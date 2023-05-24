@@ -1,0 +1,57 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.mapContainer {
+    bottom: 0;
+    top: 0;
+    right: 0;
+    left: 0;
+    position: fixed;
+    background-color: darkslategray;
+}
+
+.floatBtn {
+    top: 20px;
+    left: 20px;
+    position: fixed;
+}
+
+.fab {
+    border-radius: 100%;
+    bottom: 55px;
+    right: 35px;
+    position: fixed;
+    font-size: 40px;
+    padding: 10px;
+    width: 65px;
+    height: 61px;
+}
+
+.btnOrg {
+    border-radius: 100%;
+    top: 25px;
+    right: 35px;
+    position: fixed;
+    font-size: 40px;
+    padding: 10px;
+    width: 65px;
+    height: 61px;
+}
+
+.btnChart {
+    border-radius: 100%;
+    bottom: 55px;
+    left: 35px;
+    position: fixed;
+    font-size: 40px;
+    padding: 10px;
+    width: 65px;
+    height: 61px;
+}
+
+/* *, ::before, ::after {
+    box-sizing: border-box;
+} */
+
