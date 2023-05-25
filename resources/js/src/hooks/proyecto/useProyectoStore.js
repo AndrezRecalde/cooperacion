@@ -40,6 +40,7 @@ export const useProyectoStore = () => {
             const { proyectos } = data;
             dispatch(onProyectos(proyectos));
         } catch (error) {
+            console.log(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",

@@ -71,7 +71,7 @@ export const useStateStore = () => {
             const { cantones } = data;
             dispatch(onLoadCantones(cantones));
         } catch (error) {
-            //console.log(error);
+            console.log(error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -87,7 +87,7 @@ export const useStateStore = () => {
             const { parroquias } = data;
             dispatch(onLoadParroquias(parroquias));
         } catch (error) {
-            //console.log(error);
+            console.log(error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -104,7 +104,7 @@ export const useStateStore = () => {
             console.log(recintos)
             dispatch(onLoadRecintos(recintos));
         } catch (error) {
-            //console.log(error);
+            console.log(error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
