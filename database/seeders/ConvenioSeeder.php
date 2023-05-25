@@ -16,7 +16,7 @@ class ConvenioSeeder extends Seeder
         DB::table('convenios')->delete();
         $convenios = [
             ['convenio' => 'En Proceso de Suscripción'],
-            ['convenio' => 'Activo'],
+            ['convenio' => 'Convenio Activo'],
             ['convenio' => 'Convenio Finalizado'],
         ];
         DB::table('convenios')->insert($convenios);
