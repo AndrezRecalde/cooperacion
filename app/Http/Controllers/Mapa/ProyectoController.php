@@ -247,7 +247,7 @@ class ProyectoController extends Controller
         $proyectosTipos = Proyecto::from('proyectos as p')
             ->selectRaw('coop.tipo_cooperacion, SUM(p.monto) as monto')
             ->join('cooperaciones as coop', 'coop.id', 'p.cooperacion_id')
-            ->groupBy('p.cooperacion_id')
+            ->groupBy('coop.tipo_cooperacion')
             ->get();
 
         if (sizeof($proyectosTipos) >= 1) {
