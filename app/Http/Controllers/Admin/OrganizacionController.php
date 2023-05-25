@@ -164,7 +164,7 @@ class OrganizacionController extends Controller
         $totalOrganizaciones = Organizacion::from('organizaciones as org')
             ->join('convenios as c', 'c.id', 'org.convenio_id')
             ->selectRaw('COUNT(org.convenio_id) as total, c.convenio')
-            ->groupBy('org.convenio_id, c.convenio')
+            ->groupBy('c.convenio')
             ->get();
 
         if (sizeof($totalOrganizaciones) > 0) {
