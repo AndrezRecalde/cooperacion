@@ -180,7 +180,7 @@ class OrganizacionController extends Controller
                 }
             )
             ->where('org.id', $id)
-            ->groupByRaw('org.id, org.nombre_organizacion')
+            ->groupBy('org.id','org.nombre_organizacion', 'org.abreviatura')
             ->first();
 
         return response()->json(['status' => MsgStatusEnum::Success, 'organizacion' => $organizacion], 200);
