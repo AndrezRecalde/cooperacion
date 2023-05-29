@@ -1,6 +1,5 @@
 import { Button, Tooltip } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
-import { useUiMapa } from "../../hooks/mapa/useUiMapa";
 import { useUiProyecto } from "../../hooks/proyecto/useUiProyecto";
 
 export const FloatAddButton = () => {

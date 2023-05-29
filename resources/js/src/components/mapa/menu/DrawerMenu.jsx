@@ -1,8 +1,9 @@
 import {
+    Badge,
     Button,
-    Chip,
     Divider,
     Drawer,
+    Flex,
     Grid,
     Group,
     Select,
@@ -46,7 +47,7 @@ export const DrawerMenu = () => {
             parroquia_id: "",
             recinto_id: "",
             ods_id: "",
-            organizacion_id: ""
+            organizacion_id: "",
         },
     });
 
@@ -199,6 +200,18 @@ export const DrawerMenu = () => {
                     </Group>
                 </Chip.Group>
                 <Divider my="sm" /> */}
+                <Flex
+                    mih={100}
+                    gap="md"
+                    justify="flex-end"
+                    align="center"
+                    direction="column"
+                    wrap="wrap"
+                >
+                    <Badge size="lg" color="teal.7" radius="md">
+                        Bienvenido a la Plataforma OCIE del GADPE
+                    </Badge>
+                </Flex>
             </Drawer>
             <DrawerProyecto />
         </>

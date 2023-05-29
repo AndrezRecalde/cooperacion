@@ -1,7 +1,7 @@
 import mapboxgl from "mapbox-gl";
 import geojson from "../../helpers/geo.json";
 import AnimatedPopup from "mapbox-gl-animated-popup";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import {
     FloatButton,
@@ -42,6 +42,7 @@ const initialPoints = {
 };
 
 export const MapaPage = () => {
+    const [title, setTitle] = useState('OCIE | Mapa de Relaciones')
     const mapaRef = useRef(null);
     const mapa = useRef(null);
 
@@ -56,6 +57,15 @@ export const MapaPage = () => {
     useEffect(() => {
         startLoadMarkersOrg();
     }, []);
+
+    useEffect(() => {
+      document.title = title;
+
+      return () => {
+        setTitle("");
+      }
+    }, [])
+
 
     useEffect(() => {
         mapa.current = new mapboxgl.Map({

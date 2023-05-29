@@ -27,7 +27,7 @@ export function UserButton({ icon, ...others }) {
                     </Text>
 
                     <Badge radius="sm" color="teal">
-                        <Text tt="uppercase" fw={700}>GADPE</Text>
+                        <Text fs="italic" tt="uppercase" fw={700}>Plataforma OCIE</Text>
                     </Badge>
                 </div>
 

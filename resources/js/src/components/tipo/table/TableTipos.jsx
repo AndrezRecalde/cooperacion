@@ -1,5 +1,5 @@
 import { MantineReactTable } from "mantine-react-table";
-import { IconTrash, IconEdit, IconPencilPlus } from "@tabler/icons-react";
+import { IconEdit, IconPencilPlus } from "@tabler/icons-react";
 import { useCallback, useMemo } from "react";
 import { Button, ActionIcon, Tooltip, Grid } from "@mantine/core";
 import { useTipoStore } from "../../../hooks";

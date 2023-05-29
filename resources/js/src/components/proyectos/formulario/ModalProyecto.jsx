@@ -1,4 +1,4 @@
-import {  Modal, useMantineTheme } from "@mantine/core";
+import { Modal, useMantineTheme } from "@mantine/core";
 import { DivTitle } from "../../elements/DivTitle";
 import { useUiProyecto } from "../../../hooks/proyecto/useUiProyecto";
 import { FormStepper } from "./stepper/FormStepper";

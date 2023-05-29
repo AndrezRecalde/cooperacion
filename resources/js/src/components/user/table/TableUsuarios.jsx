@@ -1,7 +1,6 @@
-import { ActionIcon, Badge, Button, Grid, Text, Tooltip, useMantineTheme } from "@mantine/core";
+import { ActionIcon, Badge, Button, Grid, Tooltip, useMantineTheme } from "@mantine/core";
 import {
     IconEdit,
-    IconEyeCheck,
     IconPencilPlus,
     IconTrash,
 } from "@tabler/icons-react";

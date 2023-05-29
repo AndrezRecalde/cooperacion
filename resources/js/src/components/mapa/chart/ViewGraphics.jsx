@@ -1,6 +1,5 @@
 import { Grid } from "@mantine/core";
 import { ChartObjetivos } from "../../dashboard/ChartObjetivos";
-import { ChartTipos } from "../../dashboard/ChartTipos";
 import { useProyectoStore } from "../../../hooks/proyecto/useProyectoStore";
 import { useEffect } from "react";
 

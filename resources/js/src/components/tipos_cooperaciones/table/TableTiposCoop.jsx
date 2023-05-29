@@ -1,5 +1,5 @@
 import { ActionIcon, Button, Grid, Tooltip } from "@mantine/core";
-import { IconEdit, IconPencilPlus, IconTrash } from "@tabler/icons-react";
+import { IconEdit, IconPencilPlus } from "@tabler/icons-react";
 import { MantineReactTable } from "mantine-react-table";
 import { useTipoCoopStore } from "../../../hooks/tipo_cooperacion/useTipoCoopStore";
 import { useMemo, useCallback } from "react";

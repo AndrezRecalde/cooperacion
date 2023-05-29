@@ -13,9 +13,7 @@ import { useUiMapa } from "../../../hooks/mapa/useUiMapa";
 import { DivTitle } from "../../elements/DivTitle";
 import Flag from "react-flagkit";
 import {
-    IconArrowMoveRight,
     IconChecks,
-    IconDiscountCheckFilled,
     IconLoader3,
 } from "@tabler/icons-react";
 import { useMarkerStore } from "../../../hooks/marker/useMarkerStore";

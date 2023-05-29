@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Box, Button, Grid, Group, Select, TextInput } from "@mantine/core";
+import { Box, Button, Grid, Group, TextInput } from "@mantine/core";
 import { IconChecks } from "@tabler/icons-react";
 import { useTipoStore } from "../../../hooks";
 import { useUiTipo } from "../../../hooks/tipo/useUiTipo";
