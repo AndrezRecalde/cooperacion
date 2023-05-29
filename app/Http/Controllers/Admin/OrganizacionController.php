@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use File;
 use App\Http\Controllers\Controller;
 use App\Enums\MsgStatusEnum;
 use App\Exports\OrganizacionExport;
@@ -9,7 +10,6 @@ use App\Http\Requests\OrganizacionRequest;
 use App\Http\Requests\OrganizacionUpdateRequest;
 use App\Http\Requests\OrgUpdateActivo;
 use App\Models\Organizacion;
-use App\Models\Proyecto;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -107,7 +107,7 @@ class OrganizacionController extends Controller
                     $organizacion->fill($request->validated());
                     $logo = $request->file('imagen_url');
                     $filename = 'logo_' . uniqid() .  '.' . $logo->getClientOriginalExtension();
-                    $save_path = '/logos/organizaciones/' . $organizacion->id . '/';
+                    $save_path = '/organizaciones/logos/' . $organizacion->id . '/';
                     $public_path = $save_path . $filename;
                     $path = Storage::putFileAs(
                         'public' . $save_path,
@@ -202,8 +202,14 @@ class OrganizacionController extends Controller
         $organizacion = Organizacion::find($id);
 
         if ($organizacion) {
-            $organizacion->delete();
-            return response()->json(['status' => MsgStatusEnum::Success, 'msg' => MsgStatusEnum::Eliminado], 200);
+            if($organizacion->imagen_url){
+                File::deleteDirectory(storage_path('app/public') . '/organizaciones/logos/' . $organizacion->id);
+                $organizacion->delete();
+                return response()->json(['status' => MsgStatusEnum::Success, 'msg' => MsgStatusEnum::Eliminado], 200);
+            }else{
+                $organizacion->delete();
+                return response()->json(['status' => MsgStatusEnum::Success, 'msg' => MsgStatusEnum::Eliminado], 200);
+            }
         } else {
             return response()->json(['status' => MsgStatusEnum::Error, 'msg' => MsgStatusEnum::NotFound], 404);
         }

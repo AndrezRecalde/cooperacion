@@ -25,4 +25,18 @@ class Organizacion extends Model
         'convenio_id',
         'imagen_url'
     ];
+
+    public function proyectos()
+    {
+        return $this->hasMany(Proyecto::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($organizacion){
+            $organizacion->proyectos->each->delete();
+        });
+    }
 }
