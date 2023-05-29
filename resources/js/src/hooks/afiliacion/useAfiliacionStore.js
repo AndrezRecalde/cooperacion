@@ -26,11 +26,17 @@ export const useAfiliacionStore = () => {
             const { afiliaciones } = data;
             dispatch(onAfiliaciones(afiliaciones));
         } catch (error) {
-            console.log(error);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: error.response ? error.response.data.msg : error,
+                confirmButtonColor: "#c81d11",
+            });
         }
     };
 
     const starAddAfiliacion = async (afiliacion) => {
+        dispatch(onLoading());
         try {
             const { data } = await gricApi.post(
                 "/create/afiliacion",
@@ -103,11 +109,10 @@ export const useAfiliacionStore = () => {
                 { responseType: "blob" }
             );
             const url = window.URL.createObjectURL(
-                new Blob([response.data], {type: "application/pdf"})
+                new Blob([response.data], { type: "application/pdf" })
             );
             window.open(url, "_blank");
         } catch (error) {
-            console.log(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -115,6 +120,34 @@ export const useAfiliacionStore = () => {
                 confirmButtonColor: "#c81d11",
             });
         }
+    };
+
+    const startDeleteAfiliacion = (id) => {
+        Swal.fire({
+            icon: "warning",
+            title: '¿Estas seguro de eliminar esta afiliación?',
+            showDenyButton: true,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Si",
+            denyButtonText: "No",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    await gricApi.delete(
+                        `/delete/afiliacion/${id}`
+                    );
+                    Swal.fire("¡Eliminado!", "", "success");
+                    startLoadAfiliaciones();
+                } catch (error) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: error.response ? error.response.data.msg : error,
+                        confirmButtonColor: "#c81d11",
+                    });
+                }
+            }
+        });
     };
 
     return {
@@ -130,6 +163,7 @@ export const useAfiliacionStore = () => {
         startRestartSend,
         setActivateAfiliacion,
         startClearAfiliaciones,
-        archivoAfiliacion
+        archivoAfiliacion,
+        startDeleteAfiliacion
     };
 };

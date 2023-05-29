@@ -6,12 +6,12 @@ export const ActivateAfiButton = ({ cell, handleActivar }) => {
         <>
             <ActionIcon
                 onClick={() => handleActivar(cell.row.original)}
-                color={cell.row.original.contactado === 1 ? "blue" : "red"}
+                color={cell.row.original.contactado === 1 ? "indigo.7" : "yellow.6"}
             >
                 {cell.row.original.contactado === 1 ? (
-                    <IconDiscountCheckFilled color="blue" />
+                    <IconDiscountCheckFilled />
                 ) : (
-                    <IconAlertCircle color="red" />
+                    <IconAlertCircle />
                 )}
             </ActionIcon>
         </>

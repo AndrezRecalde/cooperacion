@@ -25,6 +25,7 @@ export const afiliacionSlice = createSlice({
             state.afiliaciones.push(payload);
             state.activeAfiliacion = null;
             state.errores = undefined;
+            state.isLoading = false;
         },
         onUpdateAfiliaciones: (state, { payload }) => {
             state.afiliaciones = state.afiliaciones.map((afiliacion) => {

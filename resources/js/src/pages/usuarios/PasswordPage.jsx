@@ -38,7 +38,6 @@ export const PasswordPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("clic");
         startUpdatePassword(user, password);
         form.reset();
     };

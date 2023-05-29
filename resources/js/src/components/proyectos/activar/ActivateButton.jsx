@@ -2,16 +2,21 @@ import { ActionIcon } from "@mantine/core";
 import { IconAlertCircle, IconDiscountCheckFilled } from "@tabler/icons-react";
 
 export const ActivateButton = ({ cell, handleActivar }) => {
+
+    const handleActivate = (e) => {
+        e.preventDefault();
+        handleActivar(cell.row.original)
+    }
     return (
         <>
             <ActionIcon
-                onClick={() => handleActivar(cell.row.original)}
-                color={cell.row.original.activo === 1 ? "green" : "red"}
+                onClick={(e) => handleActivate(e)}
+                color={cell.row.original.activo === 1 ? "teal" : "red.8"}
             >
                 {cell.row.original.activo === 1 ? (
-                    <IconDiscountCheckFilled color="green" />
+                    <IconDiscountCheckFilled />
                 ) : (
-                    <IconAlertCircle color="red" />
+                    <IconAlertCircle />
                 )}
             </ActionIcon>
         </>

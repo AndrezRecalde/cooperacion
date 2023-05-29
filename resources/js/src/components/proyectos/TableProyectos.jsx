@@ -24,7 +24,7 @@ import { ActivateButton } from "./activar/ActivateButton";
 export const TableProyectos = () => {
     const { modalActionProyecto, modalActionActivo, modalActionDelete } =
         useUiProyecto();
-    const { isLoading, proyectos, startShowForEdit, setActivateProyecto, fichaProyecto } =
+    const { isLoading, proyectos, startShowForEdit, setActivateProyecto, setActivateEstado, fichaProyecto, setClearActivateProyecto } =
         useProyectoStore();
 
     const columns = useMemo(
@@ -68,7 +68,7 @@ export const TableProyectos = () => {
 
     const handleActivar = useCallback(
         (selected) => {
-            setActivateProyecto(selected);
+            setActivateEstado(selected);
             modalActionActivo(1);
         },
         [proyectos]
@@ -95,7 +95,13 @@ export const TableProyectos = () => {
         fichaProyecto(id);
       },
       [proyectos],
-    )
+    );
+
+    const handleOpenForm = (e) => {
+        e.preventDefault();
+        setClearActivateProyecto();
+        modalActionProyecto(1)
+    }
 
 
     return (
@@ -160,7 +166,7 @@ export const TableProyectos = () => {
                 renderTopToolbarCustomActions={() => (
                     <Button
                         color="teal"
-                        onClick={() => modalActionProyecto(1)}
+                        onClick={(e) => handleOpenForm(e)}
                         variant="outline"
                         radius="md"
                         leftIcon={<IconPencilPlus />}

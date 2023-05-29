@@ -4,6 +4,7 @@ import {
     onAddUsuario,
     onClearUsuarios,
     onLoading,
+    onSetActivateEstado,
     onUpdateUsuario,
     onUsuarios,
 } from "../../store/admin/usuario/usuarioSlice";
@@ -11,9 +12,8 @@ import Swal from "sweetalert2";
 import { onSetActivateUsuario } from "../../store/admin/usuario/usuarioSlice";
 
 export const useUsuarioStore = () => {
-    const { isLoading, usuarios, activateUsuario, errores } = useSelector(
-        (state) => state.usuario
-    );
+    const { isLoading, usuarios, activateUsuario, activateEstado, errores } =
+        useSelector((state) => state.usuario);
 
     const dispatch = useDispatch();
 
@@ -86,6 +86,7 @@ export const useUsuarioStore = () => {
                 timer: 1000,
             });
             startLoadUsuarios();
+            setClearActivateEstado();
         } catch (error) {
             Swal.fire({
                 icon: "error",
@@ -116,6 +117,10 @@ export const useUsuarioStore = () => {
 
     const setActivateUsuario = (usuario) => {
         dispatch(onSetActivateUsuario({ ...usuario }));
+    };
+
+    const setActivateEstado = (usuario) => {
+        dispatch(onSetActivateEstado(usuario));
     };
 
     const startDeleteUsuario = async (usuario) => {
@@ -185,10 +190,15 @@ export const useUsuarioStore = () => {
         dispatch(onSetActivateUsuario(null));
     };
 
+    const setClearActivateEstado = () => {
+        dispatch(onSetActivateEstado(null));
+    }
+
     return {
         isLoading,
         usuarios,
         activateUsuario,
+        activateEstado,
         errores,
 
         startLoadUsuarios,
@@ -196,9 +206,11 @@ export const useUsuarioStore = () => {
         startUpdateActivo,
         startShowForEdit,
         setActivateUsuario,
+        setActivateEstado,
         startDeleteUsuario,
         startUpdatePassword,
         startClearUsuarios,
         setClearActivateUsuario,
+        setClearActivateEstado
     };
 };

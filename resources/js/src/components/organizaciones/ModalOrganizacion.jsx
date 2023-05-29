@@ -10,7 +10,7 @@ export const ModalOrganizacion = () => {
 
     const form = useForm({
         initialValues: {
-            imagen_logo: [],
+            imagen_url: "",
             nombre_organizacion: "",
             abreviatura: "",
             email: "",
@@ -23,6 +23,7 @@ export const ModalOrganizacion = () => {
             state_id: "",
         },
         validate: {
+            imagen_url: isNotEmpty("Por favor ingrese el logo de la organización"),
             nombre_organizacion: isNotEmpty("El nombre es obligatorio"),
             abreviatura: hasLength(
                 { min: 2, max: 4 },

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedInteger('country_id');
             $table->unsignedInteger('state_id');
             $table->unsignedInteger('convenio_id')->default(1);
+            $table->string('imagen_url');
             $table->timestamps();
         });
     }

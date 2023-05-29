@@ -13,6 +13,7 @@ use App\Models\Proyecto;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class OrganizacionController extends Controller
@@ -44,7 +45,7 @@ class OrganizacionController extends Controller
                         org.descripcion, conv.id as convenio_id, conv.convenio,
                         c.code, c.id as country_id, c.name as pais,
                         s.id as state_id, s.name as estado,
-                        ref.longitud, ref.latitud')
+                        ref.longitud, ref.latitud, org.imagen_url')
             ->join('tipos as t', 't.id', 'org.tipo_id')
             ->join('countries as c', 'c.id', 'org.country_id')
             ->join('states as s', 's.id', 'org.state_id')
@@ -60,7 +61,27 @@ class OrganizacionController extends Controller
     {
 
         try {
-            Organizacion::create($request->validated());
+            $organizacion = Organizacion::create($request->validated());
+
+            $logo = $request->file('imagen_url');
+            $filename = 'logo_' . uniqid() .  '.' . $logo->getClientOriginalExtension();
+            $save_path = '/organizaciones/logos/' . $organizacion->id . '/';
+            $public_path = $save_path . $filename;
+            $path = Storage::putFileAs(
+                'public' . $save_path,
+                $logo,
+                $filename
+            );
+
+            if (!$path) {
+                DB::rollback();
+                return response()->json(['status' => MsgStatusEnum::Error, 'msg' => 'Error al cargar los archivos'], 500);
+            }
+
+            $organizacion->imagen_url = $public_path;
+
+            $organizacion->save();
+
             return response()->json(['status' => MsgStatusEnum::Success, 'msg' => MsgStatusEnum::Creacion], 201);
         } catch (\Throwable $th) {
             return response()->json(['status' => MsgStatusEnum::Error, 'msg' => $th->getMessage()], 500);
@@ -70,17 +91,45 @@ class OrganizacionController extends Controller
         return response()->json(['status' => MsgStatusEnum::Success, 'msg' => MsgStatusEnum::Creacion], 201);
     }
 
-    public function update(OrganizacionUpdateRequest $request, int $id): JsonResponse
+    public function update(OrganizacionUpdateRequest $request): JsonResponse
     {
-        $organizacion = Organizacion::find($id);
+        $organizacion = Organizacion::find($request->id);
 
         try {
             if ($organizacion) {
 
-                $organizacion->update(array_filter($request->validated()));
-                return response()->json(['status' => MsgStatusEnum::Success, 'msg' => MsgStatusEnum::Actualizado], 201);
+                if ($request->hasFile('imagen_url')) {
+                    $filename = $organizacion->imagen_url;
+
+                    if ($filename) {
+                        Storage::disk('public')->delete($filename);
+                    }
+                    $organizacion->fill($request->validated());
+                    $logo = $request->file('imagen_url');
+                    $filename = 'logo_' . uniqid() .  '.' . $logo->getClientOriginalExtension();
+                    $save_path = '/logos/organizaciones/' . $organizacion->id . '/';
+                    $public_path = $save_path . $filename;
+                    $path = Storage::putFileAs(
+                        'public' . $save_path,
+                        $logo,
+                        $filename
+                    );
+
+                    if (!$path) {
+                        DB::rollback();
+                        return response()->json(['status' => MsgStatusEnum::Error, 'msg' => 'Error al cargar los archivos'], 500);
+                    }
+                    $organizacion->imagen_url = $public_path;
+                    $res = $organizacion->save();
+                } else {
+                    $res = $organizacion->update(array_filter($request->validated()));
+                }
             } else {
                 return response()->json(['status' => MsgStatusEnum::Error, 'msg' => MsgStatusEnum::NotFound], 404);
+            }
+
+            if ($res) {
+                return response()->json(['status' => MsgStatusEnum::Success, 'msg' => MsgStatusEnum::Actualizado], 201);
             }
         } catch (\Throwable $th) {
             return response()->json(['status' => MsgStatusEnum::Error, 'msg' => $th->getMessage()], 500);
@@ -106,7 +155,8 @@ class OrganizacionController extends Controller
                          org.razon_social, org.sitio_web, org.telefono, org.descripcion,
                         c.code, c.name as pais,
                         s.name as estado,
-                        conv.convenio, t.tipo, pa.proyectos_activos, pi.proyectos_inactivos')
+                        conv.convenio, t.tipo, pa.proyectos_activos, pi.proyectos_inactivos,
+                        org.imagen_url')
             ->join('countries as c', 'c.id', 'org.country_id')
             ->join('states as s', 's.id', 'org.state_id')
             ->join('convenios as conv', 'conv.id', 'org.convenio_id')
@@ -181,4 +231,10 @@ class OrganizacionController extends Controller
     {
         return Excel::download(new OrganizacionExport, 'organizaciones.xlsx');
     }
+
+    /* public function getLogo(Request $request)
+    {
+        $logo = Organizacion::find($request->id);
+
+    } */
 }

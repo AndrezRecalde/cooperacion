@@ -15,7 +15,7 @@ import { useUiProyecto } from "../../../../hooks/proyecto/useUiProyecto";
 
 export const FormActivar = () => {
     const { modalActionActivo } = useUiProyecto();
-    const { activateProyecto, startUpdateActivo } = useProyectoStore();
+    const { activateEstado, startUpdateActivo } = useProyectoStore();
 
     const form = useForm({
         initialValues: {
@@ -27,16 +27,15 @@ export const FormActivar = () => {
     });
 
     useEffect(() => {
-      if(activateProyecto !== null) {
-        form.setValues({...activateProyecto});
+      if(activateEstado !== null) {
+        form.setValues({...activateEstado});
         return;
       }
 
-    }, [activateProyecto]);
+    }, [activateEstado]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(form.values)
         startUpdateActivo(form.values);
         form.reset();
         modalActionActivo(0);
@@ -56,7 +55,7 @@ export const FormActivar = () => {
                         wrap="wrap"
                     >
                         <IconDeviceImacCheck size={30} />
-                        <Text>{activateProyecto.nombre_proyecto}</Text>
+                        <Text>{activateEstado?.nombre_proyecto}</Text>
                     </Flex>
                 </Grid.Col>
                 <Grid.Col sm={12} md={12} lg={12} xl={12}>
@@ -83,7 +82,7 @@ export const FormActivar = () => {
                         variant="outline"
                         color="teal"
                         leftIcon={<IconChecks />}
-                        onClick={handleSubmit}
+                        onClick={(e) => handleSubmit(e)}
                     >
                         Guardar
                     </Button>

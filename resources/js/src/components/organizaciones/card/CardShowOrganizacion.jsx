@@ -6,14 +6,13 @@ import {
     Card,
     Grid,
     Group,
+    Image,
     Text,
     createStyles,
     rem,
 } from "@mantine/core";
 import Flag from "react-flagkit";
-import {
-    IconCheck,
-} from "@tabler/icons-react";
+import { IconCheck } from "@tabler/icons-react";
 import { useOrganizacionStore } from "../../../hooks/organizacion/useOrganizacionStore";
 import { ChartShowOrganizacion } from "../chart/ChartShowOrganizacion";
 
@@ -77,7 +76,7 @@ const useStyles = createStyles((theme) => ({
 export const CardShowOrganizacion = ({ handleCloseShowModal }) => {
     const { classes } = useStyles();
 
-    const { activateOrganizacion } = useOrganizacionStore()
+    const { activateOrganizacion } = useOrganizacionStore();
 
     return (
         <Card radius="md" className={classes.card}>
@@ -99,6 +98,11 @@ export const CardShowOrganizacion = ({ handleCloseShowModal }) => {
                         <Text fz={14} fw={700} c="dimmed" tt="uppercase">
                             {activateOrganizacion?.nombre_organizacion}
                         </Text>
+                    </Grid.Col>
+                    <Grid.Col sm={12} md={12} lg={12} xl={12}>
+                        <Group position="center">
+                            <Image radius="xl" mt={10} width={100} height={90} src={'/storage' + activateOrganizacion?.imagen_url} />
+                        </Group>
                     </Grid.Col>
                     <Grid.Col sm={6} md={6} lg={6} xl={6}>
                         <div className={classes.section_info}>
@@ -138,7 +142,9 @@ export const CardShowOrganizacion = ({ handleCloseShowModal }) => {
                         </div>
                     </Grid.Col>
                     <Grid.Col sm={6} md={6} lg={6} xl={6}>
-                            <ChartShowOrganizacion activateOrganizacion={activateOrganizacion} />
+                        <ChartShowOrganizacion
+                            activateOrganizacion={activateOrganizacion}
+                        />
                     </Grid.Col>
                 </Grid>
             </Card.Section>

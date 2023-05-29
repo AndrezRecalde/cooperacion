@@ -9,6 +9,7 @@ import {
     onErrores,
     onLoading,
     onProyectos,
+    onSetActivateEstado,
     onSetActivateProyecto,
     onSetGraficoProyectosOds,
     onSetGraficoProyectosTipos,
@@ -24,6 +25,7 @@ export const useProyectoStore = () => {
         isLoading,
         proyectos,
         activateProyecto,
+        activateEstado,
         totalProyectos,
         totalProyectosActivos,
         montoEjecutado,
@@ -40,7 +42,7 @@ export const useProyectoStore = () => {
             const { proyectos } = data;
             dispatch(onProyectos(proyectos));
         } catch (error) {
-            console.log(error)
+            //console.log(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -115,6 +117,7 @@ export const useProyectoStore = () => {
                 timer: 1000,
             });
             startLoadProyectosAdmin();
+            setClearActivateEstado();
         } catch (error) {
             Swal.fire({
                 icon: "warning",
@@ -217,7 +220,7 @@ export const useProyectoStore = () => {
                 dispatch(onSetGraficoProyectosOds(proyectosOds));
             }
         } catch (error) {
-            console.log(error)
+            //console.log(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -251,9 +254,17 @@ export const useProyectoStore = () => {
         dispatch(onSetActivateProyecto({ ...proyecto }));
     };
 
+    const setActivateEstado = (proyecto) => {
+        dispatch(onSetActivateEstado({ ...proyecto }));
+    }
+
     const setClearActivateProyecto = () => {
         dispatch(onSetActivateProyecto(null));
     };
+
+    const setClearActivateEstado = () => {
+        dispatch(onSetActivateEstado(null));
+    }
 
     const startClearProyectos = () => {
         dispatch(onClearProyectos());
@@ -302,6 +313,7 @@ export const useProyectoStore = () => {
         graficoProyectosOds,
         graficoProyectosTipos,
         activateProyecto,
+        activateEstado,
         errores,
 
         startLoadProyectosAdmin,
@@ -311,7 +323,9 @@ export const useProyectoStore = () => {
         startUpdateActivo,
         setTotalProyectos,
         setActivateProyecto,
+        setActivateEstado,
         setClearActivateProyecto,
+        setClearActivateEstado,
         startShowForEdit,
         startClearTotales,
         setMontoEjecutado,

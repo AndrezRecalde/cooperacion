@@ -23,13 +23,11 @@ export const AfiliacionAdmin = () => {
                 Organizaciones
             </Text>
             <Text mb="xl" fz={16} fw={500} c="teal">
-                Existen {afiliaciones.length} organizaciones registradas
+                Existen {afiliaciones.length} afiliaciones registradas.
             </Text>
             <InfoHeader
-                texto="En esta seccion podras encontrar una lista de las organizaciones
-                nacionales e internacionales con las que el Gobierno Autonomo
-                Descentralizado de la Provincia de Esmeraldas guarda convenios
-                de cooperacion."
+                texto="En esta sección podras encontrar una lista de las organizaciones que desean
+                contactarse con el Gobierno Autonomo Descentralizado de la Provincia de Esmeraldas."
             />
             <Card
                 withBorder

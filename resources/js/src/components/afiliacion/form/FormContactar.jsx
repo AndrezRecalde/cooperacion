@@ -38,7 +38,6 @@ export const FormContactar = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(form.values);
         startUpdateContactado(form.values);
         form.reset();
         modalActivateAfiliacion(0);

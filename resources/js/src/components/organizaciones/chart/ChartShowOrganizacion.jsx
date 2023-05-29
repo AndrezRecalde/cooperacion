@@ -7,7 +7,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const ChartShowOrganizacion = ({ activateOrganizacion }) => {
     const proyectosOrganizacion = {
-        labels: ["Proyectos en Ejecución", "Proyectos en revisión"],
+        labels: ["Proyectos Ejecutados", "Proyectos en Revisión"],
         datasets: [
             {
                 label: "Total",

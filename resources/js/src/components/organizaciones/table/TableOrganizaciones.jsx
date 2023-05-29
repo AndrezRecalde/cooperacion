@@ -19,7 +19,7 @@ export const TableOrganizaciones = () => {
     const {
         isLoading,
         organizaciones,
-        setActivateOrganizacion,
+        setActivateEstado,
         startShowOrganizacion,
         startShowForEdit,
         startDeleteOrganizacion,
@@ -78,7 +78,7 @@ export const TableOrganizaciones = () => {
 
     const handleActivar = useCallback(
       (selected) => {
-        setActivateOrganizacion(selected);
+        setActivateEstado(selected);
         modalActivateOrg(1);
       },
       [organizaciones],

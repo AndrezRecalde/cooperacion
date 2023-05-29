@@ -6,6 +6,7 @@ export const usuarioSlice = createSlice({
         isLoading: false,
         usuarios: [],
         activateUsuario: null,
+        activateEstado: null,
         errores: undefined,
     },
     reducers: {
@@ -45,6 +46,11 @@ export const usuarioSlice = createSlice({
             state.errores = undefined;
             state.isLoading = false;
         },
+        onSetActivateEstado: (state, { payload }) => {
+            state.activateEstado = payload;
+            state.errores = undefined;
+            state.isLoading = false;
+        },
         onErrores: (state, { payload }) => {
             state.errores = payload;
         },
@@ -63,6 +69,7 @@ export const {
     onUpdateUsuario,
     onDeleteUsuario,
     onSetActivateUsuario,
+    onSetActivateEstado,
     onErrores,
     onClearUsuarios
 } = usuarioSlice.actions;

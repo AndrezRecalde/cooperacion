@@ -17,7 +17,7 @@ import { useEffect } from "react";
 export const FormActivarOrg = () => {
 
     const { modalActivateOrg } = useUiOrganizacion();
-    const { activateOrganizacion, startUpdateConvenioOrg } = useOrganizacionStore();
+    const { activateEstado, startUpdateConvenioOrg } = useOrganizacionStore();
     const { convenios, startLoadConvenios, startClearConvenios } = useConvenioStore();
 
     const form = useForm({
@@ -34,12 +34,12 @@ export const FormActivarOrg = () => {
     }, []);
 
     useEffect(() => {
-      if(activateOrganizacion !== null){
-        form.setValues({ ...activateOrganizacion });
+      if(activateEstado !== null){
+        form.setValues({ ...activateEstado });
         return;
       }
 
-    }, [activateOrganizacion]);
+    }, [activateEstado]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -63,7 +63,7 @@ export const FormActivarOrg = () => {
                         wrap="wrap"
                     >
                         <IconWorldCheck size={30} />
-                        <Text>{activateOrganizacion.nombre_organizacion}</Text>
+                        <Text>{activateEstado?.nombre_organizacion}</Text>
                     </Flex>
                 </Grid.Col>
                 <Grid.Col sm={12} md={12} lg={12} xl={12}>

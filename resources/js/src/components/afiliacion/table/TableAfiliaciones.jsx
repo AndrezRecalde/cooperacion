@@ -3,20 +3,17 @@ import {
     Button,
     ActionIcon,
     Tooltip,
-    Grid,
-    Badge,
     Card,
     Group,
     Table,
     Text,
     Box,
-    NavLink,
 } from "@mantine/core";
 import { MantineReactTable } from "mantine-react-table";
 import { useAfiliacionStore } from "../../../hooks/afiliacion/useAfiliacionStore";
 import { useUiAfiliacion } from "../../../hooks/afiliacion/useUiAfiliacion";
 import { ActivateAfiButton } from "../contactar/ActivateAfilButton";
-import { IconFile } from "@tabler/icons-react";
+import { IconFile, IconTrash } from "@tabler/icons-react";
 
 export const TableAfiliaciones = () => {
     const { modalActivateAfiliacion } = useUiAfiliacion();
@@ -26,6 +23,7 @@ export const TableAfiliaciones = () => {
         afiliaciones,
         setActivateAfiliacion,
         archivoAfiliacion,
+        startDeleteAfiliacion,
     } = useAfiliacionStore();
 
     const columns = useMemo(
@@ -39,10 +37,22 @@ export const TableAfiliaciones = () => {
                 enableColumnFilter: false,
                 size: 40,
                 Cell: ({ cell }) => (
-                    <ActivateAfiButton
-                        cell={cell}
-                        handleActivar={handleActivar}
-                    />
+                    <Group>
+                        <Tooltip withArrow position="right" label="Cambiar estado">
+                            <ActivateAfiButton
+                                cell={cell}
+                                handleActivar={handleActivar}
+                            />
+                        </Tooltip>
+                        <Tooltip withArrow position="right" label="Eliminar">
+                            <ActionIcon
+                                color="red.8"
+                                onClick={() => handleDelete(cell.row.original.id)}
+                            >
+                                <IconTrash />
+                            </ActionIcon>
+                        </Tooltip>
+                    </Group>
                 ),
             },
             {
@@ -87,13 +97,19 @@ export const TableAfiliaciones = () => {
     );
 
     const handleViewArchivo = useCallback(
-      (e, selected) => {
-        e.preventDefault();
-        archivoAfiliacion(selected);
-      },
-      [afiliaciones],
-    )
+        (e, selected) => {
+            e.preventDefault();
+            archivoAfiliacion(selected);
+        },
+        [afiliaciones]
+    );
 
+    const handleDelete = useCallback(
+        (selected) => {
+            startDeleteAfiliacion(selected);
+        },
+        [afiliaciones]
+    );
 
     return (
         <MantineReactTable
@@ -191,9 +207,12 @@ export const TableAfiliaciones = () => {
                                                                 <IconFile />
                                                             }
                                                             variant="white"
-                                                            onClick={e => handleViewArchivo(e,
-                                                                archivo.id
-                                                            )}
+                                                            onClick={(e) =>
+                                                                handleViewArchivo(
+                                                                    e,
+                                                                    archivo.id
+                                                                )
+                                                            }
                                                         >
                                                             Archivo
                                                         </Button>

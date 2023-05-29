@@ -6,18 +6,29 @@ use App\Enums\MsgStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AfiliacionRequest;
 use App\Http\Requests\ContactadoRequest;
+use App\Interfaces\AfiliacionInterface;
+use App\Mail\AfiliacionMail;
 use App\Models\Afiliacion;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class AfiliacionController extends Controller
 {
+
+    private AfiliacionInterface $afiliacionRepository;
+
+    public function __construct(AfiliacionInterface $afiliacionRepository)
+    {
+        $this->afiliacionRepository = $afiliacionRepository;
+    }
+
     public function getAfiliacionesAdmin(): JsonResponse
     {
-        $afiliaciones = Afiliacion::with('archivos')->get();
+        $afiliaciones = Afiliacion::with('archivos')->latest()->get();
 
         return response()->json(['status' => MsgStatusEnum::Success, 'afiliaciones' => $afiliaciones], 200);
     }
@@ -55,6 +66,17 @@ class AfiliacionController extends Controller
 
 
             $afiliacion->save();
+
+            /* Aquí realizo el envío del correo a los responsables de la gestión */
+            $director = $this->afiliacionRepository->getDirector();
+            $asistente = $this->afiliacionRepository->getAsistente();
+
+            Mail::to($director->email)
+                ->cc($asistente->email)
+                ->send(new AfiliacionMail($afiliacion));
+
+            /* Mail::to('crecalde@gadpe.gob.ec')
+                    ->send(new AfiliacionMail($afiliacion)); */
 
             return response()->json(['status' => MsgStatusEnum::Success, 'msg' => MsgStatusEnum::CreacionAfiliacion], 201);
         } catch (\Throwable $th) {

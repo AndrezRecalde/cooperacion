@@ -103,6 +103,7 @@ export const ModalProyecto = () => {
        if(activateProyecto !== null) {
          form.setValues({
              ...activateProyecto,
+             monto: parseFloat(activateProyecto.monto),
              grupo_atencion_id: activateProyecto.grupos.map( grupo => grupo.id),
              odsostenible_id: activateProyecto.odsostenibles.map( ods => ods.id)
          });

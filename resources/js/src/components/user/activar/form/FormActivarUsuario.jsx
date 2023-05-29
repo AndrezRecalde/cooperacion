@@ -16,7 +16,7 @@ import { useEffect } from "react";
 export const FormActivarUsuario = () => {
 
     const { modalActivateUsuario } = useUiUsuario();
-    const { activateUsuario, startUpdateActivo } = useUsuarioStore();
+    const { activateEstado, startUpdateActivo } = useUsuarioStore();
 
     const form = useForm({
         initialValues: {
@@ -29,12 +29,12 @@ export const FormActivarUsuario = () => {
 
 
     useEffect(() => {
-      if(activateUsuario !== null){
-        form.setValues({ ...activateUsuario });
+      if(activateEstado !== null){
+        form.setValues({ ...activateEstado });
         return;
       }
 
-    }, [activateUsuario]);
+    }, [activateEstado]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -57,7 +57,7 @@ export const FormActivarUsuario = () => {
                         wrap="wrap"
                     >
                         <IconUserCheck size={30} />
-                        <Text>{activateUsuario.nombres}</Text>
+                        <Text>{activateEstado?.nombres}</Text>
                     </Flex>
                 </Grid.Col>
                 <Grid.Col sm={12} md={12} lg={12} xl={12}>
@@ -83,7 +83,7 @@ export const FormActivarUsuario = () => {
                     variant="outline"
                     color="teal"
                     leftIcon={<IconChecks />}
-                    onClick={handleSubmit}
+                    onClick={(e) => handleSubmit(e)}
                 >
                     Guardar
                 </Button>

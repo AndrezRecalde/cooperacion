@@ -1,10 +1,8 @@
 import {
-    createStyles,
     Card,
     Image,
     Text,
     Group,
-    Badge,
     Grid,
     Flex,
     ActionIcon,
@@ -13,31 +11,13 @@ import {
 
 import { useOrganizacionStore } from "../../../hooks/organizacion/useOrganizacionStore";
 import { useEffect } from "react";
-import Flag from "react-flagkit";
 import { useUiOrganizacion } from "../../../hooks/organizacion/useUiOrganizacion";
 import { IconDiscountCheckFilled } from "@tabler/icons-react";
 
-const useStyles = createStyles((theme) => ({
-    card: {
-        backgroundColor:
-            theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-    },
-
-    title: {
-        fontWeight: 700,
-        fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-        lineHeight: 1.2,
-    },
-
-    body: {
-        padding: theme.spacing.md,
-    },
-}));
 
 export function CardOrganizacion() {
-    const { classes } = useStyles();
 
-    const { organizaciones, startLoadOrgActivas, setActivateOrganizacion, startShowOrganizacion } =
+    const { organizaciones, startLoadOrgActivas, startShowOrganizacion } =
         useOrganizacionStore();
     const { modalShowOrganizacion } = useUiOrganizacion();
 
@@ -78,7 +58,7 @@ export function CardOrganizacion() {
                                     >
                                         <IconDiscountCheckFilled
                                             size={20}
-                                            color="#1877F2"
+                                            color="indigo.7"
                                         />
                                     </ActionIcon>
                                 </Group>
@@ -112,10 +92,11 @@ export function CardOrganizacion() {
                                     direction="column"
                                     wrap="wrap"
                                 >
-                                    <Flag
+                                    {/* <Flag
                                         country={organizacion.code}
                                         size={50}
-                                    />
+                                    /> */}
+                                    <Image mt={10} width={100} height={90} src={'/storage' +  organizacion.imagen_url} />
                                     <Text fs="italic" fz="sm" weight={700}>
                                         {organizacion.pais}
                                     </Text>

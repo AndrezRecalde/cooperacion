@@ -7,6 +7,7 @@ import {
     onErrores,
     onLoading,
     onOrganizaciones,
+    onSetActivateEstado,
     onSetActivateOrganizacion,
     onSetTotalOrganizaciones,
     onUpdateOrganizacion,
@@ -20,6 +21,7 @@ export const useOrganizacionStore = () => {
         organizaciones,
         totalOrganizaciones,
         activateOrganizacion,
+        activateEstado,
     } = useSelector((state) => state.organizacion);
     const dispatch = useDispatch();
 
@@ -61,7 +63,7 @@ export const useOrganizacionStore = () => {
             const { organizacion } = data;
             dispatch(onSetActivateOrganizacion(organizacion));
         } catch (error) {
-            console.log(error)
+            //console.log(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -74,9 +76,14 @@ export const useOrganizacionStore = () => {
     const startAddOrganizacion = async (organizacion) => {
         try {
             if (organizacion.id) {
-                const { data } = await gricApi.put(
-                    `/admin/update/organizacion/${organizacion.id}`,
-                    organizacion
+                const { data } = await gricApi.post(
+                    `/admin/update/organizacion`,
+                    organizacion,
+                    {
+                        headers: {
+                            "Content-Type": "multipart/form-data",
+                        },
+                    }
                 );
                 dispatch(onUpdateOrganizacion({ ...organizacion }));
                 Swal.fire({
@@ -90,7 +97,12 @@ export const useOrganizacionStore = () => {
             }
             const { data } = await gricApi.post(
                 "/admin/create/organizacion",
-                organizacion
+                organizacion,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
             );
             dispatch(onAddOrganizacion({ ...organizacion }));
             Swal.fire({
@@ -101,6 +113,7 @@ export const useOrganizacionStore = () => {
             });
             starLoadOrganizaciones();
         } catch (error) {
+            //console.log(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -164,6 +177,10 @@ export const useOrganizacionStore = () => {
         );
     };
 
+    const setActivateEstado = (organizacion) => {
+        dispatch(onSetActivateEstado({...organizacion}));
+    }
+
     const startTotalOrganizaciones = async () => {
         try {
             const { data } = await gricApi.get("/total/organizaciones");
@@ -175,7 +192,6 @@ export const useOrganizacionStore = () => {
                 dispatch(onSetTotalOrganizaciones(totalOrganizaciones));
             }
         } catch (error) {
-            console.log(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -193,12 +209,15 @@ export const useOrganizacionStore = () => {
         dispatch(onSetActivateOrganizacion(null));
     };
 
+    const setClearActivateEstado = () => {
+        dispatch(onSetActivateEstado(null));
+    }
+
     const startClearOrganizaciones = () => {
         dispatch(onClearOrganizaciones());
     };
 
     const startUpdateConvenioOrg = async (organizacion) => {
-        console.log(organizacion);
         try {
             const { data } = await gricApi.put(
                 `/admin/update/organizacion/convenio/${organizacion.id}`,
@@ -212,6 +231,7 @@ export const useOrganizacionStore = () => {
                 timer: 1000,
             });
             starLoadOrganizaciones();
+            setClearActivateEstado();
         } catch (error) {
             Swal.fire({
                 icon: "error",
@@ -228,13 +248,11 @@ export const useOrganizacionStore = () => {
                 "/admin/export/excel/organizaciones",
                 { responseType: "blob" }
             );
-            console.log(response)
             const url = window.URL.createObjectURL(
                 new Blob([response.data], {
                     type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset-UTF-8",
                 })
             );
-            console.log(url)
             window.open(url, "_blank");
         } catch (error) {
             Swal.fire({
@@ -252,6 +270,7 @@ export const useOrganizacionStore = () => {
         organizaciones,
         totalOrganizaciones,
         activateOrganizacion,
+        activateEstado,
 
         starLoadOrganizaciones,
         startLoadOrgActivas,
@@ -260,7 +279,9 @@ export const useOrganizacionStore = () => {
         startShowForEdit,
         startDeleteOrganizacion,
         setActivateOrganizacion,
+        setActivateEstado,
         setClearActivateOrganizacion,
+        setClearActivateEstado,
         startClearOrganizaciones,
         startTotalOrganizaciones,
         setClearTotalesOrg,

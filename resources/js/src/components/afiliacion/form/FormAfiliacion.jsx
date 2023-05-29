@@ -9,6 +9,7 @@ import {
     Grid,
     Group,
     Paper,
+    Skeleton,
     Text,
     TextInput,
     Textarea,
@@ -53,7 +54,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export const FormAfiliacion = () => {
-    const { isSend, starAddAfiliacion, startRestartSend, errores } =
+    const { isLoading, isSend, starAddAfiliacion, startRestartSend, errores } =
         useAfiliacionStore();
 
     const { classes } = useStyles();
@@ -216,6 +217,7 @@ export const FormAfiliacion = () => {
                     })}
                     onSubmit={form.onSubmit((_, e) => handleSubmit(e))}
                 >
+                    <Skeleton visible={isLoading}>
                     <Card withBorder radius="md" mt="lg" mb="lg" shadow="sm">
                         <Card.Section inheritPadding py="xs">
                             <TitleCard title="Datos del contacto" />
@@ -357,6 +359,7 @@ export const FormAfiliacion = () => {
                             </Button>
                         </Group>
                     </Card>
+                    </Skeleton>
                 </Box>
             )}
         </>

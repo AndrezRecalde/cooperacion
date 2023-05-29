@@ -69,7 +69,7 @@ Route::group(
         /* Organizaciones */
         Route::get('/admin/show/edit/organizacion/{id}', [OrganizacionController::class, 'showForEdit']);
         Route::post('/admin/create/organizacion', [OrganizacionController::class, 'store']);
-        Route::put('/admin/update/organizacion/{id}', [OrganizacionController::class, 'update']);
+        Route::post('/admin/update/organizacion', [OrganizacionController::class, 'update']);
         Route::put('/admin/update/organizacion/convenio/{id}', [OrganizacionController::class, 'updateConvenio']);
         Route::delete('/admin/delete/organizacion/{id}', [OrganizacionController::class, 'destroy']);
 

@@ -35,6 +35,7 @@ class OrganizacionRequest extends FormRequest
             'tipo_id'               =>  'required',
             'country_id'            =>  'required',
             'state_id'              =>  'required',
+            'imagen_url'            =>  'required'
         ];
     }
 
@@ -50,6 +51,7 @@ class OrganizacionRequest extends FormRequest
             'descripcion.required'          =>  'Por favor escriba una breve descripción de la organización',
             'country_id.required'           => 'El país de organización es obligatoria',
             'state_id.required'             => 'El estado de organización es obligatoria',
+            'imagen_url.required'           =>  'El logo es obligatorio'
         ];
     }
 

@@ -22,6 +22,7 @@ class Organizacion extends Model
         'tipo_id',
         'country_id',
         'state_id',
-        'convenio_id'
+        'convenio_id',
+        'imagen_url'
     ];
 }

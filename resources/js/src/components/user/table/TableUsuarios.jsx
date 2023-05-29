@@ -19,7 +19,7 @@ export const TableUsuarios = () => {
         isLoading,
         usuarios,
         startShowForEdit,
-        setActivateUsuario,
+        setActivateEstado,
         startDeleteUsuario,
     } = useUsuarioStore();
 
@@ -82,7 +82,7 @@ export const TableUsuarios = () => {
 
     const handleActivar = useCallback(
         (selected) => {
-            setActivateUsuario(selected);
+            setActivateEstado(selected);
             modalActivateUsuario(1);
         },
         [usuarios]
