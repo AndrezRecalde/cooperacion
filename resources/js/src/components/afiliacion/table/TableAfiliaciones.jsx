@@ -38,20 +38,16 @@ export const TableAfiliaciones = () => {
                 size: 40,
                 Cell: ({ cell }) => (
                     <Group>
-                        <Tooltip withArrow position="right" label="Cambiar estado">
-                            <ActivateAfiButton
-                                cell={cell}
-                                handleActivar={handleActivar}
-                            />
-                        </Tooltip>
-                        <Tooltip withArrow position="right" label="Eliminar">
-                            <ActionIcon
-                                color="red.8"
-                                onClick={() => handleDelete(cell.row.original.id)}
-                            >
-                                <IconTrash />
-                            </ActionIcon>
-                        </Tooltip>
+                        <ActivateAfiButton
+                            cell={cell}
+                            handleActivar={handleActivar}
+                        />
+                        <ActionIcon
+                            color="red.8"
+                            onClick={() => handleDelete(cell.row.original.id)}
+                        >
+                            <IconTrash />
+                        </ActionIcon>
                     </Group>
                 ),
             },
