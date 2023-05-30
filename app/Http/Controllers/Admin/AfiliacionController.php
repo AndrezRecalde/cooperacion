@@ -73,7 +73,7 @@ class AfiliacionController extends Controller
 
             Mail::to($director->email)
                 ->cc($asistente->email)
-                ->send(new AfiliacionMail($afiliacion));
+                ->queue(new AfiliacionMail($afiliacion));
 
             /* Mail::to('crecalde@gadpe.gob.ec')
                     ->send(new AfiliacionMail($afiliacion)); */
