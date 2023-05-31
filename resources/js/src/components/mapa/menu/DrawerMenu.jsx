@@ -1,12 +1,16 @@
 import {
     Badge,
     Button,
+    Card,
     Divider,
     Drawer,
-    Flex,
     Grid,
     Group,
+    Image,
     Select,
+    Text,
+    createStyles,
+    rem,
     useMantineTheme,
 } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
@@ -19,8 +23,23 @@ import { useOdsStore } from "../../../hooks/ods/useOdsStore";
 import { useMarkerStore } from "../../../hooks/marker/useMarkerStore";
 import { DrawerProyecto } from "../proyecto/DrawerProyecto";
 import { useOrganizacionStore } from "../../../hooks/organizacion/useOrganizacionStore";
+import odsImage from "../../../assets/images/ods.png";
+
+const useStyles = createStyles((theme) => ({
+    footer: {
+        borderTop: `${rem(1)} solid ${
+            theme.colorScheme === "dark"
+                ? theme.colors.dark[4]
+                : theme.colors.gray[3]
+        }`,
+        paddingTop: theme.spacing.md,
+        position: "fixed",
+        bottom: 30,
+    },
+}));
 
 export const DrawerMenu = () => {
+    const { classes } = useStyles();
     const theme = useMantineTheme();
 
     const { isOpenDrawerMenu, drawerMenu, drawerActionProyectos } = useUiMapa();
@@ -99,6 +118,12 @@ export const DrawerMenu = () => {
                 title={<DivTitle title="Búsqueda de Proyectos" fw={700} />}
                 size="md"
             >
+                <Group position="center">
+                    <Badge size="lg" color="teal.7" radius="md">
+                        Bienvenido a la Plataforma OCIE del GADPE
+                    </Badge>
+                </Group>
+                <Divider my="sm" />
                 <Grid>
                     <Grid.Col sm={12} md={12} lg={12} xl={12}>
                         <Select
@@ -184,34 +209,27 @@ export const DrawerMenu = () => {
                     </Button>
                 </Group>
 
-                <Divider my="sm" />
-                {/* <DivTitle title="Selección rápida" fw={700} />
-                <Chip.Group position="center" mt={15} mb={15}>
-                    <Group position="center" mt="md">
-                        <Chip radius="md" color="teal" value="1">
-                            Educación
-                        </Chip>
-                        <Chip radius="md" color="teal" value="2">
-                            Bienestar y salud
-                        </Chip>
-                        <Chip radius="md" color="teal" value="3">
-                            Trabajo y crecimiento
-                        </Chip>
-                    </Group>
-                </Chip.Group>
-                <Divider my="sm" /> */}
-                <Flex
-                    mih={100}
-                    gap="md"
-                    justify="flex-end"
-                    align="center"
-                    direction="column"
-                    wrap="wrap"
+                <Card
+                    p="md"
+                    radius="md"
+                    component="a"
+                    href="https://www.un.org/sustainabledevelopment/es/objetivos-de-desarrollo-sostenible/"
+                    target="_blank"
+                    className={classes.footer}
                 >
-                    <Badge size="lg" color="teal.7" radius="md">
-                        Bienvenido a la Plataforma OCIE del GADPE
-                    </Badge>
-                </Flex>
+                    <Group position="center">
+                        <Text
+                            color="dimmed"
+                            size="xs"
+                            transform="uppercase"
+                            weight={700}
+                            mt="xs"
+                        >
+                            Conoce los Objetivos de Desarrollo Sostenible
+                        </Text>
+                        <Image maw={220} src={odsImage} alt="ODS Image" />
+                    </Group>
+                </Card>
             </Drawer>
             <DrawerProyecto />
         </>

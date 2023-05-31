@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Container } from "@mantine/core";
+import { Container, Skeleton } from "@mantine/core";
 import { Charts, DivHeader, Stats } from "../../components/";
 import { data } from "../../components/dashboard/data.json";
 import { useOrganizacionStore, useProyectoStore } from "../../hooks";
@@ -7,8 +7,7 @@ import { useAuthStore } from "../../hooks/auth/useAuthStore";
 import { useUsuarioStore } from "../../hooks/usuario/useUsuarioStore";
 
 export const DashboardPage = () => {
-
-    const { profile, startProfile } = useAuthStore();
+    const { isLoading, profile, startProfile } = useAuthStore();
 
     const {
         setTotalProyectos,
@@ -37,13 +36,16 @@ export const DashboardPage = () => {
 
     useEffect(() => {
         startProfile();
-    }, [])
-
-
+    }, []);
 
     return (
         <Container size="xl">
-            <DivHeader saludo="Bienvenido, " usuario={profile.nombres + " " + profile.apellidos} />
+            <Skeleton visible={isLoading} height={8} mt={6} radius="xl">
+                <DivHeader
+                    saludo="Bienvenido, "
+                    usuario={profile.nombres + " " + profile.apellidos}
+                />
+            </Skeleton>
             <Stats data={data} />
             <Charts />
         </Container>

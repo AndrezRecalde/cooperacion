@@ -1,4 +1,4 @@
-import { Modal, Text, useMantineTheme } from "@mantine/core";
+import { Modal, useMantineTheme } from "@mantine/core";
 import { FormOrganizacion } from "./FormOrganizacion";
 import { useUiOrganizacion } from "../../hooks/organizacion/useUiOrganizacion";
 import { hasLength, isEmail, isNotEmpty, useForm } from "@mantine/form";

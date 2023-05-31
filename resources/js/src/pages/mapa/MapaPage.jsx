@@ -42,7 +42,7 @@ const initialPoints = {
 };
 
 export const MapaPage = () => {
-    const [title, setTitle] = useState('OCIE | Mapa de Relaciones')
+    const [title, setTitle] = useState('OCIE | Mapa de Relaciones');
     const mapaRef = useRef(null);
     const mapa = useRef(null);
 

@@ -89,7 +89,7 @@ export const ModalInformation = () => {
         >
             <Grid>
                 <Grid.Col sm={12} md={12} lg={12} xl={12}>
-                    <Group position="apart" mb={10}>
+                    <Group position="apart">
                         <Tooltip.Floating
                             label="Tipo de Cooperación"
                             color="teal"

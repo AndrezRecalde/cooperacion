@@ -22,8 +22,6 @@ import { useEffect } from "react";
 
 export const AuthForm = () => {
 
-
-
     const { errores, startLogin } = useAuthStore();
 
     const form = useForm({

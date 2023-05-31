@@ -5,8 +5,6 @@ import {
     Text,
     Button,
     rem,
-    Group,
-    Badge,
 } from "@mantine/core";
 import { SectionAfiliacion } from "../../components/afiliacion/SectionAfiliacion";
 import { useNavigate } from "react-router-dom";
