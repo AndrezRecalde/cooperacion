@@ -11,10 +11,11 @@ import {
     createStyles,
     rem,
 } from "@mantine/core";
-import Flag from "react-flagkit";
 import { IconCheck } from "@tabler/icons-react";
-import { useOrganizacionStore } from "../../../hooks/organizacion/useOrganizacionStore";
-import { ChartShowOrganizacion } from "../chart/ChartShowOrganizacion";
+import { useOrganizacionStore } from "../../../hooks";
+import { ChartShowOrganizacion } from "../../../components";
+import Flag from "react-flagkit";
+
 
 const useStyles = createStyles((theme) => ({
     card: {

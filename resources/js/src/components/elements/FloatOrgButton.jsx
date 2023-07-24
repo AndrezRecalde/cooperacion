@@ -1,6 +1,6 @@
 import { Button, Tooltip } from "@mantine/core";
 import { IconWorld } from "@tabler/icons-react";
-import { useUiMapa } from "../../hooks/mapa/useUiMapa";
+import { useUiMapa } from "../../hooks";
 
 export const FloatOrgButton = () => {
     const { drawerOrg } = useUiMapa();

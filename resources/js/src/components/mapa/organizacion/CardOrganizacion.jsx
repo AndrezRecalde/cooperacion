@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
     Card,
     Image,
@@ -9,21 +10,16 @@ import {
     Anchor,
 } from "@mantine/core";
 
-import { useOrganizacionStore } from "../../../hooks/organizacion/useOrganizacionStore";
-import { useEffect } from "react";
-import { useUiOrganizacion } from "../../../hooks/organizacion/useUiOrganizacion";
+import { useOrganizacionStore, useUiOrganizacion } from "../../../hooks";
 import { IconDiscountCheckFilled } from "@tabler/icons-react";
 
-
 export function CardOrganizacion() {
-
     const { organizaciones, startLoadOrgActivas, startShowOrganizacion } =
         useOrganizacionStore();
     const { modalShowOrganizacion } = useUiOrganizacion();
 
     const handleSelectedOrg = (selected) => {
-        //setActivateOrganizacion(selected);
-        startShowOrganizacion(selected)
+        startShowOrganizacion(selected);
         modalShowOrganizacion(1);
     };
 
@@ -96,7 +92,14 @@ export function CardOrganizacion() {
                                         country={organizacion.code}
                                         size={50}
                                     /> */}
-                                    <Image mt={10} width={100} height={90} src={'/storage' +  organizacion.imagen_url} />
+                                    <Image
+                                        mt={10}
+                                        width={100}
+                                        height={90}
+                                        src={
+                                            "/storage" + organizacion.imagen_url
+                                        }
+                                    />
                                     <Text fs="italic" fz="sm" weight={700}>
                                         {organizacion.pais}
                                     </Text>

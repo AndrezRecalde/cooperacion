@@ -22,7 +22,6 @@ class OrganizacionExport implements FromCollection, WithHeadings, WithColumnWidt
             'C' => 30,
             'D' => 30,
             'E' => 30,
-            'F' => 30,
         ];
     }
 
@@ -33,7 +32,6 @@ class OrganizacionExport implements FromCollection, WithHeadings, WithColumnWidt
         $sheet->getStyle('C1')->getFont()->setBold(true);
         $sheet->getStyle('D1')->getFont()->setBold(true);
         $sheet->getStyle('E1')->getFont()->setBold(true);
-        $sheet->getStyle('F1')->getFont()->setBold(true);
 
     }
 
@@ -50,7 +48,6 @@ class OrganizacionExport implements FromCollection, WithHeadings, WithColumnWidt
             'Email',
             'Teléfono',
             'País',
-            'Estado',
         ];
     }
 
@@ -58,7 +55,7 @@ class OrganizacionExport implements FromCollection, WithHeadings, WithColumnWidt
     {
         $organizaciones = Organizacion::from('organizaciones as org')
                         ->selectRaw('org.nombre_organizacion, org.abreviatura,
-                                    org.email, org.telefono, c.name as pais, s.name as estado')
+                                    org.email, org.telefono, c.name as pais')
         ->join('countries as c', 'c.id', 'org.country_id')
         ->join('states as s', 's.id', 'org.state_id')
         ->get();

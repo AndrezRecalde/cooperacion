@@ -1,5 +1,5 @@
 import { Card, Grid, Text } from "@mantine/core";
-import { DivTitle } from "../../elements/DivTitle";
+import { DivTitle } from "../../../components";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 

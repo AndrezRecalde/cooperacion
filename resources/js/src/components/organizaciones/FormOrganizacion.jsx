@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
     Box,
     Button,
@@ -12,12 +13,13 @@ import {
     Textarea,
     rem,
 } from "@mantine/core";
-import { useStateStore } from "../../hooks/state/useStateStore";
+import {
+    useStateStore,
+    useTipoStore,
+    useUiOrganizacion,
+    useOrganizacionStore,
+} from "../../hooks";
 import { IconPhoto, IconWorldPlus } from "@tabler/icons-react";
-import { useTipoStore } from "../../hooks/tipo/useTipoStore";
-import { useEffect, useState } from "react";
-import { useUiOrganizacion } from "../../hooks/organizacion/useUiOrganizacion";
-import { useOrganizacionStore } from "../../hooks/organizacion/useOrganizacionStore";
 
 export const FormOrganizacion = ({ form }) => {
     const [img, setImg] = useState("");
@@ -59,7 +61,7 @@ export const FormOrganizacion = ({ form }) => {
             form.setValues({
                 ...activateOrganizacion,
             });
-            setImg('/storage' + activateOrganizacion?.imagen_url);
+            setImg("/storage" + activateOrganizacion?.imagen_url);
             return;
         }
     }, [activateOrganizacion]);
@@ -68,7 +70,6 @@ export const FormOrganizacion = ({ form }) => {
         startAddOrganizacion(form.values);
         modalActionOrganizacion(0);
         form.reset();
-
     };
 
     function Value({ file }) {
@@ -155,7 +156,11 @@ export const FormOrganizacion = ({ form }) => {
                             accept="image/png,image/jpeg,image/jpeg"
                             valueComponent={ValueComponent}
                             onChange={(e) => setImagePrev(e)}
-                            error={imagen_url === null || imagen_url === "" ? "Por favor carga el logo de la organización" : null}
+                            error={
+                                imagen_url === null || imagen_url === ""
+                                    ? "Por favor carga el logo de la organización"
+                                    : null
+                            }
                             withAsterisk
                         />
                         <Group position="center">

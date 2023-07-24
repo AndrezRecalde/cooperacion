@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
     Button,
     Divider,
@@ -8,17 +9,14 @@ import {
     Text,
 } from "@mantine/core";
 import { IconChecks, IconWorldCheck } from "@tabler/icons-react";
-import { useUiOrganizacion } from "../../../../hooks/organizacion/useUiOrganizacion";
-import { useOrganizacionStore } from "../../../../hooks/organizacion/useOrganizacionStore";
-import { useConvenioStore } from "../../../../hooks/convenio/useConvenioStore";
+import { useUiOrganizacion, useOrganizacionStore, useConvenioStore } from "../../../../hooks";
 import { isNotEmpty, useForm } from "@mantine/form";
-import { useEffect } from "react";
 
 export const FormActivarOrg = () => {
 
     const { modalActivateOrg } = useUiOrganizacion();
     const { activateEstado, startUpdateConvenioOrg } = useOrganizacionStore();
-    const { convenios, startLoadConvenios, startClearConvenios } = useConvenioStore();
+    const { convenios, startLoadConvenios } = useConvenioStore();
 
     const form = useForm({
         initialValues: {

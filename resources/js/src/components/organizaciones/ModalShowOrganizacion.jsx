@@ -1,7 +1,6 @@
 import { Group, Loader, Modal } from "@mantine/core";
-import { useUiOrganizacion } from "../../hooks/organizacion/useUiOrganizacion";
-import { useOrganizacionStore } from "../../hooks/organizacion/useOrganizacionStore";
-import { CardShowOrganizacion } from "./card/CardShowOrganizacion";
+import { useUiOrganizacion, useOrganizacionStore } from "../../hooks";
+import { CardShowOrganizacion } from "../../components";
 
 export const ModalShowOrganizacion = () => {
     const { isLoading, setClearActivateOrganizacion } = useOrganizacionStore();

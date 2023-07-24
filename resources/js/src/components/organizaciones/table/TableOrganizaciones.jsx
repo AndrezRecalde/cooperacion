@@ -1,20 +1,12 @@
-import { MantineReactTable } from "mantine-react-table";
-import {
-    IconTrash,
-    IconEdit,
-    IconEyeCheck,
-    IconPencilPlus,
-} from "@tabler/icons-react";
 import { useCallback, useMemo } from "react";
-import { Button, ActionIcon, Tooltip, Grid, Badge } from "@mantine/core";
-import { useUiOrganizacion } from "../../../hooks/organizacion/useUiOrganizacion";
-import { useOrganizacionStore } from "../../../hooks/organizacion/useOrganizacionStore";
-import { DotButton } from "./DotButton";
+import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
+import { Badge } from "@mantine/core";
+import { useUiOrganizacion, useOrganizacionStore } from "../../../hooks";
+import { ActionsOrganizacion, BtnAdd, DotButton } from "../../../components";
 import Flag from "react-flagkit";
 
-
 export const TableOrganizaciones = () => {
-    const {  modalActionOrganizacion, modalShowOrganizacion, modalActivateOrg } =
+    const { modalActionOrganizacion, modalShowOrganizacion, modalActivateOrg } =
         useUiOrganizacion();
     const {
         isLoading,
@@ -23,6 +15,7 @@ export const TableOrganizaciones = () => {
         startShowOrganizacion,
         startShowForEdit,
         startDeleteOrganizacion,
+        setClearActivateOrganizacion
     } = useOrganizacionStore();
 
     const columns = useMemo(
@@ -66,7 +59,12 @@ export const TableOrganizaciones = () => {
                                 : "red"
                         }
                         radius="md"
-                        leftSection={<DotButton cell={cell} handleActivar={handleActivar} />}
+                        leftSection={
+                            <DotButton
+                                cell={cell}
+                                handleActivar={handleActivar}
+                            />
+                        }
                     >
                         {cell.getValue()}
                     </Badge>
@@ -77,13 +75,12 @@ export const TableOrganizaciones = () => {
     );
 
     const handleActivar = useCallback(
-      (selected) => {
-        setActivateEstado(selected);
-        modalActivateOrg(1);
-      },
-      [organizaciones],
-    )
-
+        (selected) => {
+            setActivateEstado(selected);
+            modalActivateOrg(1);
+        },
+        [organizaciones]
+    );
 
     const handleShow = useCallback(
         (idSelected) => {
@@ -108,74 +105,33 @@ export const TableOrganizaciones = () => {
         [organizaciones]
     );
 
+    const handleOpen = (e) => {
+        e.preventDefault();
+        setClearActivateOrganizacion();
+        modalActionOrganizacion(1);
+    };
+
+    const table = useMantineReactTable({
+        columns,
+        data: organizaciones,
+        enableColumnOrdering: true,
+        enableRowActions: true,
+        positionActionsColumn: "last",
+        state: { showProgressBars: isLoading },
+        renderRowActionMenuItems: ({ row }) => (
+            <ActionsOrganizacion
+                row={row}
+                handleShow={handleShow}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+            />
+        ),
+        renderTopToolbarCustomActions: () => <BtnAdd title="Agregar Organización" handleAdd={handleOpen} />,
+    });
+
     return (
         <>
-            <MantineReactTable
-                displayColumnDefOptions={{
-                    "mrt-row-actions": {
-                        mantineTableHeadCellProps: {
-                            align: "center",
-                        },
-                        header: "Acciones",
-                        size: 100,
-                    },
-                }}
-                state={{ showProgressBars: isLoading }}
-                columns={columns}
-                data={organizaciones}
-                enableColumnOrdering
-                enableRowActions
-                positionActionsColumn="last"
-                renderRowActions={({ row, table }) => (
-                    <Grid justify="center" key={row.id}>
-                        <Grid.Col span={4}>
-                            <Tooltip withArrow position="left" label="Ver">
-                                <ActionIcon
-                                    onClick={() => handleShow(row.original.id)}
-                                    color="teal"
-                                >
-                                    <IconEyeCheck />
-                                </ActionIcon>
-                            </Tooltip>
-                        </Grid.Col>
-                        <Grid.Col span={4}>
-                            <Tooltip withArrow position="left" label="Editar">
-                                <ActionIcon
-                                    onClick={() => handleEdit(row.original)}
-                                    color="blue"
-                                >
-                                    <IconEdit />
-                                </ActionIcon>
-                            </Tooltip>
-                        </Grid.Col>
-                        <Grid.Col span={4}>
-                            <Tooltip
-                                withArrow
-                                position="right"
-                                label="Eliminar"
-                            >
-                                <ActionIcon
-                                    color="red"
-                                    onClick={() => handleDelete(row.original)}
-                                >
-                                    <IconTrash />
-                                </ActionIcon>
-                            </Tooltip>
-                        </Grid.Col>
-                    </Grid>
-                )}
-                renderTopToolbarCustomActions={() => (
-                    <Button
-                        color="teal"
-                        onClick={() => modalActionOrganizacion(1)}
-                        variant="outline"
-                        radius="md"
-                        leftIcon={<IconPencilPlus />}
-                    >
-                        Agregar Organizacion
-                    </Button>
-                )}
-            />
+            <MantineReactTable table={table} />
         </>
     );
 };

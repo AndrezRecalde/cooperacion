@@ -35,10 +35,10 @@ export const DetailPanelProyecto = ({ row }) => {
                 <Table horizontalSpacing="lg" withBorder withColumnBorders>
                     <thead>
                         <tr>
-                            <th>Cantón</th>
-                            <th>Grupo de atención</th>
-                            <th>Grupo Beneficiado</th>
-                            <th>Total Beneficiados</th>
+                            <th>Intervención en</th>
+                            <th>Grupo(s) de atención</th>
+                            <th>Beneficiados Directos</th>
+                            <th>Beneficiados Indirectos</th>
                             <th>Objetivos Sostenibles</th>
                         </tr>
                     </thead>

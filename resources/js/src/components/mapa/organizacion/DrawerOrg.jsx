@@ -1,7 +1,6 @@
 import { Drawer, rem, useMantineTheme } from '@mantine/core';
-import { DivTitle } from '../../../components';
-import { CardOrganizacion } from './CardOrganizacion';
-import { useUiMapa } from '../../../hooks/mapa/useUiMapa';
+import { DivTitle, CardOrganizacion } from '../../../components';
+import { useUiMapa } from '../../../hooks';
 
 export const DrawerOrg = () => {
 

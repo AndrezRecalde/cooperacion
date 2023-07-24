@@ -1,6 +1,6 @@
 import { Button, Tooltip } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
-import { useUiProyecto } from "../../hooks/proyecto/useUiProyecto";
+import { useUiProyecto } from "../../hooks";
 
 export const FloatAddButton = () => {
     const { modalActionProyecto } = useUiProyecto();

@@ -1,7 +1,7 @@
 import { Button } from "@mantine/core";
 import { IconPencilPlus } from "@tabler/icons-react";
 
-export const BtnAdd = ({ handleAdd }) => {
+export const BtnAdd = ({ title, handleAdd }) => {
     return (
         <Button
             color="teal.7"
@@ -10,7 +10,7 @@ export const BtnAdd = ({ handleAdd }) => {
             radius="sm"
             leftIcon={<IconPencilPlus />}
         >
-            Agregar Proyecto
+            {title}
         </Button>
     );
 };

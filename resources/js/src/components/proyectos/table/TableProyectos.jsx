@@ -110,7 +110,7 @@ export const TableProyectos = () => {
         ),
 
         renderTopToolbarCustomActions: () => (
-            <BtnAdd handleAdd={handleOpenForm} />
+            <BtnAdd title="Agregar Proyecto" handleAdd={handleOpenForm} />
         ),
         renderDetailPanel: ({ row }) => (
             <DetailPanelProyecto row={row} />

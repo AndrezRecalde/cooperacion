@@ -30,9 +30,11 @@ import { ViewGraphics } from "./mapa/chart/ViewGraphics";
 /* Organizaciones */
 import { ModalActivateOrg } from "./organizaciones/activar/ModalActivateOrg";
 import { FormActivarOrg } from "./organizaciones/activar/form/FormActivarOrg";
-
+import { CardShowOrganizacion } from "./organizaciones/card/CardShowOrganizacion";
+import { ChartShowOrganizacion } from "./organizaciones/chart/ChartShowOrganizacion";
 import { DotButton } from "./organizaciones/table/DotButton";
 import { TableOrganizaciones } from "./organizaciones/table/TableOrganizaciones";
+import { ActionsOrganizacion } from "./organizaciones/table/action/ActionsOrganizacion";
 
 import { FormOrganizacion } from "./organizaciones/FormOrganizacion";
 import { ModalOrganizacion } from "./organizaciones/ModalOrganizacion";
@@ -114,8 +116,11 @@ export {
 
     ModalActivateOrg,
     FormActivarOrg,
+    CardShowOrganizacion,
+    ChartShowOrganizacion,
     DotButton,
     TableOrganizaciones,
+    ActionsOrganizacion,
     FormOrganizacion,
     ModalOrganizacion,
     ModalShowOrganizacion,
