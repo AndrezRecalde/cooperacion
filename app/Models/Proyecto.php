@@ -14,12 +14,12 @@ class Proyecto extends Model
         'organizacion_id',
         'nombre_proyecto',
         'objetivo_general',
-        'canton_id',
+        //'canton_id',
         'parroquia_id',
         'recinto_id',
         //'grupo_atencion_id',
-        'grupo_beneficiado',
-        'total_beneficiados',
+        'beneficiados_directos',
+        'beneficiados_indirectos',
         //'odsostenible_id',
         'cooperacion_id',
         'modalidad_id',
@@ -41,10 +41,15 @@ class Proyecto extends Model
         return $this->belongsToMany(GrupoAtencion::class, 'grupo_proyecto', 'proyecto_id', 'grupo_atencion_id');
     }
 
+    public function cantones(): BelongsToMany
+    {
+        return $this->belongsToMany(Canton::class);
+    }
+
     public function scopeCanton($query, $canton)
     {
         if ($canton) {
-            return $query->where('p.canton_id', $canton);
+            return $query->where('cp.canton_id', $canton);
         }
     }
 
@@ -73,5 +78,15 @@ class Proyecto extends Model
         if($organizacion){
             return $query->where('p.organizacion_id', $organizacion);
         }
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function($proyecto){
+            $proyecto->cantones()->detach();
+            $proyecto->odsostenibles()->detach();
+            $proyecto->grupos()->detach();
+        });
     }
 }

@@ -15,8 +15,11 @@ class InstitucionesSeeder extends Seeder
     {
         DB::table('instituciones')->delete();
         $instituciones = [
-            ['nombre_institucion' => 'En Proceso',     'abreviatura' => 'GADPE',
-            'telefono' => '(06) 272-1433'],
+            [
+                'nombre_institucion' => 'Gobierno Autónomo Descentralizado de la Provincia de Esmeraldas',
+                'abreviatura' => 'GADPE',
+                'telefono' => '(06) 272-1433'
+            ],
         ];
         DB::table('instituciones')->insert($instituciones);
     }

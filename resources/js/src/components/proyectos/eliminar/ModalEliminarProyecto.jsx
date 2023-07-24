@@ -1,7 +1,6 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { useUiProyecto } from "../../../hooks/proyecto/useUiProyecto";
-import { FormEliminar } from "./FormEliminar";
-import { TitleCard } from "../../elements/TitleCard";
+import { FormEliminar, TitleCard } from "../../../components";
+import { useUiProyecto } from "../../../hooks";
 
 export const ModalEliminarProyecto = () => {
     const theme = useMantineTheme();

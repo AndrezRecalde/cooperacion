@@ -5,10 +5,12 @@ import {
     IconList,
     IconWorldCheck,
 } from "@tabler/icons-react";
-import { useOrganizacionStore } from "../../../../../hooks/organizacion/useOrganizacionStore";
-import { useTipoCoopStore } from "../../../../../hooks/tipo_cooperacion/useTipoCoopStore";
-import { useAuthStore } from "../../../../../hooks/auth/useAuthStore";
-import { usePeriodoStore } from "../../../../../hooks/periodo/usePeriodoStore";
+import {
+    useAuthStore,
+    useOrganizacionStore,
+    useTipoCoopStore,
+    usePeriodoStore,
+} from "../../../../../hooks";
 
 export const InfoStepper = ({ form }) => {
     const { organizaciones } = useOrganizacionStore();

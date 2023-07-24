@@ -7,6 +7,7 @@ import { FloatOrgButton } from "./elements/FloatOrgButton";
 import { TitleCard } from "./elements/TitleCard";
 import { InfoHeader } from "./elements/InfoHeader";
 import { FloatChartBtn } from "./elements/FloatChartBtn";
+import { BtnAdd } from "./elements/BtnAdd";
 
 /* Dashboard */
 import { Charts } from "./dashboard/Charts";
@@ -39,7 +40,9 @@ import { ModalShowOrganizacion } from "./organizaciones/ModalShowOrganizacion";
 
 
 /* Proyectos */
-import { TableProyectos } from "./proyectos/TableProyectos";
+import { TableProyectos } from "./proyectos/table/TableProyectos";
+import { ActionsProyecto } from "./proyectos/table/action/ActionsProyecto";
+import { DetailPanelProyecto } from "./proyectos/table/panel/DetailPanelProyecto";
 
 import { ActivateButton } from "./proyectos/activar/ActivateButton";
 import { ModalActivateProyecto } from "./proyectos/activar/ModalActivateProyecto";
@@ -93,6 +96,7 @@ export {
     TitleCard,
     InfoHeader,
     FloatChartBtn,
+    BtnAdd,
 
     Charts,
     Stats,
@@ -117,6 +121,8 @@ export {
     ModalShowOrganizacion,
 
     TableProyectos,
+    ActionsProyecto,
+    DetailPanelProyecto,
     ActivateButton,
     ModalActivateProyecto,
     FormActivar,

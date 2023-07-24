@@ -42,7 +42,7 @@ export const useProyectoStore = () => {
             const { proyectos } = data;
             dispatch(onProyectos(proyectos));
         } catch (error) {
-            //console.log(error)
+            console.log(error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -58,6 +58,7 @@ export const useProyectoStore = () => {
             const { proyectos } = data;
             dispatch(onProyectos(proyectos));
         } catch (error) {
+            console.log(error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -87,13 +88,15 @@ export const useProyectoStore = () => {
             const { data } = await gricApi.post("/create/proyecto", proyecto);
             dispatch(onAddProyectos({ ...proyecto }));
             Swal.fire({
-                icon: "success",
-                title: "Solicitud de proyecto envíada correctamente",
-                showConfirmButton: false,
-                timer: 1200,
+                icon: "info",
+                iconColor: "#008080",
+                title: "Proyecto Creado",
+                text: data.msg,
+                showConfirmButton: true,
             });
             startLoadProyectosAdmin();
         } catch (error) {
+            console.log(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -136,6 +139,7 @@ export const useProyectoStore = () => {
             const { proyecto } = data;
             dispatch(onSetActivateProyecto({ ...proyecto }));
         } catch (error) {
+            console.log(error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -295,6 +299,7 @@ export const useProyectoStore = () => {
             );
             window.open(url, "_blank");
         } catch (error) {
+            console.log(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",

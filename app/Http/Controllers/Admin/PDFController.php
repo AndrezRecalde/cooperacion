@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use PDF;
 use App\Http\Controllers\Controller;
-use App\Models\Afiliacion;
 use App\Models\Archivo;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
@@ -15,9 +14,7 @@ class PDFController extends Controller
     {
         $proyecto =  Proyecto::from('proyectos as p')
         ->selectRaw('p.id, org.nombre_organizacion, p.nombre_proyecto, p.objetivo_general,
-                            c.nombre_canton as canton, parr.nombre_parroquia as parroquia,re.nombre_recinto as recinto,
-                            ref.longitud, ref.latitud,
-                            p.grupo_beneficiado, p.total_beneficiados,
+                            p.beneficiados_directos, p.beneficiados_indirectos,
                             coop.tipo_cooperacion, m.tipo_modalidad as modalidad, p.monto, e.estado, per.fechas_periodo as periodo, p.activo')
         ->with(
             [
@@ -26,14 +23,13 @@ class PDFController extends Controller
                 },
                 'grupos' => function ($query) {
                     return $query->select('grupo_atenciones.id', 'grupo_atenciones.grupo');
+                },
+                'cantones' => function ($query) {
+                    return $query->select('cantones.id', 'cantones.nombre_canton');
                 }
             ]
         )
         ->join('organizaciones as org', 'org.id', 'p.organizacion_id')
-        ->join('cantones as c', 'c.id', 'p.canton_id')
-        ->join('parroquias as parr', 'parr.id', 'p.parroquia_id')
-        ->join('recintos as re', 're.id', 'p.recinto_id')
-        ->leftJoin('referencias_cantonales as ref', 'ref.recinto_id', 're.id')
         ->join('cooperaciones as coop', 'coop.id', 'p.cooperacion_id')
         ->join('modalidades as m', 'm.id', 'p.modalidad_id')
         ->join('estados as e', 'e.id', 'p.estado_id')

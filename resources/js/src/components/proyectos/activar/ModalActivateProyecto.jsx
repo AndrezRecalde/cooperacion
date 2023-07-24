@@ -1,8 +1,6 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { useUiProyecto } from "../../../hooks/proyecto/useUiProyecto";
-import { FormActivar } from "./form/FormActivar";
-import { TitleCard } from "../../elements/TitleCard";
-import { useProyectoStore } from "../../../hooks/proyecto/useProyectoStore";
+import { useUiProyecto, useProyectoStore } from "../../../hooks";
+import { FormActivar, TitleCard } from "../../../components";
 
 export const ModalActivateProyecto = () => {
     const theme = useMantineTheme();

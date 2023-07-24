@@ -11,10 +11,9 @@ import {
     rem,
     useMantineTheme,
 } from "@mantine/core";
-import { useUiMapa } from "../../../hooks/mapa/useUiMapa";
-import { useMarkerStore } from "../../../hooks/marker/useMarkerStore";
-import { IconCircleCheck } from "@tabler/icons-react";
-import { DivTitle } from "../../elements/DivTitle";
+import { IconCircleCheckFilled, IconFlag2Filled } from "@tabler/icons-react";
+import { useUiMapa, useMarkerStore } from "../../../hooks";
+import { DivTitle } from "../../../components";
 import Flag from "react-flagkit";
 
 const useStyles = createStyles((theme) => ({
@@ -22,16 +21,6 @@ const useStyles = createStyles((theme) => ({
         display: "flex",
         justifyContent: "space-between",
         padding: `${theme.spacing.sm} ${theme.spacing.lg}`,
-        /* borderTop: `${rem(1)} solid ${
-            theme.colorScheme === "dark"
-                ? theme.colors.dark[5]
-                : theme.colors.gray[2]
-        }`,
-        borderBottom: `${rem(1)} solid ${
-            theme.colorScheme === "dark"
-                ? theme.colors.dark[5]
-                : theme.colors.gray[2]
-        }`, */
     },
     section: {
         padding: theme.spacing.xs,
@@ -118,35 +107,34 @@ export const ModalInformation = () => {
                     </Group>
                 </Grid.Col>
                 <Grid.Col sm={12} md={12} lg={12} xl={12}>
-                    <div className={classes.section_info}>
+                    <div className={classes.section}>
                         <Text className={classes.title}>
                             Area de Intervención
                         </Text>
                         <div className={classes.section_a}>
-                            <div>
-                                <Text size="xs" color="dimmed">
-                                    Canton
-                                </Text>
-                                <Text weight={500} size="sm">
-                                    {activateMarker?.canton}
-                                </Text>
-                            </div>
-                            <div>
-                                <Text size="xs" color="dimmed">
-                                    Parroquia
-                                </Text>
-                                <Text weight={500} size="sm">
-                                    {activateMarker?.parroquia}
-                                </Text>
-                            </div>
-                            <div>
-                                <Text size="xs" color="dimmed">
-                                    Recinto
-                                </Text>
-                                <Text weight={500} size="sm">
-                                    {activateMarker?.recinto}
-                                </Text>
-                            </div>
+                            <Group spacing={8} mb={-8}>
+                                    {activateMarker?.cantones.map((canton) => (
+                                        <List
+                                            key={canton.id}
+                                            spacing="xs"
+                                            size="sm"
+                                            center
+                                            icon={
+                                                <ThemeIcon
+                                                    color="cyan.7"
+                                                    size={24}
+                                                    radius="xl"
+                                                >
+                                                    <IconFlag2Filled size="1rem" />
+                                                </ThemeIcon>
+                                            }
+                                        >
+                                            <List.Item>
+                                                {canton.nombre_canton}
+                                            </List.Item>
+                                        </List>
+                                    ))}
+                            </Group>
                         </div>
                     </div>
                 </Grid.Col>
@@ -157,26 +145,26 @@ export const ModalInformation = () => {
                         </Text>
                         <div className={classes.section_a}>
                             <Group spacing={8} mb={-8}>
-                                {activateMarker?.odsostenibles.map(ods => (
+                                {activateMarker?.odsostenibles.map((ods) => (
                                     <List
-                                    key={ods.id}
-                                    spacing="xs"
-                                    size="sm"
-                                    center
-                                    icon={
-                                        <ThemeIcon
-                                            color="indigo"
-                                            size={24}
-                                            radius="xl"
-                                        >
-                                            <IconCircleCheck size="1rem" />
-                                        </ThemeIcon>
-                                    }
-                                >
-                                    <List.Item>
-                                        {ods.objetivo_ods}
-                                    </List.Item>
-                                </List>
+                                        key={ods.id}
+                                        spacing="xs"
+                                        size="sm"
+                                        center
+                                        icon={
+                                            <ThemeIcon
+                                                color="blue.7"
+                                                size={24}
+                                                radius="xl"
+                                            >
+                                                <IconCircleCheckFilled size="1rem" />
+                                            </ThemeIcon>
+                                        }
+                                    >
+                                        <List.Item>
+                                            {ods.objetivo_ods}
+                                        </List.Item>
+                                    </List>
                                 ))}
                             </Group>
                         </div>
@@ -189,26 +177,24 @@ export const ModalInformation = () => {
                         </Text>
                         <div className={classes.section_a}>
                             <Group spacing={8} mb={-8}>
-                                {activateMarker?.grupos.map(grupo => (
+                                {activateMarker?.grupos.map((grupo) => (
                                     <List
-                                    key={grupo.id}
-                                    spacing="xs"
-                                    size="sm"
-                                    center
-                                    icon={
-                                        <ThemeIcon
-                                            color="teal"
-                                            size={24}
-                                            radius="xl"
-                                        >
-                                            <IconCircleCheck size="1rem" />
-                                        </ThemeIcon>
-                                    }
-                                >
-                                    <List.Item>
-                                        {grupo.grupo}
-                                    </List.Item>
-                                </List>
+                                        key={grupo.id}
+                                        spacing="xs"
+                                        size="sm"
+                                        center
+                                        icon={
+                                            <ThemeIcon
+                                                color="teal"
+                                                size={24}
+                                                radius="xl"
+                                            >
+                                                <IconCircleCheckFilled size="1rem" />
+                                            </ThemeIcon>
+                                        }
+                                    >
+                                        <List.Item>{grupo.grupo}</List.Item>
+                                    </List>
                                 ))}
                             </Group>
                         </div>
@@ -222,12 +208,13 @@ export const ModalInformation = () => {
                         align="center"
                         direction="row"
                         wrap="wrap"
+                        mb={10}
                     >
-                            <Text fz={14} fw={700} c="dimmed" tt="uppercase">
-                                {activateMarker?.fechas_periodo}
-                            </Text>
-                            <Flag country={activateMarker?.code} size={20} />
-                            <Flag country="EC" size={20} />
+                        <Text fz={14} fw={700} c="dimmed" tt="uppercase">
+                            {activateMarker?.fechas_periodo}
+                        </Text>
+                        <Flag country={activateMarker?.code} size={20} />
+                        <Flag country="EC" size={20} />
                     </Flex>
                 </Grid.Col>
             </Grid>

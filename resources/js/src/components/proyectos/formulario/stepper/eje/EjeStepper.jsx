@@ -1,8 +1,6 @@
 import { Grid, MultiSelect, NumberInput, Select } from "@mantine/core";
 import { IconCoins } from "@tabler/icons-react";
-import { useOdsStore } from "../../../../../hooks/ods/useOdsStore";
-import { useModalidadStore } from "../../../../../hooks/modalidad/useModalidadStore";
-import { useEstadoStore } from "../../../../../hooks/estados/useEstadoStore";
+import { useOdsStore, useModalidadStore, useEstadoStore } from "../../../../../hooks";
 
 export const EjeStepper = ({ form }) => {
     const { objetivos } = useOdsStore();

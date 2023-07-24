@@ -1,7 +1,6 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { useUiMapa } from "../../../hooks/mapa/useUiMapa";
-import { ViewGraphics } from "./ViewGraphics";
-import { DivTitle } from "../../elements/DivTitle";
+import { useUiMapa } from "../../../hooks";
+import { DivTitle, ViewGraphics } from "../../../components";
 
 export const ModalCharts = () => {
     const theme = useMantineTheme();

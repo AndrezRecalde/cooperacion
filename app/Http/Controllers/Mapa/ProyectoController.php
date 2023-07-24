@@ -16,10 +16,9 @@ class ProyectoController extends Controller
     {
         $proyectos = Proyecto::from('proyectos as p')
             ->selectRaw('p.id, org.nombre_organizacion, p.nombre_proyecto, p.objetivo_general,
-                                c.nombre_canton as canton, parr.nombre_parroquia as parroquia,re.nombre_recinto as recinto,
-                                ref.longitud, ref.latitud,
-                                p.grupo_beneficiado, p.total_beneficiados,
-                                coop.tipo_cooperacion, m.tipo_modalidad as modalidad, p.monto, e.estado, per.fechas_periodo as periodo, p.activo')
+                        p.beneficiados_directos, p.beneficiados_indirectos,
+                        coop.tipo_cooperacion, m.tipo_modalidad as modalidad,
+                        p.monto, e.estado, per.fechas_periodo as periodo, p.activo')
             ->with(
                 [
                     'odsostenibles'  => function ($query) {
@@ -27,14 +26,13 @@ class ProyectoController extends Controller
                     },
                     'grupos' => function ($query) {
                         return $query->select('grupo_atenciones.id', 'grupo_atenciones.grupo');
+                    },
+                    'cantones' => function ($query) {
+                        return $query->select('cantones.id', 'cantones.nombre_canton');
                     }
                 ]
             )
             ->join('organizaciones as org', 'org.id', 'p.organizacion_id')
-            ->join('cantones as c', 'c.id', 'p.canton_id')
-            ->join('parroquias as parr', 'parr.id', 'p.parroquia_id')
-            ->join('recintos as re', 're.id', 'p.recinto_id')
-            ->leftJoin('referencias_cantonales as ref', 'ref.recinto_id', 're.id')
             ->join('cooperaciones as coop', 'coop.id', 'p.cooperacion_id')
             ->join('modalidades as m', 'm.id', 'p.modalidad_id')
             ->join('estados as e', 'e.id', 'p.estado_id')
@@ -48,10 +46,9 @@ class ProyectoController extends Controller
     {
         $proyectos = Proyecto::from('proyectos as p')
             ->selectRaw('p.id, org.nombre_organizacion, p.nombre_proyecto, p.objetivo_general,
-                                c.nombre_canton as canton, parr.nombre_parroquia as parroquia, re.nombre_recinto as recinto,
-                                ref.longitud, ref.latitud,
-                                p.grupo_beneficiado, p.total_beneficiados,
-                                coop.tipo_cooperacion, m.tipo_modalidad as modalidad, p.monto, e.estado, per.fechas_periodo as periodo, p.activo')
+                                p.beneficiados_directos, p.beneficiados_indirectos,
+                                coop.tipo_cooperacion, m.tipo_modalidad as modalidad,
+                                p.monto, e.estado, per.fechas_periodo as periodo, p.activo')
             ->with(
                 [
                     'odsostenibles'  => function ($query) {
@@ -59,14 +56,13 @@ class ProyectoController extends Controller
                     },
                     'grupos' => function ($query) {
                         return $query->select('grupo_atenciones.id, grupo_atenciones.grupo');
+                    },
+                    'cantones' => function ($query) {
+                        return $query->select('cantones.id', 'cantones.nombre_canton');
                     }
                 ]
             )
             ->join('organizaciones as org', 'org.id', 'p.organizacion_id')
-            ->join('cantones as c', 'c.id', 'p.canton_id')
-            ->join('parroquias as parr', 'parr.id', 'p.parroquia_id')
-            ->join('recintos as re', 're.id', 'p.recinto_id')
-            ->leftJoin('referencias_cantonales as ref', 'ref.recinto_id', 're.id')
             ->join('odsostenible_proyecto as op', 'op.proyecto_id', 'p.id')
             ->join('cooperaciones as coop', 'coop.id', 'p.cooperacion_id')
             ->join('modalidades as m', 'm.id', 'p.modalidad_id')
@@ -82,11 +78,13 @@ class ProyectoController extends Controller
     {
         $proyecto = Proyecto::create($request->validated());
 
+        $proyecto->cantones()->attach($request->canton_id);
+
         $proyecto->grupos()->attach($request->grupo_atencion_id);
 
         $proyecto->odsostenibles()->attach($request->odsostenible_id);
 
-        return response()->json(['status' => MsgStatusEnum::Success, 'msg' => MsgStatusEnum::Creacion], 201);
+        return response()->json(['status' => MsgStatusEnum::Success, 'msg' => MsgStatusEnum::CreacionProyecto], 201);
     }
 
     public function update(ProyectoRequest $request, int $id): JsonResponse
@@ -95,6 +93,11 @@ class ProyectoController extends Controller
 
         if ($proyecto) {
             $proyecto->update($request->validated());
+
+            if ($request->filled('canton_id')) {
+                $proyecto->cantones()->detach();
+                $proyecto->cantones()->sync($request->canton_id);
+            }
 
             if ($request->filled('odsostenible_id')) {
                 $proyecto->odsostenibles()->detach();
@@ -121,6 +124,9 @@ class ProyectoController extends Controller
                 },
                 'grupos' => function ($query) {
                     return $query->select('grupo_atenciones.id', 'grupo_atenciones.grupo');
+                },
+                'cantones' => function ($query) {
+                    return $query->select('cantones.id', 'cantones.nombre_canton');
                 }
             ]
         )->where('proyectos.id', $id)->first();
@@ -192,29 +198,27 @@ class ProyectoController extends Controller
                     },
                     'grupos' => function ($query) {
                         return $query->select('grupo_atenciones.id', 'grupo_atenciones.grupo');
+                    },
+                    'cantones' => function ($query) {
+                        return $query->select('cantones.id', 'cantones.nombre_canton');
                     }
                 ]
             )
             ->join('organizaciones as org', 'org.id', 'p.organizacion_id')
             ->join('countries as coun', 'coun.id', 'org.country_id')
             ->join('states as s', 's.id', 'org.state_id')
-            ->join('cantones as c', 'c.id', 'p.canton_id')
-            ->join('parroquias as parr', 'parr.id', 'p.parroquia_id')
-            ->join('recintos as r', 'r.id', 'p.recinto_id')
             ->join('odsostenible_proyecto as op', 'op.proyecto_id', 'p.id')
             ->join('cooperaciones as coop', 'coop.id', 'p.cooperacion_id')
             ->join('modalidades as m', 'm.id', 'p.modalidad_id')
             ->leftJoin('estados as e', 'e.id', 'p.estado_id')
             ->join('periodos as pe', 'pe.id', 'p.periodo_id')
+            ->join('canton_proyecto as cp', 'cp.proyecto_id', 'p.id')
             ->where('p.activo', 1)
             ->canton($request->canton_id)
-            ->parroquia($request->parroquia_id)
-            ->recinto($request->recinto_id)
             ->objetivo($request->ods_id)
             ->organizacion($request->organizacion_id)
             ->selectRaw('p.id, coun.code, org.nombre_organizacion, p.nombre_proyecto, p.objetivo_general,
-                        c.nombre_canton as canton, parr.nombre_parroquia as parroquia, r.nombre_recinto as recinto,
-                        p.grupo_beneficiado, p.total_beneficiados, coop.tipo_cooperacion,
+                        p.beneficiados_directos, p.beneficiados_indirectos, coop.tipo_cooperacion,
                         m.tipo_modalidad, p.monto, e.estado, p.activo, pe.fechas_periodo')
             ->get();
 
@@ -232,7 +236,7 @@ class ProyectoController extends Controller
             ->selectRaw('ods.objetivo_ods, COUNT(p.id) as total, ods.color')
             ->join('odsostenible_proyecto as op', 'op.proyecto_id', 'p.id')
             ->join('odsostenibles as ods', 'ods.id', 'op.odsostenible_id')
-            ->groupBy('ods.objetivo_ods','ods.color')
+            ->groupBy('ods.objetivo_ods', 'ods.color')
             ->get();
 
         if (sizeof($proyectosOds) >= 1) {

@@ -223,18 +223,18 @@
                     <thead>
                         <tr>
                             <th>{{ Str::upper('Cantón') }}</th>
-                            <th>{{ Str::upper('Parroquia') }}</th>
-                            <th>{{ Str::upper('Recinto') }}</th>
-
-
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ Str::upper($proyecto->canton) }}</td>
-                            <td>{{ Str::upper($proyecto->parroquia) }}</td>
-                            <td>{{ Str::upper($proyecto->recinto) }}</td>
 
+                            <td>
+                                @foreach ($proyecto->cantones as $canton)
+                                    <ul>
+                                        <li>{{ $canton->nombre_canton }}</li>
+                                    </ul>
+                                @endforeach
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -286,8 +286,8 @@
                 <table border="1" width="100" style="width:100%;">
                     <thead>
                         <tr>
-                            <th>{{ Str::upper('Grupo Beneficiado') }}</th>
-                            <th>{{ Str::upper('Total Beneficiados') }}</th>
+                            <th>{{ Str::upper('Beneficiados Directos') }}</th>
+                            <th>{{ Str::upper('Beneficiados Inirectos') }}</th>
                             <th>{{ Str::upper('Monto del Proyecto') }}</th>
 
 
@@ -296,8 +296,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ $proyecto->grupo_beneficiado }}</td>
-                            <td>{{ $proyecto->total_beneficiados }}</td>
+                            <td>{{ $proyecto->beneficiados_directos }}</td>
+                            <td>{{ $proyecto->beneficiados_indirectos }}</td>
                             <td>{{ $proyecto->monto }} USD</td>
                         </tr>
                     </tbody>

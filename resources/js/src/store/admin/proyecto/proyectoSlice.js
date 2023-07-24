@@ -20,8 +20,8 @@ export const proyectoSlice = createSlice({
         },
         onProyectos: (state, { payload }) => {
             state.proyectos = payload;
-            state.errores = undefined;
             state.isLoading = false;
+            state.errores = undefined;
         },
         onAddProyectos: (state, { payload }) => {
             state.proyectos.push(payload);

@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Badge, Button, Group, Stepper } from "@mantine/core";
-import { EjeStepper, InfoStepper, UbicacionStepper } from "../../../index";
-import { useProyectoStore } from "../../../../hooks/proyecto/useProyectoStore";
-import { useUiProyecto } from "../../../../hooks/proyecto/useUiProyecto";
+import { EjeStepper, InfoStepper, UbicacionStepper } from "../../../../components";
+import { useProyectoStore, useUiProyecto } from "../../../../hooks";
 import {
     IconBrandTelegram,
     IconChevronsLeft,

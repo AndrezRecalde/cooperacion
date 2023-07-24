@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
     Button,
     Divider,
@@ -7,11 +8,9 @@ import {
     Select,
     Text,
 } from "@mantine/core";
-import { IconChecks, IconDeviceImacCheck } from "@tabler/icons-react";
-import { useProyectoStore } from "../../../../hooks/proyecto/useProyectoStore";
 import { isNotEmpty, useForm } from "@mantine/form";
-import { useEffect } from "react";
-import { useUiProyecto } from "../../../../hooks/proyecto/useUiProyecto";
+import { IconChecks, IconDeviceImacCheck } from "@tabler/icons-react";
+import { useProyectoStore, useUiProyecto } from "../../../../hooks";
 
 export const FormActivar = () => {
     const { modalActionActivo } = useUiProyecto();

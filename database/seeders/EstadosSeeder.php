@@ -15,6 +15,7 @@ class EstadosSeeder extends Seeder
     {
         DB::table('estados')->delete();
         $estados = [
+            ['estado' => 'Inicial',          'activo' => 1],
             ['estado' => 'En Proceso',          'activo' => 1],
             ['estado' => 'Finalizado',          'activo' => 1],
         ];

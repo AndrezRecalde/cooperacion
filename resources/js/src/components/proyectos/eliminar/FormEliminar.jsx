@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
     ActionIcon,
     Alert,
@@ -13,15 +14,12 @@ import {
 } from "@mantine/core";
 import {
     IconAlertCircle,
-    IconCategory2,
     IconCheck,
     IconFileShredder,
     IconTrash,
 } from "@tabler/icons-react";
-import { useUiProyecto } from "../../../hooks/proyecto/useUiProyecto";
-import { useProyectoStore } from "../../../hooks/proyecto/useProyectoStore";
+import { useUiProyecto, useProyectoStore } from "../../../hooks";
 import { isNotEmpty, useForm } from "@mantine/form";
-import { useEffect, useState } from "react";
 
 export const FormEliminar = () => {
     const { modalActionDelete } = useUiProyecto();
@@ -106,8 +104,8 @@ export const FormEliminar = () => {
                         title="Informacion!"
                         color="yellow"
                     >
-                        Para confirmar la eliminacion, escriba el nombre del
-                        proyecto en el cuadro de a continuacion.
+                        Para confirmar la eliminación, escriba el nombre del
+                        proyecto en el cuadro de a continuación.
                     </Alert>
                 </Grid.Col>
                 <Grid.Col sm={12} md={12} lg={12} xl={12}>
@@ -115,7 +113,6 @@ export const FormEliminar = () => {
                         data-autofocus
                         label="Nombre de proyecto"
                         placeholder="Escriba el nombre del proyecto"
-                        icon={<IconCategory2 size="0.8rem" />}
                         {...form.getInputProps("confirm_proyecto")}
                     />
                     <Divider />

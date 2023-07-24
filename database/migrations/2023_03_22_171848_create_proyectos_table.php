@@ -16,13 +16,8 @@ return new class extends Migration
             $table->unsignedInteger('organizacion_id');
             $table->string('nombre_proyecto');
             $table->text('objetivo_general');
-            $table->unsignedInteger('canton_id');
-            $table->unsignedInteger('parroquia_id');
-            $table->unsignedInteger('recinto_id');
-            //$table->unsignedInteger('grupo_atencion_id');
-            $table->string('grupo_beneficiado');
-            $table->unsignedInteger('total_beneficiados');
-            //$table->unsignedInteger('odsostenible_id');
+            $table->string('beneficiados_directos');
+            $table->string('beneficiados_indirectos');
             $table->unsignedInteger('cooperacion_id');
             $table->unsignedInteger('modalidad_id');
             $table->decimal('monto', 15, 2);

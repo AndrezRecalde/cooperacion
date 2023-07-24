@@ -1,6 +1,7 @@
 import {
     ActionIcon,
     Badge,
+    Button,
     Card,
     Drawer,
     Flex,
@@ -9,22 +10,19 @@ import {
     Text,
     Tooltip,
 } from "@mantine/core";
-import { useUiMapa } from "../../../hooks/mapa/useUiMapa";
-import { DivTitle } from "../../elements/DivTitle";
+import { useUiMapa, useMarkerStore } from "../../../hooks";
+import { DivTitle } from "../../../components";
+import { IconChecks, IconChevronsLeft, IconLoader3 } from "@tabler/icons-react";
 import Flag from "react-flagkit";
-import {
-    IconChecks,
-    IconLoader3,
-} from "@tabler/icons-react";
-import { useMarkerStore } from "../../../hooks/marker/useMarkerStore";
 
 export const DrawerProyecto = () => {
     const {
         isOpenDrawerProyectos,
         drawerActionProyectos,
         modalActionInformation,
+        drawerMenu
     } = useUiMapa();
-    const { proyectosMarkers, setActiveMarker, errores } = useMarkerStore();
+    const { proyectosMarkers, setActiveMarker, startClearProyectoMarkers, errores } = useMarkerStore();
 
     const handleCloseDrawer = () => {
         drawerActionProyectos(0);
@@ -35,6 +33,12 @@ export const DrawerProyecto = () => {
         modalActionInformation(1);
     };
 
+    const handleBack = () => {
+        drawerActionProyectos(0);
+        startClearProyectoMarkers();
+        drawerMenu(1);
+    }
+
     return (
         <Drawer
             opened={isOpenDrawerProyectos}
@@ -44,6 +48,9 @@ export const DrawerProyecto = () => {
             title={<DivTitle title="Resultado de Proyectos" fw={700} />}
             size="md"
         >
+            <Button onClick={handleBack} fullWidth  variant="light" color="teal.7" mb={2} leftIcon={<IconChevronsLeft size="1rem" />}>
+                Regresar
+            </Button>
             {proyectosMarkers.length !== 0 ? (
                 proyectosMarkers.map((proyecto) => (
                     <Card
@@ -92,7 +99,11 @@ export const DrawerProyecto = () => {
                                     </Badge>
                                     <Tooltip
                                         label={proyecto.estado}
-                                        color={proyecto.estado === "Finalizado" ? "blue" : "red"}
+                                        color={
+                                            proyecto.estado === "Finalizado"
+                                                ? "blue"
+                                                : "red"
+                                        }
                                         withArrow
                                         transitionProps={{
                                             transition: "slide-left",
@@ -100,14 +111,20 @@ export const DrawerProyecto = () => {
                                         }}
                                     >
                                         <ActionIcon
-                                            color={proyecto.estado === "Finalizado" ? "blue" : "red"}
+                                            color={
+                                                proyecto.estado === "Finalizado"
+                                                    ? "blue"
+                                                    : "red"
+                                            }
                                             size="lg"
                                             radius="xl"
                                         >
-                                            {proyecto.estado === "Finalizado" ? (
+                                            {proyecto.estado ===
+                                            "Finalizado" ? (
                                                 <IconChecks size="1.3rem" />
-                                            ) : ( <IconLoader3 size="1.3rem" /> ) }
-
+                                            ) : (
+                                                <IconLoader3 size="1.3rem" />
+                                            )}
                                         </ActionIcon>
                                     </Tooltip>
                                 </Group>

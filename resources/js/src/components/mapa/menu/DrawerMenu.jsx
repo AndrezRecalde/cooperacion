@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
     Badge,
     Button,
@@ -14,15 +15,15 @@ import {
     useMantineTheme,
 } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
-import { DivTitle } from "../../../components";
-import { useUiMapa } from "../../../hooks/mapa/useUiMapa";
-import { useStateStore } from "../../../hooks/state/useStateStore";
-import { useEffect } from "react";
+import { DivTitle, DrawerProyecto } from "../../../components";
+import {
+    useUiMapa,
+    useStateStore,
+    useOdsStore,
+    useMarkerStore,
+    useOrganizacionStore,
+} from "../../../hooks";
 import { useForm } from "@mantine/form";
-import { useOdsStore } from "../../../hooks/ods/useOdsStore";
-import { useMarkerStore } from "../../../hooks/marker/useMarkerStore";
-import { DrawerProyecto } from "../proyecto/DrawerProyecto";
-import { useOrganizacionStore } from "../../../hooks/organizacion/useOrganizacionStore";
 import odsImage from "../../../assets/images/ods.png";
 
 const useStyles = createStyles((theme) => ({
@@ -51,10 +52,9 @@ export const DrawerMenu = () => {
         startLoadCantones,
         startLoadParroquias,
         startLoadRecintos,
-        starClearStates,
     } = useStateStore();
 
-    const { starLoadObjetivos, startClearObjetivos, objetivos } = useOdsStore();
+    const { starLoadObjetivos, objetivos } = useOdsStore();
 
     const { startOnSearch } = useMarkerStore();
 
@@ -136,34 +136,6 @@ export const DrawerMenu = () => {
                                 };
                             })}
                             {...form.getInputProps("canton_id")}
-                        />
-                    </Grid.Col>
-                    <Grid.Col sm={12} md={12} lg={12} xl={12}>
-                        <Select
-                            placeholder="Selecciona Parroquia"
-                            label="Parroquia"
-                            data={parroquias.map((parroquia) => {
-                                return {
-                                    label: parroquia.nombre_parroquia,
-                                    value: parroquia.id,
-                                };
-                            })}
-                            mt={5}
-                            {...form.getInputProps("parroquia_id")}
-                        />
-                    </Grid.Col>
-                    <Grid.Col sm={12} md={12} lg={12} xl={12}>
-                        <Select
-                            placeholder="Selecciona Recinto"
-                            label="Recinto"
-                            data={recintos.map((recinto) => {
-                                return {
-                                    label: recinto.nombre_recinto,
-                                    value: recinto.id,
-                                };
-                            })}
-                            mt={5}
-                            {...form.getInputProps("recinto_id")}
                         />
                     </Grid.Col>
                     <Grid.Col sm={12} md={12} lg={12} xl={12}>

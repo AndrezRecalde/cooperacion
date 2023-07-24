@@ -1,3 +1,6 @@
+/* Autenticacion */
+import { useAuthStore } from "./auth/useAuthStore";
+
 /* Tipos de Convenio */
 import { useConvenioStore } from "./convenio/useConvenioStore";
 
@@ -38,8 +41,16 @@ import { useTipoStore } from "./tipo/useTipoStore";
 /* Tipos de cooperacion */
 import { useTipoCoopStore } from "./tipo_cooperacion/useTipoCoopStore";
 
+/* Grupo de Atencion Prioritaria */
+import { useGrupoAtencionStore } from "./grupo_atencion/useGrupoAtencionStore";
+
+/* Periodos */
+import { usePeriodoStore } from "./periodo/usePeriodoStore";
+
 
 export {
+    useAuthStore,
+
     useConvenioStore,
 
     useEstadoStore,
@@ -61,5 +72,9 @@ export {
 
     useTipoStore,
 
-    useTipoCoopStore
+    useTipoCoopStore,
+
+    useGrupoAtencionStore,
+
+    usePeriodoStore
 }
