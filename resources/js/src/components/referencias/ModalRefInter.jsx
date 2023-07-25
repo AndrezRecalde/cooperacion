@@ -1,8 +1,7 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { TitleCard } from "../elements/TitleCard";
-import { useUiInternacional } from "../../hooks/referencia/internacional/useUiInternacional";
 import { isNotEmpty, useForm } from "@mantine/form";
-import { FormRefInter } from "./form/FormRefInter";
+import { TitleCard, FormRefInter } from "../../components";
+import { useUiInternacional } from "../../hooks";
 
 export const ModalRefInter = () => {
     const theme = useMantineTheme();

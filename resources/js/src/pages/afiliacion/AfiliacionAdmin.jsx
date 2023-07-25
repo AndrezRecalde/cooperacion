@@ -20,7 +20,7 @@ export const AfiliacionAdmin = () => {
     return (
         <Container size="xl">
             <Text mt={15} tt="capitalize" fw={700} fz="xl">
-                Organizaciones
+                Afiliaciones
             </Text>
             <Text mb="xl" fz={16} fw={500} c="teal">
                 Existen {afiliaciones.length} afiliaciones registradas.
@@ -38,7 +38,7 @@ export const AfiliacionAdmin = () => {
                 sx={{ position: "static" }}
             >
                 <Card.Section withBorder inheritPadding py="lg">
-                    <TitleCard title="Lista de Organizaciones" />
+                    <TitleCard fz="xs" title="Lista de Organizaciones que desean afiliarse" />
                 </Card.Section>
                 <Card.Section>
                     <TableAfiliaciones />

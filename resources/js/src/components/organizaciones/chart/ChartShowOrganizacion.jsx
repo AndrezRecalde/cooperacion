@@ -26,7 +26,11 @@ export const ChartShowOrganizacion = ({ activateOrganizacion }) => {
     };
 
     return (
-        <Card p="lg">
+        <Card  withBorder
+        radius="sm"
+        mt="lg"
+        mb="lg"
+        shadow="sm">
             <Card.Section withBorder inheritPadding py="xs">
                 <DivTitle title="Distribución de Proyectos" fw={700} />
             </Card.Section>

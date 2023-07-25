@@ -1,7 +1,7 @@
 import { ActionIcon } from "@mantine/core";
 import { IconBan, IconCircleCheckFilled } from "@tabler/icons-react";
 
-export const ActivateButton = ({ cell, handleActivar }) => {
+export const ActivateUserButton = ({ cell, handleActivar }) => {
     return (
         <>
             <ActionIcon

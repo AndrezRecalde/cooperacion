@@ -1,13 +1,15 @@
-import { ActionIcon, Button, Grid, Tooltip } from "@mantine/core";
-import { IconEdit, IconPencilPlus } from "@tabler/icons-react";
-import { MantineReactTable } from "mantine-react-table";
 import { useMemo, useCallback } from "react";
-import { useInternacionalStore } from "../../../hooks/referencia/internacional/useInternacionalStore";
-import { useUiInternacional } from "../../../hooks/referencia/internacional/useUiInternacional";
+import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
+import { useInternacionalStore, useUiInternacional } from "../../../hooks";
+import { BtnAdd, MenuActionsAdmin } from "../../../components";
 
 export const TableRefInter = () => {
-    const { isLoading, referencias, setActivateRefInter } =
-        useInternacionalStore();
+    const {
+        isLoading,
+        referencias,
+        setActivateRefInter,
+        setClearActivateRefInter,
+    } = useInternacionalStore();
 
     const { modalActionRefInter } = useUiInternacional();
 
@@ -41,7 +43,7 @@ export const TableRefInter = () => {
         [referencias]
     );
 
-    const handleEditar = useCallback(
+    const handleEdit = useCallback(
         (selected) => {
             setActivateRefInter(selected);
             modalActionRefInter(1);
@@ -49,64 +51,35 @@ export const TableRefInter = () => {
         [referencias]
     );
 
-    return (
-        <MantineReactTable
-            displayColumnDefOptions={{
-                "mrt-row-actions": {
-                    mantineTableHeadCellProps: {
-                        align: "center",
-                    },
-                    header: "Acciones",
-                    size: 100,
-                },
-            }}
-            state={{ showProgressBars: isLoading }}
-            columns={columns}
-            data={referencias}
-            enableRowNumbers
-            rowNumberMode="original"
-            enableColumnOrdering
-            enableRowActions
-            positionActionsColumn="last"
-            renderRowActions={({ row, table }) => (
-                <Grid justify="center" key={row.id}>
-                    <Grid.Col span={2}>
-                        <Tooltip withArrow position="left" label="Editar">
-                            <ActionIcon
-                                onClick={() => handleEditar(row.original)}
-                                color="blue"
-                            >
-                                <IconEdit />
-                            </ActionIcon>
-                        </Tooltip>
-                    </Grid.Col>
-                    {/* <Grid.Col span={4}>
-                <Tooltip
-                    withArrow
-                    position="right"
-                    label="Eliminar"
-                >
-                    <ActionIcon
-                        color="red"
-                        onClick={() => handleDelete(row.original)}
-                    >
-                        <IconTrash />
-                    </ActionIcon>
-                </Tooltip>
-            </Grid.Col> */}
-                </Grid>
-            )}
-            renderTopToolbarCustomActions={() => (
-                <Button
-                    color="teal"
-                    onClick={() => modalActionRefInter(1)}
-                    variant="outline"
-                    radius="md"
-                    leftIcon={<IconPencilPlus />}
-                >
-                    Agregar Referencia
-                </Button>
-            )}
-        />
-    );
+    const handleDelete = useCallback(() => {
+        console.log("clic");
+    }, [referencias]);
+
+    const handleOpen = (e) => {
+        e.preventDefault();
+        setClearActivateRefInter();
+        modalActionRefInter(1);
+    };
+
+    const table = useMantineReactTable({
+        columns,
+        data: referencias,
+        enableColumnOrdering: true,
+        enableRowActions: true,
+        positionActionsColumn: "last",
+        rowNumberMode: "original",
+        state: { showProgressBars: isLoading },
+        renderRowActionMenuItems: ({ row }) => (
+            <MenuActionsAdmin
+                row={row}
+                handleEdit={handleEdit}
+                handleDelele={handleDelete}
+            />
+        ),
+        renderTopToolbarCustomActions: () => (
+            <BtnAdd title="Agregar Referencia" handleAdd={handleOpen} />
+        ),
+    });
+
+    return <MantineReactTable table={table} />;
 };

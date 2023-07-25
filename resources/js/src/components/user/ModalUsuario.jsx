@@ -1,8 +1,8 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { useUiUsuario } from "../../hooks/usuario/useUiUsuario";
 import { hasLength, isEmail, isNotEmpty, useForm } from "@mantine/form";
-import { FormUsuario } from "./form/FormUsuario";
-import { TitleCard } from "../elements/TitleCard";
+import { TitleCard, FormUsuario } from "../../components";
+import { useUiUsuario } from "../../hooks";
+
 
 export const ModalUsuario = () => {
     const theme = useMantineTheme();

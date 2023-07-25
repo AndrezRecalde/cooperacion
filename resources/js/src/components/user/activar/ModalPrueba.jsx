@@ -1,6 +1,6 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { useUiUsuario } from "../../../hooks/usuario/useUiUsuario";
-import { TitleCard } from "../../elements/TitleCard";
+import { useUiUsuario } from "../../../hooks";
+import { TitleCard } from "../../../components";
 
 
 export const ModalPrueba = () => {

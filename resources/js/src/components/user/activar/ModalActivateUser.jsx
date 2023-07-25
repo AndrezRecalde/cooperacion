@@ -1,8 +1,6 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { useUiUsuario } from "../../../hooks/usuario/useUiUsuario";
-import { TitleCard } from "../../elements/TitleCard";
-import { FormActivarUsuario } from "./form/FormActivarUsuario";
-import { useUsuarioStore } from "../../../hooks/usuario/useUsuarioStore";
+import { TitleCard, FormActivarUsuario } from "../../../components";
+import { useUsuarioStore, useUiUsuario } from "../../../hooks";
 
 export const ModalActivateUser = () => {
     const theme = useMantineTheme();

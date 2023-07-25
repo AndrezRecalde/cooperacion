@@ -1,8 +1,7 @@
+import { useEffect } from "react";
 import { Box, Button, Grid, Group, Select, TextInput } from "@mantine/core";
 import { IconChecks } from "@tabler/icons-react";
-import { useModalidadStore } from "../../../hooks/modalidad/useModalidadStore";
-import { useEffect } from "react";
-import { useUiModalidad } from "../../../hooks/modalidad/useUiModalidad";
+import { useModalidadStore, useUiModalidad } from "../../../hooks";
 
 export const FormModalidad = ({ form }) => {
     const { modalActionModalidad } = useUiModalidad();

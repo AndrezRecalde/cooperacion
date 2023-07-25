@@ -1,8 +1,7 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { TitleCard } from "../elements/TitleCard";
-import { useUiModalidad } from "../../hooks/modalidad/useUiModalidad";
 import { isNotEmpty, useForm } from "@mantine/form";
-import { FormModalidad } from "./form/FormModalidad";
+import { TitleCard, FormModalidad } from "../../components";
+import { useUiModalidad } from "../../hooks";
 
 export const ModalModalidad = () => {
     const theme = useMantineTheme();

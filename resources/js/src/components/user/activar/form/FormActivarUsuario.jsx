@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
     Button,
     Divider,
@@ -7,11 +8,9 @@ import {
     Select,
     Text,
 } from "@mantine/core";
-import { IconChecks, IconUserCheck } from "@tabler/icons-react";
-import { useUiUsuario } from "../../../../hooks/usuario/useUiUsuario";
-import { useUsuarioStore } from "../../../../hooks/usuario/useUsuarioStore";
 import { isNotEmpty, useForm } from "@mantine/form";
-import { useEffect } from "react";
+import { IconChecks, IconUserCheck } from "@tabler/icons-react";
+import { useUiUsuario, useUsuarioStore } from "../../../../hooks";
 
 export const FormActivarUsuario = () => {
 

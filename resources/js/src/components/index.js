@@ -1,3 +1,6 @@
+/* Authentication */
+import { AuthForm } from "./auth/AuthForm";
+
 /* Elements */
 import { DivHeader } from "./elements/DivHeader";
 import { DivTitle } from "./elements/DivTitle";
@@ -8,6 +11,7 @@ import { TitleCard } from "./elements/TitleCard";
 import { InfoHeader } from "./elements/InfoHeader";
 import { FloatChartBtn } from "./elements/FloatChartBtn";
 import { BtnAdd } from "./elements/BtnAdd";
+import { MenuActionsAdmin } from "./elements/action/MenuActionsAdmin";
 
 /* Dashboard */
 import { Charts } from "./dashboard/Charts";
@@ -15,6 +19,7 @@ import { Stats } from "./dashboard/Stats";
 import { ChartReporteProyectos } from "./dashboard/ChartReporteProyectos";
 import { ChartObjetivos } from "./dashboard/ChartObjetivos";
 import { ChartOrganizaciones } from "./dashboard/ChartOrganizaciones";
+import { ChartTipos } from "./dashboard/ChartTipos";
 
 
 /* Mapa */
@@ -65,6 +70,8 @@ import { ModalUsuario } from "./user/ModalUsuario";
 import { FormUsuario } from "./user/form/FormUsuario";
 import { TableUsuarios } from "./user/table/TableUsuarios";
 import { ModalActivateUser } from "./user/activar/ModalActivateUser";
+import { FormActivarUsuario } from "./user/activar/form/FormActivarUsuario";
+import { ActivateUserButton } from "./user/activar/ActivateUserButton";
 
 /* Modalidades */
 import { ModalModalidad } from "./modalidades/ModalModalidad";
@@ -86,8 +93,12 @@ import { ModalTipoCoop } from "./tipos_cooperaciones/ModalTipoCoop";
 import { FormTipoCoop } from "./tipos_cooperaciones/form/FormTipoCoop";
 import { TableTiposCoop } from "./tipos_cooperaciones/table/TableTiposCoop";
 
-/* Authentication */
-import { AuthForm } from "./auth/AuthForm";
+
+/* Afiliacion */
+import { ActivateAfilButton } from "./afiliacion/contactar/ActivateAfilButton";
+import { FormContactar } from "./afiliacion/form/FormContactar";
+import { FormAfiliacion } from "./afiliacion/form/FormAfiliacion";
+import { DetailPanelAfiliacion } from "./afiliacion/table/panel/DetailPanelAfiliacion";
 
 export {
     DivHeader,
@@ -99,12 +110,14 @@ export {
     InfoHeader,
     FloatChartBtn,
     BtnAdd,
+    MenuActionsAdmin,
 
     Charts,
     Stats,
     ChartReporteProyectos,
     ChartObjetivos,
     ChartOrganizaciones,
+    ChartTipos,
 
     DrawerMenu,
     CardOrganizacion,
@@ -145,6 +158,8 @@ export {
     FormUsuario,
     TableUsuarios,
     ModalActivateUser,
+    FormActivarUsuario,
+    ActivateUserButton,
 
     ModalModalidad,
     FormModalidad,
@@ -163,4 +178,9 @@ export {
     TableTiposCoop,
 
     AuthForm,
+
+    ActivateAfilButton,
+    FormContactar,
+    FormAfiliacion,
+    DetailPanelAfiliacion
 };

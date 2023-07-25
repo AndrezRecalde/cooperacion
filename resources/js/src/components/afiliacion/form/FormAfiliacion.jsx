@@ -18,14 +18,14 @@ import {
     rem,
 } from "@mantine/core";
 import { hasLength, isEmail, isNotEmpty, useForm } from "@mantine/form";
-import { TitleCard } from "../../elements/TitleCard";
+import { TitleCard } from "../../../components";
 import {
     IconBrandTelegram,
     IconChecks,
     IconFileDots,
     IconInfoCircle,
 } from "@tabler/icons-react";
-import { useAfiliacionStore } from "../../../hooks/afiliacion/useAfiliacionStore";
+import { useAfiliacionStore } from "../../../hooks";
 import Swal from "sweetalert2";
 
 const useStyles = createStyles((theme) => ({
@@ -45,8 +45,8 @@ const useStyles = createStyles((theme) => ({
             left: 0,
             width: rem(8),
             backgroundImage: theme.fn.gradient({
-                from: "blue",
-                to: "green",
+                from: "teal.7",
+                to: "teal.5",
                 deg: 45,
             }),
         },
@@ -81,14 +81,20 @@ export const FormAfiliacion = () => {
             email: isEmail("Por favor digite un email válido"),
             razon_social: isNotEmpty("La razón social es requerida"),
             telefono_org: isNotEmpty("El teléfono corporativo es requerido"),
-            direccion_org: isNotEmpty("La dirección de la entidad es requerida"),
-            descripcion_org: hasLength({ min: 5 }, "Por favor digite un breve resumen de la entidad"),
-            archivos: value => value.length > 2 ? "Se admiten solo 2 archivos" : null
-        }
+            direccion_org: isNotEmpty(
+                "La dirección de la entidad es requerida"
+            ),
+            descripcion_org: hasLength(
+                { min: 5 },
+                "Por favor digite un breve resumen de la entidad"
+            ),
+            archivos: (value) =>
+                value.length > 2 ? "Se admiten solo 2 archivos" : null,
+        },
     });
 
     useEffect(() => {
-        if(errores !== undefined) {
+        if (errores !== undefined) {
             Swal.fire({
                 icon: "error",
                 title: errores,
@@ -96,10 +102,7 @@ export const FormAfiliacion = () => {
                 timer: 1000,
             });
         }
-
-      }, [errores]);
-
-
+    }, [errores]);
 
     function Value({ file }) {
         return (
@@ -218,147 +221,168 @@ export const FormAfiliacion = () => {
                     onSubmit={form.onSubmit((_, e) => handleSubmit(e))}
                 >
                     <Skeleton visible={isLoading}>
-                    <Card withBorder radius="md" mt="lg" mb="lg" shadow="sm">
-                        <Card.Section inheritPadding py="xs">
-                            <TitleCard title="Datos del contacto" />
-                        </Card.Section>
-                        <Card.Section inheritPadding py="xs">
-                            <Grid>
-                                <Grid.Col sm={12} md={6} lg={6} xl={6}>
-                                    <TextInput
-                                        placeholder="Nombres y apellidos del contacto"
-                                        label="Nombres"
-                                        withAsterisk
-                                        mb={15}
-                                        {...form.getInputProps("nombres")}
-                                        /* error={errores[0]?.nombres ?? null} */
-                                    />
-                                    <TextInput
-                                        placeholder="Cargo ocupacional del contacto"
-                                        label="Cargo"
-                                        withAsterisk
-                                        {...form.getInputProps("cargo")}
-                                        /* error={errores[0]?.cargo ?? null} */
-                                    />
-                                </Grid.Col>
-                                <Grid.Col sm={12} md={6} lg={6} xl={6}>
-                                    <TextInput
-                                        placeholder="Nombre de la entidad"
-                                        label="Entidad"
-                                        withAsterisk
-                                        mb={15}
-                                        {...form.getInputProps("entidad")}
-                                        /* error={errores[0]?.entidad ?? null} */
-                                    />
-                                    <TextInput
-                                        placeholder="Número telefónico del contacto"
-                                        label="Número telefónico"
-                                        withAsterisk
-                                        {...form.getInputProps("telefono")}
-                                        /* error={errores[0]?.telefono ?? null} */
-                                    />
-                                </Grid.Col>
-                                <Grid.Col sm={12} md={12} lg={12} xl={12}>
-                                    <TextInput
-                                        placeholder="E-mail del contacto"
-                                        label="E-mail"
-                                        withAsterisk
-                                        mb={15}
-                                        {...form.getInputProps("email")}
-                                        /* error={errores[0]?.email ?? null} */
-                                    />
-                                </Grid.Col>
-                            </Grid>
-                        </Card.Section>
-                        <Card.Section inheritPadding py="xs">
-                            <TitleCard title="Información general de la entidad" />
-                        </Card.Section>
-                        <Card.Section inheritPadding py="xs">
-                            <Grid>
-                                <Grid.Col sm={12} md={6} lg={6} xl={6}>
-                                    <TextInput
-                                        placeholder="Razón social de la entidad"
-                                        label="Razón social"
-                                        withAsterisk
-                                        mb={15}
-                                        {...form.getInputProps("razon_social")}
-                                        /* error={errores[0]?.razon_social ?? null} */
-                                    />
-                                    <TextInput
-                                        placeholder="Teléfono de la entidad"
-                                        label="Teléfono"
-                                        withAsterisk
-                                        {...form.getInputProps("telefono_org")}
-                                        /* error={errores[0]?.telefono_org ?? null} */
-                                    />
-                                </Grid.Col>
-                                <Grid.Col sm={12} md={6} lg={6} xl={6}>
-                                    <TextInput
-                                        placeholder="Sitio web de la entidad"
-                                        label="Sitio web"
-                                        withAsterisk
-                                        mb={15}
-                                        {...form.getInputProps("sitio_web")}
-                                        /* error={errores[0]?.sitio_web ?? null} */
-                                    />
-                                    <TextInput
-                                        placeholder="Dirección de la entidad"
-                                        label="Dirección"
-                                        withAsterisk
-                                        {...form.getInputProps("direccion_org")}
-                                        /* error={errores[0]?.direccion_org ?? null} */
-                                    />
-                                </Grid.Col>
-                                <Grid.Col sm={12} md={12} lg={6} xl={6}>
-                                    <Textarea
-                                        placeholder="Redacte una breve descripción de la entidad"
-                                        label="Descripción de la entidad"
-                                        radius="sm"
-                                        withAsterisk
-                                        mb={15}
-                                        minRows={3}
-                                        maxRows={4}
-                                        {...form.getInputProps(
-                                            "descripcion_org"
-                                        )}
-                                        /* error={errores[0]?.descripcion_org ?? null} */
-                                    />
-                                </Grid.Col>
-                                <Grid.Col sm={12} md={12} lg={6} xl={6}>
-                                    <FileInput
-                                        clearable
-                                        description="Porfafolio de servicios, Estatuto Organico y Copia de RUC"
-                                        accept="application/pdf"
-                                        label="Documentos"
-                                        placeholder="Cargue los documentos habilitantes (PDF)"
-                                        multiple
-                                        valueComponent={ValueComponent}
-                                        {...form.getInputProps("archivos")}
-                                    />
-                                </Grid.Col>
-                            </Grid>
-                        </Card.Section>
-                        <Paper withBorder radius="md" className={classes.card}>
-                            <Group>
-                                <IconInfoCircle color="teal" />
-                                <Text fz={14}>
-                                    Al enviar tu información estas aceptando la
-                                    declaración de privacidad de los datos
-                                    registrados en este sitio.
-                                </Text>
-                            </Group>
-                        </Paper>
-                        <Group position="center">
-                            <Button
-                                variant="outline"
-                                color="teal"
-                                type="submit"
-                                leftIcon={<IconBrandTelegram size="1.3rem" />}
+                        <Card
+                            withBorder
+                            radius="md"
+                            mt="lg"
+                            mb="lg"
+                            shadow="sm"
+                        >
+                            <Card.Section inheritPadding py="xs">
+                                <TitleCard title="Datos del contacto" />
+                            </Card.Section>
+                            <Card.Section inheritPadding py="xs">
+                                <Grid>
+                                    <Grid.Col sm={12} md={6} lg={6} xl={6}>
+                                        <TextInput
+                                            placeholder="Nombres y apellidos del contacto"
+                                            label="Nombres"
+                                            withAsterisk
+                                            {...form.getInputProps("nombres")}
+                                            /* error={errores[0]?.nombres ?? null} */
+                                        />
+                                    </Grid.Col>
+                                    <Grid.Col sm={12} md={6} lg={6} xl={6}>
+                                        <TextInput
+                                            placeholder="Cargo ocupacional del contacto"
+                                            label="Cargo"
+                                            withAsterisk
+                                            {...form.getInputProps("cargo")}
+                                            /* error={errores[0]?.cargo ?? null} */
+                                        />
+                                    </Grid.Col>
+                                    <Grid.Col sm={12} md={6} lg={6} xl={6}>
+                                        <TextInput
+                                            placeholder="Nombre de la entidad"
+                                            label="Entidad"
+                                            withAsterisk
+                                            {...form.getInputProps("entidad")}
+                                            /* error={errores[0]?.entidad ?? null} */
+                                        />
+                                    </Grid.Col>
+                                    <Grid.Col sm={12} md={6} lg={6} xl={6}>
+                                        <TextInput
+                                            placeholder="Número telefónico del contacto"
+                                            label="Número telefónico"
+                                            withAsterisk
+                                            {...form.getInputProps("telefono")}
+                                            /* error={errores[0]?.telefono ?? null} */
+                                        />
+                                    </Grid.Col>
+                                    <Grid.Col sm={12} md={12} lg={12} xl={12}>
+                                        <TextInput
+                                            placeholder="E-mail del contacto"
+                                            label="E-mail"
+                                            withAsterisk
+                                            {...form.getInputProps("email")}
+                                            /* error={errores[0]?.email ?? null} */
+                                        />
+                                    </Grid.Col>
+                                </Grid>
+                            </Card.Section>
+                            <Card.Section inheritPadding py="xs">
+                                <TitleCard title="Información general de la entidad" />
+                            </Card.Section>
+                            <Card.Section inheritPadding py="xs">
+                                <Grid>
+                                    <Grid.Col sm={12} md={6} lg={6} xl={6}>
+                                        <TextInput
+                                            placeholder="Razón social de la entidad"
+                                            label="Razón social"
+                                            withAsterisk
+                                            {...form.getInputProps(
+                                                "razon_social"
+                                            )}
+                                            /* error={errores[0]?.razon_social ?? null} */
+                                        />
+                                    </Grid.Col>
+                                    <Grid.Col sm={12} md={6} lg={6} xl={6}>
+                                        <TextInput
+                                            placeholder="Teléfono de la entidad"
+                                            label="Teléfono"
+                                            withAsterisk
+                                            {...form.getInputProps(
+                                                "telefono_org"
+                                            )}
+                                            /* error={errores[0]?.telefono_org ?? null} */
+                                        />
+                                    </Grid.Col>
+                                    <Grid.Col sm={12} md={12} lg={6} xl={6}>
+                                        <TextInput
+                                            placeholder="Dirección de la entidad"
+                                            label="Dirección"
+                                            withAsterisk
+                                            {...form.getInputProps(
+                                                "direccion_org"
+                                            )}
+                                            /* error={errores[0]?.direccion_org ?? null} */
+                                        />
+                                    </Grid.Col>
+                                    <Grid.Col sm={12} md={6} lg={6} xl={6}>
+                                        <TextInput
+                                            placeholder="Ejem: www.sitio.com"
+                                            label="Sitio web"
+                                            withAsterisk
+                                            {...form.getInputProps("sitio_web")}
+                                            /* error={errores[0]?.sitio_web ?? null} */
+                                        />
+                                    </Grid.Col>
+                                    <Grid.Col sm={12} md={12} lg={6} xl={6}>
+                                        <Textarea
+                                            placeholder="Redacte una breve descripción de la entidad"
+                                            label="Descripción de la entidad"
+                                            radius="sm"
+                                            withAsterisk
+                                            minRows={3}
+                                            maxRows={4}
+                                            {...form.getInputProps(
+                                                "descripcion_org"
+                                            )}
+                                            /* error={errores[0]?.descripcion_org ?? null} */
+                                        />
+                                    </Grid.Col>
+                                    <Grid.Col sm={12} md={12} lg={6} xl={6}>
+                                        <FileInput
+                                            clearable
+                                            description="Porfafolio de servicios, Estatuto Orgánico y Copia de RUC"
+                                            accept="application/pdf"
+                                            label="Documentos"
+                                            placeholder="Máximo 3 archivos PDF (Opcional)"
+                                            multiple
+                                            valueComponent={ValueComponent}
+                                            {...form.getInputProps("archivos")}
+                                        />
+                                    </Grid.Col>
+                                </Grid>
+                            </Card.Section>
+                            <Paper
+                                withBorder
+                                radius="sm"
+                                className={classes.card}
                             >
-                                Enviar Formulario
-                            </Button>
-                        </Group>
-                    </Card>
+                                <Group>
+                                    <IconInfoCircle color="teal" />
+                                    <Text fz={14}>
+                                        Al enviar tu información estas aceptando
+                                        la declaración de privacidad de los
+                                        datos registrados en este sitio.
+                                    </Text>
+                                </Group>
+                            </Paper>
+                            <Group position="center">
+                                <Button
+                                    variant="light"
+                                    color="teal.7"
+                                    mb={15}
+                                    type="submit"
+                                    leftIcon={
+                                        <IconBrandTelegram size="1.3rem" />
+                                    }
+                                >
+                                    Enviar Formulario
+                                </Button>
+                            </Group>
+                        </Card>
                     </Skeleton>
                 </Box>
             )}

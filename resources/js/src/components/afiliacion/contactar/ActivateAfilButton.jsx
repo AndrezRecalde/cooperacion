@@ -1,7 +1,7 @@
 import { ActionIcon } from "@mantine/core";
 import { IconAlertCircle, IconDiscountCheckFilled } from "@tabler/icons-react";
 
-export const ActivateAfiButton = ({ cell, handleActivar }) => {
+export const ActivateAfilButton = ({ cell, handleActivar }) => {
     return (
         <>
             <ActionIcon

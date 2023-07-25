@@ -1,6 +1,6 @@
 import { Card, Grid, Text } from "@mantine/core";
-import { DivTitle } from "../elements/DivTitle";
-import { useProyectoStore } from "../../hooks/proyecto/useProyectoStore";
+import { DivTitle } from "../../components";
+import { useProyectoStore } from "../../hooks";
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
@@ -47,7 +47,6 @@ export const ChartObjetivos = () => {
                         withBorder
                         mb={20}
                         mt={20}
-                        /* onClick={() => console.log("clic")} */
                     >
                         <Grid>
                             <Grid.Col sm={12} md={12} lg={12} xl={12}>

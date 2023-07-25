@@ -6,7 +6,7 @@ import {
     createStyles,
     rem,
 } from "@mantine/core";
-import { FormAfiliacion } from "./form/FormAfiliacion";
+import { FormAfiliacion } from "../../components";
 import logo from "../../assets/images/logo/LogoGadpe.png";
 
 const useStyles = createStyles((theme) => ({

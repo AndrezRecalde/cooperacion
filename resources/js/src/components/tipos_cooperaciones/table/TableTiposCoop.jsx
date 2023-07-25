@@ -1,12 +1,16 @@
-import { ActionIcon, Button, Grid, Tooltip } from "@mantine/core";
-import { IconEdit, IconPencilPlus } from "@tabler/icons-react";
-import { MantineReactTable } from "mantine-react-table";
-import { useTipoCoopStore } from "../../../hooks/tipo_cooperacion/useTipoCoopStore";
 import { useMemo, useCallback } from "react";
-import { useUiTipoCoop } from "../../../hooks/tipo_cooperacion/useUiTipoCoop";
+import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
+import { useTipoCoopStore, useUiTipoCoop } from "../../../hooks";
+import { BtnAdd, MenuActionsAdmin } from "../../../components";
 
 export const TableTiposCoop = () => {
-    const { isLoading, tiposCopperaciones, setActivateTipoCoop, startDeleteTipoCoop } = useTipoCoopStore();
+    const {
+        isLoading,
+        tiposCopperaciones,
+        setActivateTipoCoop,
+        startDeleteTipoCoop,
+        setClearActivateTipoCoop
+    } = useTipoCoopStore();
 
     const { modalActionTipoCoop } = useUiTipoCoop();
 
@@ -19,7 +23,7 @@ export const TableTiposCoop = () => {
                 wrap: true,
             },
             {
-                accessorFn: (row) => row.activo === 1 ? "Si" : "No",
+                accessorFn: (row) => (row.activo === 1 ? "Si" : "No"),
                 header: "Activo",
                 size: 80,
                 wrap: true,
@@ -28,7 +32,7 @@ export const TableTiposCoop = () => {
         [tiposCopperaciones]
     );
 
-    const handleEditar = useCallback(
+    const handleEdit = useCallback(
         (selected) => {
             setActivateTipoCoop(selected);
             modalActionTipoCoop(1);
@@ -37,72 +41,43 @@ export const TableTiposCoop = () => {
     );
 
     const handleDelete = useCallback(
-      (selected) => {
-        startDeleteTipoCoop(selected);
-      },
-      [tiposCopperaciones],
-    )
+        (selected) => {
+            startDeleteTipoCoop(selected);
+        },
+        [tiposCopperaciones]
+    );
 
+    const handleOpen = (e) => {
+        e.preventDefault();
+        setClearActivateTipoCoop();
+        modalActionTipoCoop(1);
+
+    }
+
+    const table = useMantineReactTable({
+        columns,
+        data: tiposCopperaciones,
+        enableColumnOrdering: true,
+        enableRowActions: true,
+        positionActionsColumn: "last",
+        rowNumberMode: "original",
+        state: { showProgressBars: isLoading },
+        renderRowActionMenuItems: ({ row }) => (
+            <MenuActionsAdmin
+                row={row}
+                handleEdit={handleEdit}
+                handleDelele={handleDelete}
+            />
+        ),
+        renderTopToolbarCustomActions: () => (
+            <BtnAdd title="Agregar Tipo de Cooperación" handleAdd={handleOpen} />
+        ),
+    });
 
     return (
         <>
             <MantineReactTable
-                displayColumnDefOptions={{
-                    "mrt-row-actions": {
-                        mantineTableHeadCellProps: {
-                            align: "center",
-                        },
-                        header: "Acciones",
-                        size: 100,
-                    },
-                }}
-                state={{ showProgressBars: isLoading }}
-                columns={columns}
-                data={tiposCopperaciones}
-                enableRowNumbers
-                rowNumberMode="original"
-                enableColumnOrdering
-                enableRowActions
-                positionActionsColumn="last"
-                renderRowActions={({ row, table }) => (
-                    <Grid justify="center" key={row.id}>
-                        <Grid.Col span={2}>
-                            <Tooltip withArrow position="left" label="Editar">
-                                <ActionIcon
-                                    onClick={() => handleEditar(row.original)}
-                                    color="blue"
-                                >
-                                    <IconEdit />
-                                </ActionIcon>
-                            </Tooltip>
-                        </Grid.Col>
-                        {/* <Grid.Col span={4}>
-                            <Tooltip
-                                withArrow
-                                position="right"
-                                label="Eliminar"
-                            >
-                                <ActionIcon
-                                    color="red"
-                                    onClick={() => handleDelete(row.original)}
-                                >
-                                    <IconTrash />
-                                </ActionIcon>
-                            </Tooltip>
-                        </Grid.Col> */}
-                    </Grid>
-                )}
-                renderTopToolbarCustomActions={() => (
-                    <Button
-                        color="teal"
-                        onClick={() => modalActionTipoCoop(1)}
-                        variant="outline"
-                        radius="md"
-                        leftIcon={<IconPencilPlus />}
-                    >
-                        Agregar Tipo de Cooperación
-                    </Button>
-                )}
+              table={table}
             />
         </>
     );

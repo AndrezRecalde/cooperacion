@@ -1,6 +1,6 @@
 import { Card, Grid, Text } from "@mantine/core";
-import { DivTitle } from "../elements/DivTitle";
-import { useProyectoStore } from "../../hooks/proyecto/useProyectoStore";
+import { DivTitle } from "../../components";
+import { useProyectoStore } from "../../hooks";
 import { PolarArea } from 'react-chartjs-2';
 import { Chart as ChartJS, RadialLinearScale, ArcElement, Tooltip, Legend } from 'chart.js';
 

@@ -13,9 +13,11 @@ import {
     IconFolders,
     IconUserCircle,
 } from "@tabler/icons-react";
-import { useProyectoStore } from "../../hooks/proyecto/useProyectoStore";
-import { useOrganizacionStore } from "../../hooks/organizacion/useOrganizacionStore";
-import { useUsuarioStore } from "../../hooks/usuario/useUsuarioStore";
+import {
+    useProyectoStore,
+    useOrganizacionStore,
+    useUsuarioStore,
+} from "../../hooks";
 
 const useStyles = createStyles((theme) => ({
     root: {
@@ -78,7 +80,7 @@ export const Stats = ({ data }) => {
         const totales = valores[stat.value];
         return (
             <Paper withBorder p="md" radius="md" key={stat.title}>
-                {totales !== 'null USD' ? (
+                {totales !== "null USD" ? (
                     <div>
                         <Group position="apart">
                             <Text

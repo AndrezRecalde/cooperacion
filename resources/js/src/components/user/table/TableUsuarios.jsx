@@ -1,14 +1,12 @@
-import { ActionIcon, Badge, Button, Grid, Tooltip, useMantineTheme } from "@mantine/core";
-import {
-    IconEdit,
-    IconPencilPlus,
-    IconTrash,
-} from "@tabler/icons-react";
-import { MantineReactTable } from "mantine-react-table";
 import { useCallback, useMemo } from "react";
-import { useUiUsuario } from "../../../hooks/usuario/useUiUsuario";
-import { useUsuarioStore } from "../../../hooks/usuario/useUsuarioStore";
-import { ActivateButton } from "../activar/ActivateButton";
+import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
+import { Badge, useMantineTheme } from "@mantine/core";
+import { useUiUsuario, useUsuarioStore } from "../../../hooks";
+import {
+    ActivateUserButton,
+    BtnAdd,
+    MenuActionsAdmin,
+} from "../../../components";
 
 export const TableUsuarios = () => {
     const theme = useMantineTheme();
@@ -20,6 +18,7 @@ export const TableUsuarios = () => {
         startShowForEdit,
         setActivateEstado,
         startDeleteUsuario,
+        setClearActivateUsuario,
     } = useUsuarioStore();
 
     const columns = useMemo(
@@ -33,7 +32,10 @@ export const TableUsuarios = () => {
                 enableColumnFilter: false,
                 size: 40,
                 Cell: ({ cell }) => (
-                    <ActivateButton cell={cell} handleActivar={handleActivar} />
+                    <ActivateUserButton
+                        cell={cell}
+                        handleActivar={handleActivar}
+                    />
                 ),
             },
             {
@@ -55,7 +57,7 @@ export const TableUsuarios = () => {
             },
             {
                 accessorKey: "role",
-                Cell: ({cell}) => (
+                Cell: ({ cell }) => (
                     <Badge
                         color={
                             cell.getValue() === "Administrador"
@@ -67,7 +69,9 @@ export const TableUsuarios = () => {
                                 : "red"
                         }
                         radius="sm"
-                        variant={theme.colorScheme === 'dark' ? 'light' : 'outline'}
+                        variant={
+                            theme.colorScheme === "dark" ? "light" : "outline"
+                        }
                     >
                         {cell.getValue()}
                     </Badge>
@@ -102,64 +106,35 @@ export const TableUsuarios = () => {
         [usuarios]
     );
 
+    const handleOpen = (e) => {
+        e.preventDefault();
+        setClearActivateUsuario();
+        modalActionUsuario(1);
+    };
+
+    const table = useMantineReactTable({
+        columns,
+        data: usuarios,
+        enableColumnOrdering: true,
+        enableRowActions: true,
+        positionActionsColumn: "last",
+        rowNumberMode: "original",
+        state: { showProgressBars: isLoading },
+        renderRowActionMenuItems: ({ row }) => (
+            <MenuActionsAdmin
+                row={row}
+                handleEdit={handleEdit}
+                handleDelele={handleDelete}
+            />
+        ),
+        renderTopToolbarCustomActions: () => (
+            <BtnAdd title="Agregar Usuario" handleAdd={handleOpen} />
+        ),
+    });
+
     return (
         <>
-            <MantineReactTable
-                displayColumnDefOptions={{
-                    "mrt-row-actions": {
-                        mantineTableHeadCellProps: {
-                            align: "center",
-                        },
-                        header: "Acciones",
-                        size: 100,
-                    },
-                }}
-                state={{ showProgressBars: isLoading }}
-                columns={columns}
-                data={usuarios}
-                enableColumnOrdering
-                enableRowActions
-                positionActionsColumn="last"
-                renderRowActions={({ row, table }) => (
-                    <Grid justify="center" key={row.id}>
-                        <Grid.Col span={4}>
-                            <Tooltip withArrow position="left" label="Editar">
-                                <ActionIcon
-                                    onClick={() => handleEdit(row.original)}
-                                    color="blue"
-                                >
-                                    <IconEdit />
-                                </ActionIcon>
-                            </Tooltip>
-                        </Grid.Col>
-                        <Grid.Col span={4}>
-                            <Tooltip
-                                withArrow
-                                position="right"
-                                label="Eliminar"
-                            >
-                                <ActionIcon
-                                    color="red"
-                                    onClick={() => handleDelete(row.original)}
-                                >
-                                    <IconTrash />
-                                </ActionIcon>
-                            </Tooltip>
-                        </Grid.Col>
-                    </Grid>
-                )}
-                renderTopToolbarCustomActions={() => (
-                    <Button
-                        color="teal"
-                        onClick={() => modalActionUsuario(1)}
-                        variant="outline"
-                        radius="md"
-                        leftIcon={<IconPencilPlus />}
-                    >
-                        Agregar Usuarios
-                    </Button>
-                )}
-            />
+            <MantineReactTable table={table} />
         </>
     );
 };

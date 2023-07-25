@@ -8,11 +8,9 @@ import {
     Select,
     Text,
 } from "@mantine/core";
-
-import { IconBuildingSkyscraper, IconChecks } from "@tabler/icons-react";
-import { useUiAfiliacion } from "../../../hooks/afiliacion/useUiAfiliacion";
-import { useAfiliacionStore } from "../../../hooks/afiliacion/useAfiliacionStore";
 import { isNotEmpty, useForm } from "@mantine/form";
+import { IconBuildingSkyscraper, IconChecks } from "@tabler/icons-react";
+import { useUiAfiliacion, useAfiliacionStore } from "../../../hooks";
 
 export const FormContactar = () => {
     const { modalActivateAfiliacion } = useUiAfiliacion();

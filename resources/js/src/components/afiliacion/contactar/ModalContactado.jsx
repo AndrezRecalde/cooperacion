@@ -1,7 +1,7 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { useUiAfiliacion } from "../../../hooks/afiliacion/useUiAfiliacion";
-import { TitleCard } from "../../elements/TitleCard";
-import { FormContactar } from "../form/FormContactar";
+import { TitleCard, FormContactar } from "../../../components";
+import { useUiAfiliacion } from "../../../hooks";
+
 
 export const ModalContactado = () => {
 

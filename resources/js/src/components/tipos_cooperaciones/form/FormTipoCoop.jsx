@@ -1,8 +1,7 @@
-import { Box, Button, Grid, Group, Select, TextInput } from "@mantine/core";
-import { useUiTipoCoop } from "../../../hooks/tipo_cooperacion/useUiTipoCoop";
-import { useTipoCoopStore } from "../../../hooks/tipo_cooperacion/useTipoCoopStore";
 import { useEffect } from "react";
+import { Box, Button, Grid, Group, Select, TextInput } from "@mantine/core";
 import { IconChecks } from "@tabler/icons-react";
+import { useUiTipoCoop, useTipoCoopStore } from "../../../hooks";
 
 export const FormTipoCoop = ({ form }) => {
     const { modalActionTipoCoop } = useUiTipoCoop();

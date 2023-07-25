@@ -83,6 +83,8 @@ Route::group(
         /* Tipos de Organizacion */
         Route::post('/admin/create/tipo', [TiposController::class, 'store']);
         Route::put('/admin/update/tipo/{id}', [TiposController::class, 'update']);
+        Route::delete('/admin/delete/tipo/{id}', [TiposController::class, 'destroy']);
+
 
         /* Usuarios */
         Route::post('/admin/create/usuario', [UserController::class, 'store']);

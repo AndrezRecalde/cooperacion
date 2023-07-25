@@ -11,9 +11,9 @@ import {
     createStyles,
     rem,
 } from "@mantine/core";
-import { IconCheck } from "@tabler/icons-react";
+import { IconThumbUp } from "@tabler/icons-react";
 import { useOrganizacionStore } from "../../../hooks";
-import { ChartShowOrganizacion } from "../../../components";
+import { ChartShowOrganizacion, TitleCard } from "../../../components";
 import Flag from "react-flagkit";
 
 
@@ -106,41 +106,50 @@ export const CardShowOrganizacion = ({ handleCloseShowModal }) => {
                         </Group>
                     </Grid.Col>
                     <Grid.Col sm={6} md={6} lg={6} xl={6}>
-                        <div className={classes.section_info}>
-                            <Text className={classes.title}>
-                                Tipo de Convenio
-                            </Text>
-                            <Badge size="lg" color="indigo" radius="sm">
-                                {activateOrganizacion?.convenio}
-                            </Badge>
-                        </div>
-                        <div className={classes.section_info}>
-                            <Text className={classes.title}>
-                                Tipo de Organización
-                            </Text>
-                            <Text
-                                tt="uppercase"
-                                className={classes.description}
+                        <Card
+                                withBorder
+                                radius="sm"
+                                mt="lg"
+                                mb="lg"
+                                shadow="sm"
                             >
-                                {activateOrganizacion?.tipo}
-                            </Text>
-                        </div>
-                        <div className={classes.section_info}>
-                            <Text className={classes.title}>Sitio Web</Text>
-
-                            {activateOrganizacion?.sitio_web ? (
-                                <Anchor
-                                    href={`https://${activateOrganizacion.sitio_web}`}
-                                    target="_blank"
-                                    underline={false}
-                                    color="dark"
-                                >
-                                    {activateOrganizacion.sitio_web}
-                                </Anchor>
-                            ) : (
-                                <Text fs="italic">Sitio web no registrado</Text>
-                            )}
-                        </div>
+                                <Card.Section inheritPadding py="xs" withBorder>
+                                    <TitleCard title="Tipo de Convenio" />
+                                </Card.Section>
+                                <Card.Section inheritPadding py="xs">
+                                    <Badge size="lg" color="indigo.7" radius="sm">
+                                        {activateOrganizacion?.convenio}
+                                    </Badge>
+                                </Card.Section>
+                                <Card.Section inheritPadding py="xs" withBorder>
+                                    <TitleCard title="Tipo de Organización" />
+                                </Card.Section>
+                                <Card.Section inheritPadding py="xs">
+                                    <Text
+                                        tt="uppercase"
+                                        className={classes.description}
+                                    >
+                                        {activateOrganizacion?.tipo}
+                                    </Text>
+                                </Card.Section>
+                                <Card.Section inheritPadding py="xs" withBorder>
+                                    <TitleCard title="Sitio Web" />
+                                </Card.Section>
+                                <Card.Section inheritPadding py="xs">
+                                    {activateOrganizacion?.sitio_web ? (
+                                        <Anchor
+                                            href={`https://${activateOrganizacion.sitio_web}`}
+                                            target="_blank"
+                                            underline={false}
+                                            color="dark"
+                                        >
+                                            {activateOrganizacion.sitio_web}
+                                        </Anchor>
+                                    ) : (
+                                        <Text fs="italic">Sitio web no registrado</Text>
+                                    )}
+                                </Card.Section>
+                        </Card>
                     </Grid.Col>
                     <Grid.Col sm={6} md={6} lg={6} xl={6}>
                         <ChartShowOrganizacion
@@ -154,7 +163,8 @@ export const CardShowOrganizacion = ({ handleCloseShowModal }) => {
                     <Button
                         fullWidth
                         variant="light"
-                        leftIcon={<IconCheck />}
+                        color="teal.7"
+                        leftIcon={<IconThumbUp />}
                         onClick={handleCloseShowModal}
                     >
                         Entendido

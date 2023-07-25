@@ -66,13 +66,42 @@ export const useTipoStore = () => {
         }
     };
 
+    const startDeleteTipo = async (tipo) => {
+        Swal.fire({
+            icon: "warning",
+            title: "Estas seguro de eliminar?",
+            showDenyButton: true,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Si",
+            denyButtonText: "No",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    await gricApi.delete(
+                        `/admin/delete/tipo/${tipo.id}`
+                    );
+                    Swal.fire("¡Eliminado!", "", "success");
+                    dispatch(onDeleteTipo(tipo));
+                    starLoadTiposCoopAdmin();
+                } catch (error) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: error.response ? error.response.data.msg : error,
+                        confirmButtonColor: "#c81d11",
+                    });
+                }
+            }
+        });
+    };
+
     const setActivateTipo = (tipo) => {
         dispatch(onSetActivateTipo({ ...tipo }));
-    }
+    };
 
     const setClearActivateTipo = () => {
         dispatch(onSetActivateTipo(null));
-    }
+    };
 
     const startClearTipos = () => {
         dispatch(onClearTipos());
@@ -87,6 +116,7 @@ export const useTipoStore = () => {
         startLoadTipos,
         startAddTipo,
         setActivateTipo,
+        startDeleteTipo,
         setClearActivateTipo,
         startClearTipos,
     };

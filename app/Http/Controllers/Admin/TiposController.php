@@ -35,7 +35,18 @@ class TiposController extends Controller
             return response()->json(['status' => MsgStatusEnum::Success, 'msg' => MsgStatusEnum::Actualizado], 201);
         } catch (\Throwable $th) {
             return response()->json(['status' => MsgStatusEnum::Success, 'msg' => $th->getMessage()], 500);
+        }
+    }
 
+    public function destroy(int $id): JsonResponse
+    {
+        $tipo = Tipo::find($id);
+
+        if ($tipo) {
+            $tipo->delete();
+            return response()->json(['status' => MsgStatusEnum::Success, 'msg' => MsgStatusEnum::Eliminado], 200);
+        } else {
+            return response()->json(['status' => MsgStatusEnum::Error, 'msg' => MsgStatusEnum::NotFound], 404);
         }
     }
 }

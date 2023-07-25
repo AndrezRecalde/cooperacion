@@ -11,7 +11,8 @@ class RoleController extends Controller
 {
     public function getRoles()
     {
-        $roles = Role::get(['id', 'name']);
+        $roles = Role::where('id', '<>', 1)
+        ->get(['id', 'name']);
 
         return response()->json(['status' => MsgStatusEnum::Success, 'roles' => $roles], 200);
     }

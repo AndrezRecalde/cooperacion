@@ -1,26 +1,27 @@
 import { useEffect } from "react";
 import { Box, Button, Grid, Group, Select, TextInput } from "@mantine/core";
 import { IconChecks } from "@tabler/icons-react";
-import { useUiInternacional } from "../../../hooks/referencia/internacional/useUiInternacional";
-import { useInternacionalStore } from "../../../hooks/referencia/internacional/useInternacionalStore";
-import { useStateStore } from "../../../hooks/state/useStateStore";
-
+import {
+    useUiInternacional,
+    useInternacionalStore,
+    useStateStore,
+} from "../../../hooks";
 
 export const FormRefInter = ({ form }) => {
-
     const { modalActionRefInter } = useUiInternacional();
-    const { activateReferencia, startAddRefInter, setClearActivateRefInter } = useInternacionalStore();
+    const { activateReferencia, startAddRefInter, setClearActivateRefInter } =
+        useInternacionalStore();
     const { paises, estados, startLoadPaises, startLoadEstados } =
-    useStateStore();
+        useStateStore();
 
     const { latitud, longitud, country_id, state_id } = form.values;
 
     useEffect(() => {
         startLoadPaises();
 
-      return () => {
-        setClearActivateRefInter();
-      }
+        return () => {
+            setClearActivateRefInter();
+        };
     }, []);
 
     useEffect(() => {
@@ -33,23 +34,20 @@ export const FormRefInter = ({ form }) => {
         //setClearActivateRefInter();
     }, [country_id]);
 
-
     useEffect(() => {
-      if(activateReferencia !== null){
-        form.setValues({
-            ...activateReferencia,
-        });
-        return;
-      }
+        if (activateReferencia !== null) {
+            form.setValues({
+                ...activateReferencia,
+            });
+            return;
+        }
     }, [activateReferencia]);
 
     const handleSubmit = () => {
         startAddRefInter(form.values);
         form.reset();
         modalActionRefInter(0);
-    }
-
-
+    };
 
     return (
         <Box
@@ -85,11 +83,11 @@ export const FormRefInter = ({ form }) => {
                         defaultValue={1}
                         nothingFound="No options"
                         {...form.getInputProps("country_id")}
-                        data={paises.map(pais => {
+                        data={paises.map((pais) => {
                             return {
                                 label: pais.name,
-                                value: pais.id
-                            }
+                                value: pais.id,
+                            };
                         })}
                     />
                 </Grid.Col>
@@ -101,11 +99,11 @@ export const FormRefInter = ({ form }) => {
                         defaultValue={1}
                         nothingFound="No options"
                         {...form.getInputProps("state_id")}
-                        data={estados.map(estado => {
+                        data={estados.map((estado) => {
                             return {
                                 label: estado.name,
-                                value: estado.id
-                            }
+                                value: estado.id,
+                            };
                         })}
                     />
                 </Grid.Col>

@@ -1,10 +1,7 @@
+import { useEffect } from "react";
 import { Box, Button, Grid, Group, Select, Skeleton, TextInput } from "@mantine/core";
 import { IconUserPlus } from "@tabler/icons-react";
-import { useUsuarioStore } from "../../../hooks/usuario/useUsuarioStore";
-import { useEffect } from "react";
-import { useUiUsuario } from "../../../hooks/usuario/useUiUsuario";
-import { useRoleStore } from "../../../hooks/role/useRoleStore";
-import { useInstitucionStore } from "../../../hooks/institucion/useInstitucionStore";
+import { useUsuarioStore, useUiUsuario, useRoleStore, useInstitucionStore } from "../../../hooks";
 
 export const FormUsuario = ({ form }) => {
 

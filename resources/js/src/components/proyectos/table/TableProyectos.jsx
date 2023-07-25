@@ -99,7 +99,7 @@ export const TableProyectos = () => {
         enableColumnOrdering: true,
         enableRowActions: true,
         positionActionsColumn: "last",
-
+        state: { showProgressBars: isLoading },
         renderRowActionMenuItems: ({ row }) => (
             <ActionsProyecto
                 row={row}
@@ -115,7 +115,6 @@ export const TableProyectos = () => {
         renderDetailPanel: ({ row }) => (
             <DetailPanelProyecto row={row} />
         ),
-        state: { showProgressBars: isLoading },
     });
 
     return (

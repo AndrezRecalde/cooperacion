@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-import { Box, Button, Grid, Group, TextInput } from "@mantine/core";
 import { IconChecks } from "@tabler/icons-react";
-import { useTipoStore } from "../../../hooks";
-import { useUiTipo } from "../../../hooks/tipo/useUiTipo";
+import { Box, Button, Grid, Group, TextInput } from "@mantine/core";
+import { useTipoStore, useUiTipo } from "../../../hooks";
 
 export const FormTipo = ({ form }) => {
     const { modalActionTipo } = useUiTipo();

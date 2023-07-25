@@ -20,6 +20,7 @@ class UserController extends Controller
             ->join('model_has_roles as mhr', 'mhr.model_id', 'u.id')
             ->join('roles as r', 'r.id', 'mhr.role_id')
             ->join('instituciones as i', 'i.id', 'u.institucion_id')
+            ->where('u.id','<>', 1)
             ->get();
 
         return response()->json(['status' => MsgStatusEnum::Success, 'usuarios' => $usuarios], 200);

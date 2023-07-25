@@ -1,12 +1,11 @@
-import { MantineReactTable } from "mantine-react-table";
-import { IconEdit, IconPencilPlus } from "@tabler/icons-react";
 import { useCallback, useMemo } from "react";
-import { Button, ActionIcon, Tooltip, Grid } from "@mantine/core";
-import { useTipoStore } from "../../../hooks";
-import { useUiTipo } from "../../../hooks/tipo/useUiTipo";
+import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
+import { useTipoStore, useUiTipo } from "../../../hooks";
+import { BtnAdd, MenuActionsAdmin } from "../../../components";
 
 export const TableTipos = () => {
-    const { isLoading, tipos, setActivateTipo } = useTipoStore();
+    const { isLoading, tipos, startDeleteTipo, setActivateTipo, setClearActivateTipo } =
+        useTipoStore();
     const { modalActionTipo } = useUiTipo();
 
     const columns = useMemo(
@@ -21,7 +20,7 @@ export const TableTipos = () => {
         [tipos]
     );
 
-    const handleEditar = useCallback(
+    const handleEdit = useCallback(
         (selected) => {
             setActivateTipo(selected);
             modalActionTipo(1);
@@ -29,50 +28,39 @@ export const TableTipos = () => {
         [tipos]
     );
 
-    return (
-        <MantineReactTable
-            displayColumnDefOptions={{
-                "mrt-row-actions": {
-                    mantineTableHeadCellProps: {
-                        align: "center",
-                    },
-                    header: "Acciones",
-                    size: 100,
-                },
-            }}
-            state={{ showProgressBars: isLoading }}
-            columns={columns}
-            data={tipos}
-            enableRowNumbers
-            rowNumberMode="original"
-            enableColumnOrdering
-            enableRowActions
-            positionActionsColumn="last"
-            renderRowActions={({ row, table }) => (
-                <Grid justify="center" key={row.id}>
-                    <Grid.Col span={4}>
-                        <Tooltip withArrow position="left" label="Editar">
-                            <ActionIcon
-                                onClick={() => handleEditar(row.original)}
-                                color="blue"
-                            >
-                                <IconEdit />
-                            </ActionIcon>
-                        </Tooltip>
-                    </Grid.Col>
-                </Grid>
-            )}
-            renderTopToolbarCustomActions={() => (
-                <Button
-                    color="teal"
-                    onClick={() => modalActionTipo(1)}
-                    variant="outline"
-                    radius="md"
-                    leftIcon={<IconPencilPlus />}
-                >
-                    Agregar Tipo de Organizacion
-                </Button>
-            )}
-        />
+    const handleDelete = useCallback(
+        (selected) => {
+            startDeleteTipo(selected);
+        },
+        [tipos]
     );
+
+    const handleOpen = (e) => {
+        e.preventDefault();
+        setClearActivateTipo();
+        modalActionTipo(1);
+
+    }
+
+    const table = useMantineReactTable({
+        columns,
+        data: tipos,
+        enableColumnOrdering: true,
+        enableRowActions: true,
+        positionActionsColumn: "last",
+        rowNumberMode: "original",
+        state: { showProgressBars: isLoading },
+        renderRowActionMenuItems: ({ row }) => (
+            <MenuActionsAdmin
+                row={row}
+                handleEdit={handleEdit}
+                handleDelele={handleDelete}
+            />
+        ),
+        renderTopToolbarCustomActions: () => (
+            <BtnAdd title="Agregar Tipo de Organización" handleAdd={handleOpen} />
+        ),
+    });
+
+    return <MantineReactTable table={table} />;
 };
