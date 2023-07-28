@@ -11,26 +11,26 @@ export const App = () => {
         setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
     return (
-        <Provider store={store}>
-            <ColorSchemeProvider
-                colorScheme={colorScheme}
-                toggleColorScheme={toggleColorScheme}
+        <ColorSchemeProvider
+            colorScheme={colorScheme}
+            toggleColorScheme={toggleColorScheme}
+        >
+            <MantineProvider
+                theme={{
+                    colorScheme,
+                    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+                    fontFamilyMonospace: "Monaco, Courier, monospace",
+                    headings: { fontFamily: "Greycliff CF, sans-serif" },
+                }}
+                withGlobalStyles
+                withNormalizeCSS
             >
-                <MantineProvider
-                    theme={{
-                        colorScheme,
-                        fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-                        fontFamilyMonospace: "Monaco, Courier, monospace",
-                        headings: { fontFamily: "Greycliff CF, sans-serif" },
-                    }}
-                    withGlobalStyles
-                    withNormalizeCSS
-                >
+                <Provider store={store}>
                     <BrowserRouter>
                         <AppRouter />
                     </BrowserRouter>
-                </MantineProvider>
-            </ColorSchemeProvider>
-        </Provider>
+                </Provider>
+            </MantineProvider>
+        </ColorSchemeProvider>
     );
 };

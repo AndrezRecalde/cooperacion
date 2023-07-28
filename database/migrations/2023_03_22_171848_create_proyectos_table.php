@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('nombre_proyecto');
             $table->text('objetivo_general');
             $table->string('beneficiados_directos');
-            $table->string('beneficiados_indirectos');
+            $table->string('beneficiados_indirectos')->nullable();
             $table->unsignedInteger('cooperacion_id');
             $table->unsignedInteger('modalidad_id');
-            $table->decimal('monto', 15, 2);
-            $table->unsignedInteger('periodo_id')->nullable();
+            $table->decimal('monto', 15, 2)->default(0);
+            $table->unsignedInteger('periodo_id');
             $table->unsignedInteger('estado_id');
             $table->boolean('activo')->default(0);
             $table->timestamps();

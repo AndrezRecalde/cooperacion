@@ -30,14 +30,14 @@ class ProyectoRequest extends FormRequest
             'canton_id'                 =>  'required',
             'grupo_atencion_id'         =>  'required',
             'beneficiados_directos'     =>  'required',
-            'beneficiados_indirectos'   =>  'required',
-            'odsostenible_id'   =>  'required',
-            'cooperacion_id'    =>  'required',
-            'modalidad_id'      =>  'required',
-            'monto'             =>  'required',
-            'estado_id'         =>  'required',
-            'periodo_id'        =>  '',
-            'activo'            =>  ''
+            'beneficiados_indirectos'   =>  '',
+            'odsostenible_id'           =>  'required',
+            'cooperacion_id'            =>  'required',
+            'modalidad_id'              =>  'required',
+            'monto'                     =>  '',
+            'estado_id'                 =>  'required',
+            'periodo_id'                =>  '',
+            'activo'                    =>  ''
         ];
     }
 
@@ -47,14 +47,12 @@ class ProyectoRequest extends FormRequest
             'organizacion_id.required'      => 'La organización es obligatorio',
             'nombre_proyecto.required'      => 'El nombre de proyecto es obligatorio',
             'objetivo_general.required'     => 'El objetivo es obligatorio',
-            'canton_id.required'                     =>  'Por favor elija 1 o varios cantones alcanzados',
+            'canton_id.required'            =>  'Por favor elija 1 o varios cantones alcanzados',
             'grupo_atencion_id.required'    =>  'El grupo de atencion prioritaria es obligatoria',
             'beneficiados_directos.required'    => 'El grupo es obligatorio',
-            'beneficiados_indirectos.required'    => 'El total es obligatorio',
             'odsostenible_id.required'      => 'El objetivo ods es obligatorio',
             'cooperacion_id.required'       => 'El tipo de Cooperación es obligatorio',
             'modalidad_id.required'         => 'La modalidad es obligatoria',
-            'monto.required'                => 'El monto es obligatorio',
             'estado_id.required'            =>  'El estado es obligatorio'
         ];
     }

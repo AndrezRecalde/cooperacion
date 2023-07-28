@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+/*
 Route::get('/{any?}', HomeController::class)
-    ->where('any', '.*');
+    ->where('any', '.*'); */
+    Route::get('/{path?}', function () {
+        return view('welcome');
+    })->where('path', '^(?!api).*?');
