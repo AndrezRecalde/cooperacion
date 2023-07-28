@@ -9,8 +9,8 @@ export const UbicacionStepper = ({ form }) => {
         <Grid>
             <Grid.Col xs={12} sm={12} md={12} lg={12}>
                 <MultiSelect
-                    label="Cantón"
-                    placeholder="Elige tu Cantón"
+                    label="Área(s) de intervención"
+                    placeholder="Elige las áreas de intervención"
                     searchable
                     nothingFound="No options"
                     radius="md"
@@ -61,7 +61,6 @@ export const UbicacionStepper = ({ form }) => {
                     placeholder="Ingrese el Grupo Beneficiarios indirectos"
                     label="Beneficiarios indirectos"
                     radius="md"
-                    withAsterisk
                     mt={10}
                     icon={<IconUsers size="1rem" />}
                     {...form.getInputProps("beneficiados_indirectos")}

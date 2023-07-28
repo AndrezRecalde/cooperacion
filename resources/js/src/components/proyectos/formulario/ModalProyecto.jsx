@@ -65,10 +65,6 @@ export const ModalProyecto = () => {
             beneficiados_directos: isNotEmpty(
                 "Por favor ingrese el grupo beneficiado"
             ),
-            beneficiados_indirectos: isNotEmpty(
-                "Por favor ingrese el total de beneficiados"
-            ),
-
             odsostenible_id: isNotEmpty(
                 "Por favor ingrese el Objetivo Sostenible"
             ),

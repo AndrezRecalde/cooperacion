@@ -19,6 +19,7 @@ export const FormStepper = ({ form }) => {
         switch (active) {
             case 0:
                 if (
+                    errors.hasOwnProperty("periodo_id") ||
                     errors.hasOwnProperty("organizacion_id") ||
                     errors.hasOwnProperty("nombre_proyecto") ||
                     errors.hasOwnProperty("cooperacion_id") ||
@@ -36,11 +37,8 @@ export const FormStepper = ({ form }) => {
             case 1:
                 if (
                     errors.hasOwnProperty("canton_id") ||
-                    errors.hasOwnProperty("parroquia_id") ||
-                    errors.hasOwnProperty("recinto_id") ||
                     errors.hasOwnProperty("grupo_atencion_id") ||
-                    errors.hasOwnProperty("grupo_beneficiado") ||
-                    errors.hasOwnProperty("total_beneficiados")
+                    errors.hasOwnProperty("beneficiados_directos")
                 ) {
                     setActive((current) => current * 1);
                 } else {

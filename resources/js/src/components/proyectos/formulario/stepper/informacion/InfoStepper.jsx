@@ -28,6 +28,7 @@ export const InfoStepper = ({ form }) => {
                         nothingFound="No options"
                         radius="md"
                         mt={10}
+                        withAsterisk
                         icon={<IconCalendarTime size="1rem" />}
                         {...form.getInputProps("periodo_id")}
                         data={periodos.map((periodo) => {
