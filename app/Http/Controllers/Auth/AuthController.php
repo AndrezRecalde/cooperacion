@@ -24,7 +24,7 @@ class AuthController extends Controller
                 ->selectRaw('u.id, u.nombres, u.apellidos, u.email, r.name as role, s.color_scheme')
                 ->join('model_has_roles as mhr', 'mhr.model_id', 'u.id')
                 ->join('roles as r', 'r.id', 'mhr.role_id')
-                ->join('schemes as s', 's.id', 'u.scheme_id')
+                ->join('schemes as s', 's.id')
                 ->where('u.email', $request->email)
                 ->where('u.activo', 1)
                 ->first();
@@ -51,7 +51,7 @@ class AuthController extends Controller
             ->selectRaw('u.id, u.nombres, u.apellidos, u.email, r.name as role, s.color_scheme')
             ->join('model_has_roles as mhr', 'mhr.model_id', 'u.id')
             ->join('roles as r', 'r.id', 'mhr.role_id')
-            ->join('schemes as s', 's.id', 'u.scheme_id')
+            ->join('schemes as s', 's.id')
             ->where('u.id', Auth::user()->id)
             ->first();
 
@@ -75,7 +75,7 @@ class AuthController extends Controller
             ->join('model_has_roles as mhr', 'mhr.model_id', 'u.id')
             ->join('roles as r', 'r.id', 'mhr.role_id')
             ->join('instituciones as i', 'i.id', 'u.institucion_id')
-            ->join('schemes as s', 's.id', 'u.scheme_id')
+            ->join('schemes as s', 's.id')
             ->where('u.id', Auth::user()->id)
             ->first();
 
