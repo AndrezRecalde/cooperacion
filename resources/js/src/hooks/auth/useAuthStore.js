@@ -18,7 +18,6 @@ export const useAuthStore = () => {
             localStorage.setItem("atf_token", data.access_token);
             localStorage.setItem("token_init_date", new Date().getTime());
             dispatch(onAuthenticate(user));
-            console.log(user)
         } catch (error) {
             dispatch(onLogout(error.response.data.msg));
             setTimeout(() => {

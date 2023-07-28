@@ -42,7 +42,7 @@ export const useProyectoStore = () => {
             const { proyectos } = data;
             dispatch(onProyectos(proyectos));
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -58,7 +58,7 @@ export const useProyectoStore = () => {
             const { proyectos } = data;
             dispatch(onProyectos(proyectos));
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -96,7 +96,7 @@ export const useProyectoStore = () => {
             });
             startLoadProyectosAdmin();
         } catch (error) {
-            console.log(error)
+            //console.log(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -139,7 +139,7 @@ export const useProyectoStore = () => {
             const { proyecto } = data;
             dispatch(onSetActivateProyecto({ ...proyecto }));
         } catch (error) {
-            console.log(error);
+            //console.log(error);
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
@@ -299,7 +299,7 @@ export const useProyectoStore = () => {
             );
             window.open(url, "_blank");
         } catch (error) {
-            console.log(error)
+            //console.log(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
