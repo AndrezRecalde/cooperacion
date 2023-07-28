@@ -27,7 +27,6 @@ class User extends Authenticatable
         'password',
         'institucion_id',
         'activo',
-        'scheme_id'
     ];
 
     /**
