@@ -15,7 +15,8 @@ export const TableOrganizaciones = () => {
         startShowOrganizacion,
         startShowForEdit,
         startDeleteOrganizacion,
-        setClearActivateOrganizacion
+        setClearActivateOrganizacion,
+        setClearActivateEstado
     } = useOrganizacionStore();
 
     const columns = useMemo(
@@ -108,6 +109,7 @@ export const TableOrganizaciones = () => {
     const handleOpen = (e) => {
         e.preventDefault();
         setClearActivateOrganizacion();
+        setClearActivateEstado();
         modalActionOrganizacion(1);
     };
 

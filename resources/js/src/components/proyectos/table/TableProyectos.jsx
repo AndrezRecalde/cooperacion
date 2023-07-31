@@ -14,6 +14,7 @@ export const TableProyectos = () => {
         setActivateEstado,
         fichaProyecto,
         setClearActivateProyecto,
+        setClearActivateEstado,
     } = useProyectoStore();
 
     const columns = useMemo(
@@ -90,6 +91,7 @@ export const TableProyectos = () => {
     const handleOpenForm = (e) => {
         e.preventDefault();
         setClearActivateProyecto();
+        setClearActivateEstado();
         modalActionProyecto(1);
     };
 
