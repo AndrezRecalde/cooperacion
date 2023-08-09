@@ -220,6 +220,7 @@ class ProyectoController extends Controller
             ->selectRaw('p.id, coun.code, org.nombre_organizacion, p.nombre_proyecto, p.objetivo_general,
                         p.beneficiados_directos, p.beneficiados_indirectos, coop.tipo_cooperacion,
                         m.tipo_modalidad, p.monto, e.estado, p.activo, pe.fechas_periodo')
+            ->distinct()
             ->get();
 
 

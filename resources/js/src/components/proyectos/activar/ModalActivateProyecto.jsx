@@ -7,15 +7,15 @@ export const ModalActivateProyecto = () => {
     const { isOpenModalProyectoActivo, modalActionActivo } = useUiProyecto();
     const { setClearActivateEstado } = useProyectoStore();
 
-    const handleCloseModal = (e) => {
-        e.preventDefault();
+    const handleCloseModal = () => {
+        //e.preventDefault();
         modalActionActivo(0);
         setClearActivateEstado();
     }
     return (
         <Modal
             opened={isOpenModalProyectoActivo}
-            onClose={(e) => handleCloseModal(e)}
+            onClose={handleCloseModal}
             title={<TitleCard title="Activar Proyecto" />}
             centered
             overlayProps={{
