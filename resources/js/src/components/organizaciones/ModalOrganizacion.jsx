@@ -25,7 +25,7 @@ export const ModalOrganizacion = () => {
             imagen_url: isNotEmpty("Por favor ingrese el logo de la organización"),
             nombre_organizacion: isNotEmpty("El nombre es obligatorio"),
             abreviatura: hasLength(
-                { min: 2, max: 8 },
+                { min: 1, max: 10 },
                 "La Abreviatura es obligatoria"
             ),
             email: isEmail("Ingrese un correo válido"),
