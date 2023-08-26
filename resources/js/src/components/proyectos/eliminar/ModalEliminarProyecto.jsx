@@ -1,15 +1,34 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { FormEliminar, TitleCard } from "../../../components";
-import { useUiProyecto } from "../../../hooks";
+import { useProyectoStore, useUiProyecto } from "../../../hooks";
+import { isNotEmpty, useForm } from "@mantine/form";
 
 export const ModalEliminarProyecto = () => {
     const theme = useMantineTheme();
 
     const { isOpenModalDeleteProyecto, modalActionDelete } = useUiProyecto();
+    const { setClearActivateProyecto } = useProyectoStore();
+
+    const form = useForm({
+        initialValues: {
+            confirm_proyecto: "",
+        },
+        validate: {
+            confirm_proyecto: isNotEmpty(
+                "Debe especificar el nombre del proyecto"
+            ),
+        },
+    });
+
+    const handleCloseModal = () => {
+        modalActionDelete(0);
+        setClearActivateProyecto();
+    }
+
     return (
         <Modal
             opened={isOpenModalDeleteProyecto}
-            onClose={() => modalActionDelete(0)}
+            onClose={handleCloseModal}
             title={<TitleCard title="Eliminar Proyecto" />}
             centered
             overlayProps={{
@@ -21,7 +40,7 @@ export const ModalEliminarProyecto = () => {
                 blur: 3,
             }}
         >
-            <FormEliminar />
+            <FormEliminar form={form} />
         </Modal>
     );
 };

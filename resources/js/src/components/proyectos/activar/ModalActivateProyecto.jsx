@@ -1,16 +1,25 @@
 import { Modal, useMantineTheme } from "@mantine/core";
+import { isNotEmpty, useForm } from "@mantine/form";
 import { useUiProyecto, useProyectoStore } from "../../../hooks";
 import { FormActivar, TitleCard } from "../../../components";
 
 export const ModalActivateProyecto = () => {
     const theme = useMantineTheme();
     const { isOpenModalProyectoActivo, modalActionActivo } = useUiProyecto();
-    const { setClearActivateEstado } = useProyectoStore();
+    const { setClearActivateProyecto } = useProyectoStore();
+
+    const form = useForm({
+        initialValues: {
+            activo: null
+        },
+        validate: {
+            activo: isNotEmpty("Por favor ingrese un estado para el proyecto")
+        }
+    });
 
     const handleCloseModal = () => {
-        //e.preventDefault();
         modalActionActivo(0);
-        setClearActivateEstado();
+        setClearActivateProyecto();
     }
     return (
         <Modal
@@ -27,7 +36,7 @@ export const ModalActivateProyecto = () => {
                 blur: 3,
             }}
         >
-            <FormActivar />
+            <FormActivar form={form} />
         </Modal>
     );
 };

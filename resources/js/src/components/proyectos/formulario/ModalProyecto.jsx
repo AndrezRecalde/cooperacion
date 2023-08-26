@@ -11,7 +11,6 @@ import {
     useOdsStore,
     useModalidadStore,
     useEstadoStore,
-    useProyectoStore,
     useGrupoAtencionStore,
 } from "../../../hooks";
 
@@ -24,7 +23,6 @@ export const ModalProyecto = () => {
     const { starLoadObjetivos } = useOdsStore();
     const { startLoadModalidadesActivas } = useModalidadStore();
     const { startLoadEstadosActivos } = useEstadoStore();
-    const { activateProyecto } = useProyectoStore();
     const { isOpenModalProyecto, modalActionProyecto } = useUiProyecto();
     const { startLoadGruposAtencion } = useGrupoAtencionStore();
 
@@ -97,22 +95,7 @@ export const ModalProyecto = () => {
            } */
     }, []);
 
-    useEffect(() => {
-        if (activateProyecto !== null) {
-            form.setValues({
-                ...activateProyecto,
-                monto: parseFloat(activateProyecto.monto),
-                canton_id: activateProyecto.cantones.map((canton) => canton.id),
-                grupo_atencion_id: activateProyecto.grupos.map(
-                    (grupo) => grupo.id
-                ),
-                odsostenible_id: activateProyecto.odsostenibles.map(
-                    (ods) => ods.id
-                ),
-            });
-            return;
-        }
-    }, [activateProyecto]);
+
 
     const handleCloseModal = () => {
         form.reset();

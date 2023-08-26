@@ -10,34 +10,26 @@ import {
 } from "@mantine/core";
 import { IconChecks, IconWorldCheck } from "@tabler/icons-react";
 import { useUiOrganizacion, useOrganizacionStore, useConvenioStore } from "../../../../hooks";
-import { isNotEmpty, useForm } from "@mantine/form";
 
-export const FormActivarOrg = () => {
+export const FormActivarOrg = ({ form }) => {
 
     const { modalActivateOrg } = useUiOrganizacion();
-    const { activateEstado, startUpdateConvenioOrg } = useOrganizacionStore();
+    const { activateOrganizacion, startUpdateConvenioOrg } = useOrganizacionStore();
     const { convenios, startLoadConvenios } = useConvenioStore();
 
-    const form = useForm({
-        initialValues: {
-            convenio_id: null
-        },
-        validate: {
-           convenio_id: isNotEmpty("Por favor seleccione el tipo de convenio")
-        }
-    });
+
 
     useEffect(() => {
         startLoadConvenios();
     }, []);
 
     useEffect(() => {
-      if(activateEstado !== null){
-        form.setValues({ ...activateEstado });
+      if(activateOrganizacion !== null){
+        form.setValues({ ...activateOrganizacion });
         return;
       }
 
-    }, [activateEstado]);
+    }, [activateOrganizacion]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -61,7 +53,7 @@ export const FormActivarOrg = () => {
                         wrap="wrap"
                     >
                         <IconWorldCheck size={30} />
-                        <Text>{activateEstado?.nombre_organizacion}</Text>
+                        <Text>{activateOrganizacion?.nombre_organizacion}</Text>
                     </Flex>
                 </Grid.Col>
                 <Grid.Col sm={12} md={12} lg={12} xl={12}>

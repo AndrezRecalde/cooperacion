@@ -5,11 +5,8 @@ export const organizacionSlice = createSlice({
     initialState: {
         isLoading: false,
         organizaciones: [],
-
         totalOrganizaciones: [],
-
         activateOrganizacion: null,
-        activateEstado: null,
         errores: undefined,
     },
     reducers: {
@@ -56,11 +53,6 @@ export const organizacionSlice = createSlice({
             state.errores = undefined;
             state.isLoading = false;
         },
-        onSetActivateEstado: (state, { payload }) => {
-            state.activateEstado = payload;
-            state.errores = undefined;
-            state.isLoading = false;
-        },
         onClearOrganizaciones: (state) => {
             state.organizaciones = [];
             state.errores = undefined;
@@ -77,12 +69,9 @@ export const {
     onAddOrganizacion,
     onUpdateOrganizacion,
     onDeleteOrganizacion,
-
     onSetTotalOrganizaciones,
     onClearTotalesOrg,
-
     onSetActivateOrganizacion,
-    onSetActivateEstado,
     onClearOrganizaciones,
     onErrores,
 } = organizacionSlice.actions;

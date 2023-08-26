@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
-import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { Badge } from "@mantine/core";
+import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { useUiOrganizacion, useOrganizacionStore } from "../../../hooks";
 import { ActionsOrganizacion, BtnAdd, DotButton } from "../../../components";
 import Flag from "react-flagkit";
@@ -11,12 +11,11 @@ export const TableOrganizaciones = () => {
     const {
         isLoading,
         organizaciones,
-        setActivateEstado,
+        setActivateOrganizacion,
         startShowOrganizacion,
         startShowForEdit,
         startDeleteOrganizacion,
         setClearActivateOrganizacion,
-        setClearActivateEstado
     } = useOrganizacionStore();
 
     const columns = useMemo(
@@ -77,7 +76,7 @@ export const TableOrganizaciones = () => {
 
     const handleActivar = useCallback(
         (selected) => {
-            setActivateEstado(selected);
+            setActivateOrganizacion(selected);
             modalActivateOrg(1);
         },
         [organizaciones]
@@ -101,6 +100,7 @@ export const TableOrganizaciones = () => {
 
     const handleDelete = useCallback(
         (selected) => {
+            setActivateOrganizacion(selected);
             startDeleteOrganizacion(selected);
         },
         [organizaciones]
@@ -109,7 +109,6 @@ export const TableOrganizaciones = () => {
     const handleOpen = (e) => {
         e.preventDefault();
         setClearActivateOrganizacion();
-        setClearActivateEstado();
         modalActionOrganizacion(1);
     };
 

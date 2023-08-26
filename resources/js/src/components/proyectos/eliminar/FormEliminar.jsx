@@ -19,26 +19,13 @@ import {
     IconTrash,
 } from "@tabler/icons-react";
 import { useUiProyecto, useProyectoStore } from "../../../hooks";
-import { isNotEmpty, useForm } from "@mantine/form";
 
-export const FormEliminar = () => {
+export const FormEliminar = ({ form }) => {
+    const { confirm_proyecto } = form.values;
     const { modalActionDelete } = useUiProyecto();
     const { activateProyecto, startDelete } = useProyectoStore();
-
     const [btnDisabled, setBtnDisabled] = useState(true);
 
-    const form = useForm({
-        initialValues: {
-            confirm_proyecto: "",
-        },
-        validate: {
-            confirm_proyecto: isNotEmpty(
-                "Debe especificar el nombre del proyecto"
-            ),
-        },
-    });
-
-    const { confirm_proyecto } = form.values;
 
     useEffect(() => {
         if (activateProyecto !== null) {
@@ -48,7 +35,7 @@ export const FormEliminar = () => {
     }, [activateProyecto]);
 
     useEffect(() => {
-        if(confirm_proyecto === activateProyecto.nombre_proyecto){
+        if(confirm_proyecto === activateProyecto?.nombre_proyecto){
             setBtnDisabled(false);
         }else {
             setBtnDisabled(true);
@@ -74,7 +61,7 @@ export const FormEliminar = () => {
                         direction="column"
                         wrap="wrap"
                     >
-                        <CopyButton value={activateProyecto.nombre_proyecto} timeout={2000}>
+                        <CopyButton value={activateProyecto?.nombre_proyecto} timeout={2000}>
                             {({ copied, copy }) => (
                                 <Tooltip
                                     label={copied ? "Copiado" : "Copiar"}
@@ -95,7 +82,7 @@ export const FormEliminar = () => {
                             )}
                         </CopyButton>
 
-                        <Text>{activateProyecto.nombre_proyecto}</Text>
+                        <Text>{activateProyecto?.nombre_proyecto}</Text>
                     </Flex>
                 </Grid.Col>
                 <Grid.Col sm={12} md={12} lg={12} xl={12}>

@@ -69,8 +69,8 @@ const useStyles = createStyles((theme) => ({
         color:
             theme.colorScheme === "dark"
                 ? theme.colors.dark[2]
-                : theme.colors.gray[6],
-        marginRight: theme.spacing.sm,
+                : theme.colors.gray[7],
+        marginRight: theme.spacing.md,
     },
 
     linkActive: {
@@ -93,12 +93,13 @@ const useStyles = createStyles((theme) => ({
     },
 
     footer: {
+        marginLeft: `calc(${theme.spacing.md} * -1)`,
+        marginRight: `calc(${theme.spacing.md} * -1)`,
         borderTop: `${rem(1)} solid ${
             theme.colorScheme === "dark"
                 ? theme.colors.dark[4]
                 : theme.colors.gray[3]
         }`,
-        paddingTop: theme.spacing.md,
     },
 }));
 

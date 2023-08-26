@@ -6,7 +6,6 @@ export const proyectoSlice = createSlice({
         isLoading: false,
         proyectos: [],
         activateProyecto: null,
-        activateEstado: null,
         totalProyectos: [],
         montoEjecutado: null,
         graficoProyectosOds: [],
@@ -62,10 +61,6 @@ export const proyectoSlice = createSlice({
             state.activateProyecto = payload;
             state.errores = undefined;
         },
-        onSetActivateEstado: (state, { payload }) => {
-            state.activateEstado = payload;
-            state. errores = undefined;
-        },
         onClearProyectos: (state) => {
             state.proyectos = [];
             state.errores = undefined;
@@ -97,7 +92,6 @@ export const {
     onSetGraficoProyectosOds,
     onSetGraficoProyectosTipos,
     onSetActivateProyecto,
-    onSetActivateEstado,
     onClearProyectos,
     onClearTotales,
     onClearMontos,

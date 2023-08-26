@@ -1,17 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
-import gricApi from "../../api/gricApi";
 import {
     onAddOrganizacion,
     onClearOrganizaciones,
     onClearTotalesOrg,
+    onDeleteOrganizacion,
     onErrores,
     onLoading,
     onOrganizaciones,
-    onSetActivateEstado,
     onSetActivateOrganizacion,
     onSetTotalOrganizaciones,
     onUpdateOrganizacion,
 } from "../../store/admin/organizacion/organizacionSlice";
+import gricApi from "../../api/gricApi";
 import Swal from "sweetalert2";
 
 export const useOrganizacionStore = () => {
@@ -21,7 +21,6 @@ export const useOrganizacionStore = () => {
         organizaciones,
         totalOrganizaciones,
         activateOrganizacion,
-        activateEstado,
     } = useSelector((state) => state.organizacion);
     const dispatch = useDispatch();
 
@@ -155,8 +154,9 @@ export const useOrganizacionStore = () => {
                     await gricApi.delete(
                         `/admin/delete/organizacion/${organizacion.id}`
                     );
+                    dispatch(onDeleteOrganizacion());
                     Swal.fire("¡Eliminado!", "", "success");
-                    starLoadOrganizaciones();
+                    //starLoadOrganizaciones();
                 } catch (error) {
                     Swal.fire({
                         icon: "error",
@@ -176,10 +176,6 @@ export const useOrganizacionStore = () => {
             })
         );
     };
-
-    const setActivateEstado = (organizacion) => {
-        dispatch(onSetActivateEstado({...organizacion}));
-    }
 
     const startTotalOrganizaciones = async () => {
         try {
@@ -209,10 +205,6 @@ export const useOrganizacionStore = () => {
         dispatch(onSetActivateOrganizacion(null));
     };
 
-    const setClearActivateEstado = () => {
-        dispatch(onSetActivateEstado(null));
-    }
-
     const startClearOrganizaciones = () => {
         dispatch(onClearOrganizaciones());
     };
@@ -231,7 +223,6 @@ export const useOrganizacionStore = () => {
                 timer: 1000,
             });
             starLoadOrganizaciones();
-            setClearActivateEstado();
         } catch (error) {
             Swal.fire({
                 icon: "error",
@@ -270,7 +261,6 @@ export const useOrganizacionStore = () => {
         organizaciones,
         totalOrganizaciones,
         activateOrganizacion,
-        activateEstado,
 
         starLoadOrganizaciones,
         startLoadOrgActivas,
@@ -279,9 +269,7 @@ export const useOrganizacionStore = () => {
         startShowForEdit,
         startDeleteOrganizacion,
         setActivateOrganizacion,
-        setActivateEstado,
         setClearActivateOrganizacion,
-        setClearActivateEstado,
         startClearOrganizaciones,
         startTotalOrganizaciones,
         setClearTotalesOrg,

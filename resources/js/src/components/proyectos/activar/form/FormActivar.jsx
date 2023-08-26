@@ -8,30 +8,20 @@ import {
     Select,
     Text,
 } from "@mantine/core";
-import { isNotEmpty, useForm } from "@mantine/form";
 import { IconChecks, IconDeviceImacCheck } from "@tabler/icons-react";
 import { useProyectoStore, useUiProyecto } from "../../../../hooks";
 
-export const FormActivar = () => {
+export const FormActivar = ({ form }) => {
     const { modalActionActivo } = useUiProyecto();
-    const { activateEstado, startUpdateActivo } = useProyectoStore();
-
-    const form = useForm({
-        initialValues: {
-            activo: null
-        },
-        validate: {
-            activo: isNotEmpty("Por favor ingrese un estado para el proyecto")
-        }
-    });
+    const { activateProyecto, startUpdateActivo } = useProyectoStore();
 
     useEffect(() => {
-      if(activateEstado !== null) {
-        form.setValues({...activateEstado});
+      if(activateProyecto !== null) {
+        form.setValues({...activateProyecto});
         return;
       }
 
-    }, [activateEstado]);
+    }, [activateProyecto]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -54,7 +44,7 @@ export const FormActivar = () => {
                         wrap="wrap"
                     >
                         <IconDeviceImacCheck size={30} />
-                        <Text>{activateEstado?.nombre_proyecto}</Text>
+                        <Text>{activateProyecto?.nombre_proyecto}</Text>
                     </Flex>
                 </Grid.Col>
                 <Grid.Col sm={12} md={12} lg={12} xl={12}>

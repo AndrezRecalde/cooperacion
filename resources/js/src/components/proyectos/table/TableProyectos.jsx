@@ -11,10 +11,8 @@ export const TableProyectos = () => {
         proyectos,
         startShowForEdit,
         setActivateProyecto,
-        setActivateEstado,
         fichaProyecto,
         setClearActivateProyecto,
-        setClearActivateEstado,
     } = useProyectoStore();
 
     const columns = useMemo(
@@ -59,7 +57,7 @@ export const TableProyectos = () => {
 
     const handleActivar = useCallback(
         (selected) => {
-            setActivateEstado(selected);
+            setActivateProyecto(selected);
             modalActionActivo(1);
         },
         [proyectos]
@@ -91,7 +89,6 @@ export const TableProyectos = () => {
     const handleOpenForm = (e) => {
         e.preventDefault();
         setClearActivateProyecto();
-        setClearActivateEstado();
         modalActionProyecto(1);
     };
 

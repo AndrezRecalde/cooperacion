@@ -1,16 +1,26 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { TitleCard, FormActivarOrg } from "../../../components";
 import { useOrganizacionStore, useUiOrganizacion } from "../../../hooks";
+import { isNotEmpty, useForm } from "@mantine/form";
 
 export const ModalActivateOrg = () => {
     const theme = useMantineTheme();
     const { isOpenModalOrgActivo, modalActivateOrg } = useUiOrganizacion();
-    const { setClearActivateEstado } = useOrganizacionStore();
+    const { setClearActivateOrganizacion } = useOrganizacionStore();
+
+    const form = useForm({
+        initialValues: {
+            convenio_id: null
+        },
+        validate: {
+           convenio_id: isNotEmpty("Por favor seleccione el tipo de convenio")
+        }
+    });
 
     const handleCloseModal = (e) => {
         e.preventDefault();
         modalActivateOrg(0);
-        setClearActivateEstado();
+        setClearActivateOrganizacion();
     }
 
     return (
@@ -28,7 +38,7 @@ export const ModalActivateOrg = () => {
                 blur: 3,
             }}
         >
-            <FormActivarOrg />
+            <FormActivarOrg form={form} />
         </Modal>
     );
 };

@@ -9,23 +9,21 @@ import {
     onErrores,
     onLoading,
     onProyectos,
-    onSetActivateEstado,
     onSetActivateProyecto,
     onSetGraficoProyectosOds,
     onSetGraficoProyectosTipos,
     onSetMontoEjecutado,
     onSetTotalProyectos,
     onUpdateProyecto,
+    onDeleteProyecto,
 } from "../../store/admin/proyecto/proyectoSlice";
 import Swal from "sweetalert2";
-import { onDeleteProyecto } from "../../store/admin/proyecto/proyectoSlice";
 
 export const useProyectoStore = () => {
     const {
         isLoading,
         proyectos,
         activateProyecto,
-        activateEstado,
         totalProyectos,
         totalProyectosActivos,
         montoEjecutado,
@@ -120,7 +118,6 @@ export const useProyectoStore = () => {
                 timer: 1000,
             });
             startLoadProyectosAdmin();
-            setClearActivateEstado();
         } catch (error) {
             Swal.fire({
                 icon: "warning",
@@ -182,7 +179,7 @@ export const useProyectoStore = () => {
         try {
             const { data } = await gricApi.get("/total/proyectos");
 
-            if(data.msg){
+            if (data.msg) {
                 dispatch(onErrores(data.msg));
             } else {
                 const { totalProyectos } = data;
@@ -258,17 +255,9 @@ export const useProyectoStore = () => {
         dispatch(onSetActivateProyecto({ ...proyecto }));
     };
 
-    const setActivateEstado = (proyecto) => {
-        dispatch(onSetActivateEstado({ ...proyecto }));
-    }
-
     const setClearActivateProyecto = () => {
         dispatch(onSetActivateProyecto(null));
     };
-
-    const setClearActivateEstado = () => {
-        dispatch(onSetActivateEstado(null));
-    }
 
     const startClearProyectos = () => {
         dispatch(onClearProyectos());
@@ -318,7 +307,6 @@ export const useProyectoStore = () => {
         graficoProyectosOds,
         graficoProyectosTipos,
         activateProyecto,
-        activateEstado,
         errores,
 
         startLoadProyectosAdmin,
@@ -328,9 +316,7 @@ export const useProyectoStore = () => {
         startUpdateActivo,
         setTotalProyectos,
         setActivateProyecto,
-        setActivateEstado,
         setClearActivateProyecto,
-        setClearActivateEstado,
         startShowForEdit,
         startClearTotales,
         setMontoEjecutado,

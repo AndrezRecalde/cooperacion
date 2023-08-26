@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Badge, Button, Group, Stepper } from "@mantine/core";
 import { EjeStepper, InfoStepper, UbicacionStepper } from "../../../../components";
 import { useProyectoStore, useUiProyecto } from "../../../../hooks";
@@ -11,8 +11,25 @@ import {
 
 export const FormStepper = ({ form }) => {
     const [active, setActive] = useState(0);
-    const { startAddProyectos } = useProyectoStore();
+    const { startAddProyectos, activateProyecto } = useProyectoStore();
     const { modalActionProyecto } = useUiProyecto();
+
+    useEffect(() => {
+        if (activateProyecto !== null) {
+            form.setValues({
+                ...activateProyecto,
+                monto: parseFloat(activateProyecto.monto),
+                canton_id: activateProyecto.cantones.map((canton) => canton.id),
+                grupo_atencion_id: activateProyecto.grupos.map(
+                    (grupo) => grupo.id
+                ),
+                odsostenible_id: activateProyecto.odsostenibles.map(
+                    (ods) => ods.id
+                ),
+            });
+            return;
+        }
+    }, [activateProyecto]);
 
     const nextStep = () => {
         const { errors } = form.validate();
