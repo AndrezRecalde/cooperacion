@@ -6,7 +6,7 @@ import { ActionsOrganizacion, BtnAdd, DotButton } from "../../../components";
 import Flag from "react-flagkit";
 
 export const TableOrganizaciones = () => {
-    const { modalActionOrganizacion, modalShowOrganizacion, modalActivateOrg } =
+    const { modalActionOrganizacion, modalShowOrganizacion, modalActivateOrg, modalActionEliminarOrg } =
         useUiOrganizacion();
     const {
         isLoading,
@@ -14,7 +14,6 @@ export const TableOrganizaciones = () => {
         setActivateOrganizacion,
         startShowOrganizacion,
         startShowForEdit,
-        startDeleteOrganizacion,
         setClearActivateOrganizacion,
     } = useOrganizacionStore();
 
@@ -101,7 +100,7 @@ export const TableOrganizaciones = () => {
     const handleDelete = useCallback(
         (selected) => {
             setActivateOrganizacion(selected);
-            startDeleteOrganizacion(selected);
+            modalActionEliminarOrg(1);
         },
         [organizaciones]
     );

@@ -1,6 +1,6 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
-import { TitleCard, FormTipoCoop } from "../../components";
+import { TitleSections, FormTipoCoop } from "../../components";
 import { useUiTipoCoop } from "../../hooks";
 
 export const ModalTipoCoop = () => {
@@ -28,7 +28,7 @@ export const ModalTipoCoop = () => {
         <Modal
             opened={isOpenModalTipoCoop}
             onClose={handleCloseModalTipoCoop}
-            title={<TitleCard title="Tipo de Cooperación" />}
+            title={<TitleSections title="Tipo de Cooperación" />}
             overlayProps={{
                 color:
                     theme.colorScheme === "dark"

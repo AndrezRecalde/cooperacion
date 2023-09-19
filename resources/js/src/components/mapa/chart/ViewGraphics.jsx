@@ -1,20 +1,16 @@
+import { useEffect } from "react";
 import { Grid } from "@mantine/core";
 import { ChartObjetivos } from "../../../components";
-import { useProyectoStore } from "../../../hooks";
-import { useEffect } from "react";
+import { useDashboardStore } from "../../../hooks";
 
 export const ViewGraphics = () => {
-    const {
-        setGraficoProyectosOds,
-        setGraficoProyectosTipos,
-        startClearGraficos,
-    } = useProyectoStore();
+
+    const { startLoadingProyectosOds, startClearDashboard } = useDashboardStore();
 
     useEffect(() => {
-        setGraficoProyectosOds();
-        setGraficoProyectosTipos();
+        startLoadingProyectosOds();
         return () => {
-            startClearGraficos();
+            startClearDashboard();
         };
     }, []);
 

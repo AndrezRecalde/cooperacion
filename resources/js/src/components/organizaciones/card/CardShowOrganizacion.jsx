@@ -13,9 +13,8 @@ import {
 } from "@mantine/core";
 import { IconThumbUp } from "@tabler/icons-react";
 import { useOrganizacionStore } from "../../../hooks";
-import { ChartShowOrganizacion, TitleCard } from "../../../components";
+import { ChartShowOrganizacion, TitleSections } from "../../../components";
 import Flag from "react-flagkit";
-
 
 const useStyles = createStyles((theme) => ({
     card: {
@@ -102,53 +101,66 @@ export const CardShowOrganizacion = ({ handleCloseShowModal }) => {
                     </Grid.Col>
                     <Grid.Col sm={12} md={12} lg={12} xl={12}>
                         <Group position="center">
-                            <Image radius="xl" mt={10} width={100} height={90} src={'/storage' + activateOrganizacion?.imagen_url} />
+                            <Image
+                                radius="xl"
+                                mt={10}
+                                width={100}
+                                height={90}
+                                src={
+                                    "/storage" +
+                                    activateOrganizacion?.imagen_url
+                                }
+                                withPlaceholder
+                                fit="contain"
+                            />
                         </Group>
                     </Grid.Col>
                     <Grid.Col sm={6} md={6} lg={6} xl={6}>
                         <Card
-                                withBorder
-                                radius="sm"
-                                mt="lg"
-                                mb="lg"
-                                shadow="sm"
-                            >
-                                <Card.Section inheritPadding py="xs" withBorder>
-                                    <TitleCard title="Tipo de Convenio" />
-                                </Card.Section>
-                                <Card.Section inheritPadding py="xs">
-                                    <Badge size="lg" color="indigo.7" radius="sm">
-                                        {activateOrganizacion?.convenio}
-                                    </Badge>
-                                </Card.Section>
-                                <Card.Section inheritPadding py="xs" withBorder>
-                                    <TitleCard title="Tipo de Organización" />
-                                </Card.Section>
-                                <Card.Section inheritPadding py="xs">
-                                    <Text
-                                        tt="uppercase"
-                                        className={classes.description}
+                            withBorder
+                            radius="sm"
+                            mt="lg"
+                            mb="lg"
+                            shadow="sm"
+                        >
+                            <Card.Section inheritPadding py="xs" withBorder>
+                                <TitleSections title="Tipo de Convenio" />
+                            </Card.Section>
+                            <Card.Section inheritPadding py="xs">
+                                <Badge size="lg" color="indigo.7" radius="sm">
+                                    {activateOrganizacion?.convenio}
+                                </Badge>
+                            </Card.Section>
+                            <Card.Section inheritPadding py="xs" withBorder>
+                                <TitleSections title="Tipo de Organización" />
+                            </Card.Section>
+                            <Card.Section inheritPadding py="xs">
+                                <Text
+                                    tt="uppercase"
+                                    className={classes.description}
+                                >
+                                    {activateOrganizacion?.tipo}
+                                </Text>
+                            </Card.Section>
+                            <Card.Section inheritPadding py="xs" withBorder>
+                                <TitleSections title="Sitio Web" />
+                            </Card.Section>
+                            <Card.Section inheritPadding py="xs">
+                                {activateOrganizacion?.sitio_web ? (
+                                    <Anchor
+                                        href={`https://${activateOrganizacion.sitio_web}`}
+                                        target="_blank"
+                                        underline={false}
+                                        color="dark"
                                     >
-                                        {activateOrganizacion?.tipo}
+                                        {activateOrganizacion.sitio_web}
+                                    </Anchor>
+                                ) : (
+                                    <Text fs="italic">
+                                        Sitio web no registrado
                                     </Text>
-                                </Card.Section>
-                                <Card.Section inheritPadding py="xs" withBorder>
-                                    <TitleCard title="Sitio Web" />
-                                </Card.Section>
-                                <Card.Section inheritPadding py="xs">
-                                    {activateOrganizacion?.sitio_web ? (
-                                        <Anchor
-                                            href={`https://${activateOrganizacion.sitio_web}`}
-                                            target="_blank"
-                                            underline={false}
-                                            color="dark"
-                                        >
-                                            {activateOrganizacion.sitio_web}
-                                        </Anchor>
-                                    ) : (
-                                        <Text fs="italic">Sitio web no registrado</Text>
-                                    )}
-                                </Card.Section>
+                                )}
+                            </Card.Section>
                         </Card>
                     </Grid.Col>
                     <Grid.Col sm={6} md={6} lg={6} xl={6}>

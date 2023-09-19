@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Modal, useMantineTheme } from "@mantine/core";
 import { hasLength, isNotEmpty, useForm } from "@mantine/form";
-import { DivTitle, FormStepper } from "../../../components";
+import { TitleSections, FormStepper } from "../../../components";
 import {
     useUiProyecto,
     usePeriodoStore,
@@ -39,7 +39,8 @@ export const ModalProyecto = () => {
             odsostenible_id: [],
             cooperacion_id: "",
             modalidad_id: "",
-            monto: "",
+            monto: 0,
+            contrapartida: 0,
             estado_id: "",
         },
         validate: {
@@ -69,7 +70,10 @@ export const ModalProyecto = () => {
             modalidad_id: isNotEmpty(
                 "Por favor ingrese la modalidad de cooperación"
             ),
-            monto: isNotEmpty("Por favor ingrese el monto del proyecto"),
+            /* monto: isNotEmpty("Por favor ingrese el monto del proyecto"),
+            contrapartida: isNotEmpty(
+                "Por favor ingrese el monto de la contrapartida"
+            ), */
             estado_id: isNotEmpty(
                 "Por favor el estado en el que se encuentra el proyecto"
             ),
@@ -95,8 +99,6 @@ export const ModalProyecto = () => {
            } */
     }, []);
 
-
-
     const handleCloseModal = () => {
         form.reset();
         modalActionProyecto(0);
@@ -106,7 +108,7 @@ export const ModalProyecto = () => {
         <Modal
             opened={isOpenModalProyecto}
             onClose={handleCloseModal}
-            title={<DivTitle title="Proyecto" fw={700} fz="sm" />}
+            title={<TitleSections title="Proyecto" fw={700} fz="sm" />}
             overlayProps={{
                 color:
                     theme.colorScheme === "dark"

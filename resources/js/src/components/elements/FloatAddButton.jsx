@@ -15,7 +15,7 @@ export const FloatAddButton = () => {
             arrowPosition="center"
         >
             <Button
-                color="teal"
+                color="teal.7"
                 variant="light"
                 className="fab"
                 onClick={() => modalActionProyecto(1) }

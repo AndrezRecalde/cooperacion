@@ -4,12 +4,13 @@ import { MapaPage } from "../pages/mapa/MapaPage";
 import { AuthenticationPage } from "../pages/auth/AuthenticationPage";
 import { PrivateRoute } from "./private/PrivateRoute";
 import { PrivatePages } from "./private/PrivatePages";
-import { useAuthStore } from "../hooks/auth/useAuthStore";
+import { useAuthStore } from "../hooks";
 import { PublicRoute } from "./public/PublicRoute";
 import { AfiliacionPage } from "../pages/afiliacion/AfiliacionPage";
 
 export const AppRouter = () => {
-    const { user, checkAuthToken } = useAuthStore();
+    const { checkAuthToken } = useAuthStore();
+    const token = localStorage.getItem("atf_token");
 
     useEffect(() => {
         checkAuthToken();
@@ -25,7 +26,7 @@ export const AppRouter = () => {
             <Route
                 path="/auth/login/*"
                 element={
-                    <PublicRoute>
+                    <PublicRoute token={token}>
                         <Routes>
                             <Route path="/*" element={<AuthenticationPage />} />
                         </Routes>
@@ -36,7 +37,7 @@ export const AppRouter = () => {
             <Route
                 path="/*"
                 element={
-                    <PrivateRoute user={user}>
+                    <PrivateRoute token={token}>
                         <PrivatePages />
                     </PrivateRoute>
                 }

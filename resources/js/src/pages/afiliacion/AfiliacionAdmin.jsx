@@ -1,9 +1,12 @@
 import { useEffect } from "react";
-import { Card, Container, Text } from "@mantine/core";
-import { useAfiliacionStore } from "../../hooks/afiliacion/useAfiliacionStore";
-import { InfoHeader, TitleCard } from "../../components";
-import { TableAfiliaciones } from "../../components/afiliacion/table/TableAfiliaciones";
-import { ModalContactado } from "../../components/afiliacion/contactar/ModalContactado";
+import { Card, Text } from "@mantine/core";
+import { useAfiliacionStore } from "../../hooks";
+import {
+    InfoHeader,
+    TitleSections,
+    TableAfiliaciones,
+    ModalContactado,
+} from "../../components";
 
 export const AfiliacionAdmin = () => {
     const { startLoadAfiliaciones, startClearAfiliaciones, afiliaciones } =
@@ -18,16 +21,12 @@ export const AfiliacionAdmin = () => {
     }, []);
 
     return (
-        <Container size="xl">
+        <>
             <Text mt={15} tt="capitalize" fw={700} fz="xl">
                 Afiliaciones
             </Text>
-            <Text mb="xl" fz={16} fw={500} c="teal">
-                Existen {afiliaciones.length} afiliaciones registradas.
-            </Text>
             <InfoHeader
-                texto="En esta sección podras encontrar una lista de las organizaciones que desean
-                contactarse con el Gobierno Autonomo Descentralizado de la Provincia de Esmeraldas."
+                texto={`Existen ${afiliaciones.length} afiliaciones registradas.`}
             />
             <Card
                 withBorder
@@ -38,13 +37,16 @@ export const AfiliacionAdmin = () => {
                 sx={{ position: "static" }}
             >
                 <Card.Section withBorder inheritPadding py="lg">
-                    <TitleCard fz="xs" title="Lista de Organizaciones que desean afiliarse" />
+                    <TitleSections
+                        fz="xs"
+                        title="Lista de Organizaciones que desean afiliarse"
+                    />
                 </Card.Section>
                 <Card.Section>
                     <TableAfiliaciones />
                 </Card.Section>
             </Card>
             <ModalContactado />
-        </Container>
+        </>
     );
 };

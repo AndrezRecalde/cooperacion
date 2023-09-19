@@ -15,7 +15,7 @@ import {
     useMantineTheme,
 } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
-import { DivTitle, DrawerProyecto } from "../../../components";
+import { TitleSections, DrawerProyecto } from "../../../components";
 import {
     useUiMapa,
     useStateStore,
@@ -47,8 +47,6 @@ export const DrawerMenu = () => {
 
     const {
         cantones,
-        parroquias,
-        recintos,
         startLoadCantones,
         startLoadParroquias,
         startLoadRecintos,
@@ -115,7 +113,7 @@ export const DrawerMenu = () => {
                     blur: 3,
                 }}
                 padding="md"
-                title={<DivTitle title="Búsqueda de Proyectos" fw={700} />}
+                title={<TitleSections title="Búsqueda de Proyectos" fw={700} />}
                 size="md"
             >
                 <Group position="center">

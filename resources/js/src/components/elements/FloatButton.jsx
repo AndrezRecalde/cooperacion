@@ -9,7 +9,7 @@ export const FloatButton = () => {
         <Button
             className="floatBtn"
             variant="light"
-            color="teal"
+            color="teal.7"
             rightIcon={<IconClick />}
             onClick={() => drawerMenu(1)}
         >

@@ -1,50 +1,50 @@
 import { Card, Grid, Text } from "@mantine/core";
-import { DivTitle } from "../../components";
-import { useOrganizacionStore } from "../../hooks";
-import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { TitleSections } from "../../../components";
+import { Doughnut, Pie } from "react-chartjs-2";
+import {
+    Chart as ChartJS,
+    RadialLinearScale,
+    ArcElement,
+    Tooltip,
+    Legend,
+} from "chart.js";
+import { useDashboardStore } from "../../../hooks";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 
+export const ChartModalidad = () => {
 
-export const ChartOrganizaciones = () => {
+    const { errores, totalProyectosModalidades } = useDashboardStore();
 
-    const { errores, totalOrganizaciones } = useOrganizacionStore();
-
-    const organizaciones = {
-        labels: totalOrganizaciones?.map((org) => org.convenio),
+    const proyectosModalidad = {
+        labels: totalProyectosModalidades?.map(
+            (grafico) => grafico.tipo_modalidad
+        ),
         datasets: [
             {
                 label: "Total",
-                data: totalOrganizaciones?.map((org) => org.total),
-                backgroundColor: [
-                    "rgba(39, 255, 96, 0.61)", // Convenio Activo
-                    "rgba(39, 96, 255, 0.54)", // En proceso de suscripcion
-                    "rgba(255, 39, 39, 0.61)", // Convenio Finalizado
-                ],
-                borderColor: [
-                    "rgba(0,100,0)",
-                    "rgba(39, 96, 255, 1)",
-                    "rgba(128,0,0)",
-                ],
+                data: totalProyectosModalidades?.map((grafico) => grafico.total),
+                backgroundColor: totalProyectosModalidades?.map(grafico => grafico.color),
+                borderColor: totalProyectosModalidades?.map(grafico => grafico.border),
                 borderWidth: 1.5,
             },
         ],
     };
 
     return (
-        <Card mt={10} shadow="sm" p="lg">
+        <Card mt={5} shadow="sm" p="lg">
             <Card.Section withBorder inheritPadding py="xs">
-                <DivTitle
-                    title="Distribución de Organizaciones por Convenio"
+                <TitleSections
+                    title="Distribución de Proyectos por Modalidad"
+                    fz={12}
                     fw={700}
                 />
             </Card.Section>
             <Card.Section withBorder inheritPadding py="xs">
-                {totalOrganizaciones.length > 0 ? (
+                {totalProyectosModalidades.length > 0 ? (
                     <Pie
-                        height={350}
-                        data={organizaciones}
+                        height={150}
+                        data={proyectosModalidad}
                         options={{ maintainAspectRatio: false }}
                     />
                 ) : (

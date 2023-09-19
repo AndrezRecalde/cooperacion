@@ -1,6 +1,9 @@
 /* Autenticacion */
 import { useAuthStore } from "./auth/useAuthStore";
 
+/* Dashboard */
+import { useDashboardStore } from "./dashboard/useDashboardStore";
+
 /* Usuario */
 import { useUsuarioStore } from "./usuario/useUsuarioStore";
 import { useUiUsuario } from "./usuario/useUiUsuario";
@@ -69,6 +72,8 @@ import { useUiAfiliacion } from "./afiliacion/useUiAfiliacion";
 
 export {
     useAuthStore,
+
+    useDashboardStore,
 
     useUsuarioStore,
     useUiUsuario,

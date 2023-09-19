@@ -26,7 +26,7 @@ export const EjeStepper = ({ form }) => {
                     })}
                 />
             </Grid.Col>
-            <Grid.Col xs={12} md={6} lg={6}>
+            <Grid.Col xs={12} md={12} lg={12}>
                 <Select
                     label="Modalidad"
                     placeholder="Elige la Modalidad de Cooperación"
@@ -46,8 +46,28 @@ export const EjeStepper = ({ form }) => {
             </Grid.Col>
             <Grid.Col xs={12} md={6} lg={6}>
                 <NumberInput
+                    placeholder="Monto de contrapartida"
+                    label="Monto de contrapartida"
+                    description="Omitir el campo si no conoce los valores"
+                    mt={10}
+                    withAsterisk
+                    hideControls
+                    icon={<IconCoins size="1rem" />}
+                    precision={2}
+                    parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
+                    formatter={(value) =>
+                        !Number.isNaN(parseFloat(value))
+                          ? `$ ${value}`.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+                          : '$ '
+                      }
+                    {...form.getInputProps("contrapartida")}
+                />
+            </Grid.Col>
+            <Grid.Col xs={12} md={6} lg={6}>
+                <NumberInput
                     placeholder="Monto del Proyecto"
                     label="Monto del Proyecto"
+                    description="Omitir el campo si no conoce los valores"
                     mt={10}
                     withAsterisk
                     hideControls

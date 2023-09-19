@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { Card, Container, Text } from "@mantine/core";
+import { Card, Text } from "@mantine/core";
 import {
     InfoHeader,
     ModalActivateProyecto,
     ModalEliminarProyecto,
     ModalProyecto,
     TableProyectos,
-    TitleCard,
+    TitleSections,
 } from "../../components";
 import { useProyectoStore } from "../../hooks";
 
@@ -23,21 +23,16 @@ export const ProyectosPage = () => {
     }, []);
 
     return (
-        <Container size="xl">
+        <>
             <Text mt={15} tt="capitalize" fw={700} fz="xl">
                 Proyectos
             </Text>
-            <Text mb="xl" fz={15} fw={500} c="teal">
-                Existen {proyectos.length} proyectos registrados
-            </Text>
             <InfoHeader
-                texto="En esta seccion podras encontrar una lista de los proyectos
-                realizados a través de las diferentes organizaciones nacionales
-                e internacionales."
+                texto={`Existen ${proyectos.length} proyectos registrados`}
             />
             <Card withBorder radius="md" mt="lg" mb="lg" shadow="sm">
                 <Card.Section withBorder inheritPadding py="lg">
-                    <TitleCard title="Lista de Proyectos" />
+                    <TitleSections title="Lista de Proyectos" fw={700} />
                 </Card.Section>
                 <Card.Section>
                     <TableProyectos />
@@ -46,6 +41,6 @@ export const ProyectosPage = () => {
             <ModalProyecto />
             <ModalActivateProyecto />
             <ModalEliminarProyecto />
-        </Container>
+        </>
     );
 };

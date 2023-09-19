@@ -32,7 +32,13 @@ export const useMarkerStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
@@ -47,7 +53,13 @@ export const useMarkerStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
@@ -70,7 +82,13 @@ export const useMarkerStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
@@ -95,7 +113,13 @@ export const useMarkerStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AfiliacionController;
 use App\Http\Controllers\Admin\ConvenioController;
 use App\Http\Controllers\Admin\CooperacionController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DirPrefecturaController;
 use App\Http\Controllers\Admin\EstadoController;
 use App\Http\Controllers\Admin\GrupoAtencionController;
@@ -46,6 +47,11 @@ Route::group(
         Route::get('/refresh', [AuthController::class, 'refresh']);
         Route::get('/profile', [AuthController::class, 'profile']);
         Route::post('/auth/logout', [AuthController::class, 'logout']);
+
+        /* Dashboard */
+        Route::get('/admin/total/organizaciones', [DashboardController::class, 'getTotalOrganizaciones']);
+        Route::get('/admin/total/proyectos', [DashboardController::class, 'getTotalProyectos']);
+        Route::get('/admin/total/proyectos/modalidades', [DashboardController::class, 'getTotalProyectosModalidad']);
 
         /* Cooperaciones */
         Route::get('/admin/cooperaciones', [CooperacionController::class, 'getCooperacionesAll']);
@@ -134,6 +140,12 @@ Route::group(
 Route::group(
     [],
     function () {
+
+        /* Dashbaord */
+        Route::get('/total/proyectos/ods', [DashboardController::class, 'getTotalProyectosODS']);
+        Route::get('/total/proyectos/tipos', [DashboardController::class, 'getTotalProyectosTipos']);
+        Route::get('/total/proyectos/montos', [DashboardController::class, 'getMontosProyectos']);
+
         /* Cooperaciones */
         Route::get('/cooperaciones/activas', [CooperacionController::class, 'getCooperacionesActivas']);
 
@@ -151,16 +163,11 @@ Route::group(
         Route::get('organizaciones', [OrganizacionController::class, 'getOrganizaciones']);
         Route::get('/organizaciones/activas', [OrganizacionController::class, 'getOrganizacionesActivas']);
         Route::get('/show/organizacion/{id}', [OrganizacionController::class, 'show']);
-        Route::get('/total/organizaciones', [OrganizacionController::class, 'totalOrganizaciones']);
 
         /* Proyectos */
         Route::get('/proyectos/activos', [ProyectoController::class, 'getProyectosActivos']);
         Route::post('/create/proyecto', [ProyectoController::class, 'store']);
-        Route::get('/total/proyectos', [ProyectoController::class, 'totalProyectos']);
-        Route::get('/proyectos/monto', [ProyectoController::class, 'montoEjecutado']);
         Route::post('/proyecto/search', [ProyectoController::class, 'searchProyecto']);
-        Route::get('/grafico/proyectos/ods', [ProyectoController::class, 'graficoProyectosOds']);
-        Route::get('/grafico/proyectos/tipos', [ProyectoController::class, 'graficoProyectosTipos']);
 
         /* Estados: Pais, Estado, Ciudad */
         Route::get('paises', [StatesController::class, 'getPaises']);

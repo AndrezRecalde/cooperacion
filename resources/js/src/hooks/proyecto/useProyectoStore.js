@@ -2,18 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import gricApi from "../../api/gricApi";
 import {
     onAddProyectos,
-    onClearGraficos,
-    onClearMontos,
     onClearProyectos,
-    onClearTotales,
-    onErrores,
     onLoading,
     onProyectos,
     onSetActivateProyecto,
-    onSetGraficoProyectosOds,
-    onSetGraficoProyectosTipos,
-    onSetMontoEjecutado,
-    onSetTotalProyectos,
     onUpdateProyecto,
     onDeleteProyecto,
 } from "../../store/admin/proyecto/proyectoSlice";
@@ -24,11 +16,6 @@ export const useProyectoStore = () => {
         isLoading,
         proyectos,
         activateProyecto,
-        totalProyectos,
-        totalProyectosActivos,
-        montoEjecutado,
-        graficoProyectosOds,
-        graficoProyectosTipos,
         errores,
     } = useSelector((state) => state.proyecto);
     const dispatch = useDispatch();
@@ -44,7 +31,13 @@ export const useProyectoStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
@@ -60,7 +53,13 @@ export const useProyectoStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
@@ -98,7 +97,13 @@ export const useProyectoStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
@@ -120,10 +125,16 @@ export const useProyectoStore = () => {
             startLoadProyectosAdmin();
         } catch (error) {
             Swal.fire({
-                icon: "warning",
-                title: error.response.data ? error.response.data.msg : error,
-                showConfirmButton: false,
-                timer: 1000,
+                icon: "error",
+                title: "Oops...",
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
+                confirmButtonColor: "#c81d11",
             });
         }
     };
@@ -140,13 +151,19 @@ export const useProyectoStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
     };
 
-    const startDelete = async (proyecto) => {
+    const startDeleteProyecto = async (proyecto) => {
         Swal.fire({
             icon: "warning",
             title: "Estas seguro de eliminar?",
@@ -167,88 +184,18 @@ export const useProyectoStore = () => {
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",
-                        text: error.response ? error.response.data.msg : error,
+                        text: error.response.data.msg
+                            ? error.response.data.msg
+                            : error.response.data.errores
+                            ? Object.values(error.response.data.errores)
+                            : error.message
+                            ? error.message
+                            : error,
                         confirmButtonColor: "#c81d11",
                     });
                 }
             }
         });
-    };
-
-    const setTotalProyectos = async () => {
-        try {
-            const { data } = await gricApi.get("/total/proyectos");
-
-            if (data.msg) {
-                dispatch(onErrores(data.msg));
-            } else {
-                const { totalProyectos } = data;
-                dispatch(onSetTotalProyectos(totalProyectos));
-            }
-        } catch (error) {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
-                confirmButtonColor: "#c81d11",
-            });
-        }
-    };
-
-    const setMontoEjecutado = async () => {
-        try {
-            const { data } = await gricApi.get("/proyectos/monto");
-            const { montoEjecutado } = data;
-            dispatch(onSetMontoEjecutado(montoEjecutado));
-        } catch (error) {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
-                confirmButtonColor: "#c81d11",
-            });
-        }
-    };
-
-    const setGraficoProyectosOds = async () => {
-        try {
-            const { data } = await gricApi.get("/grafico/proyectos/ods");
-
-            if (data.msg) {
-                dispatch(onErrores(data.msg));
-            } else {
-                const { proyectosOds } = data;
-                dispatch(onSetGraficoProyectosOds(proyectosOds));
-            }
-        } catch (error) {
-            //console.log(error)
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
-                confirmButtonColor: "#c81d11",
-            });
-        }
-    };
-
-    const setGraficoProyectosTipos = async () => {
-        try {
-            const { data } = await gricApi.get("/grafico/proyectos/tipos");
-
-            if (data.msg) {
-                dispatch(onErrores(data.msg));
-            } else {
-                const { proyectosTipos } = data;
-                dispatch(onSetGraficoProyectosTipos(proyectosTipos));
-            }
-        } catch (error) {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
-                confirmButtonColor: "#c81d11",
-            });
-        }
     };
 
     const setActivateProyecto = (proyecto) => {
@@ -261,18 +208,6 @@ export const useProyectoStore = () => {
 
     const startClearProyectos = () => {
         dispatch(onClearProyectos());
-    };
-
-    const startClearTotales = () => {
-        dispatch(onClearTotales());
-    };
-
-    const startClearMontos = () => {
-        dispatch(onClearMontos());
-    };
-
-    const startClearGraficos = () => {
-        dispatch(onClearGraficos());
     };
 
     const fichaProyecto = async (id) => {
@@ -292,7 +227,13 @@ export const useProyectoStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
@@ -301,11 +242,6 @@ export const useProyectoStore = () => {
     return {
         isLoading,
         proyectos,
-        totalProyectos,
-        totalProyectosActivos,
-        montoEjecutado,
-        graficoProyectosOds,
-        graficoProyectosTipos,
         activateProyecto,
         errores,
 
@@ -314,17 +250,10 @@ export const useProyectoStore = () => {
         startAddProyectos,
         startClearProyectos,
         startUpdateActivo,
-        setTotalProyectos,
         setActivateProyecto,
         setClearActivateProyecto,
         startShowForEdit,
-        startClearTotales,
-        setMontoEjecutado,
-        startClearMontos,
-        startDelete,
-        setGraficoProyectosOds,
-        setGraficoProyectosTipos,
-        startClearGraficos,
+        startDeleteProyecto,
         fichaProyecto,
     };
 };

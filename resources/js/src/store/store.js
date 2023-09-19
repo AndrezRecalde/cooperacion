@@ -27,10 +27,12 @@ import { uiPeriodoSlice } from "./admin/periodo/uiPeriodoSlice";
 import { uiTipoSlice } from "./admin/tipos/uiTipoSlice";
 import { internacionalSlice } from "./admin/referencia/internacional/internacionalSlice";
 import { uiInternacionalSlice } from "./admin/referencia/internacional/uiInternacionalSlice";
+import { dashboardSlice } from "./admin/dashboard/dashboardSlice";
 
 export const store = configureStore({
     reducer: {
         auth: authSlice.reducer,
+        dashboard: dashboardSlice.reducer,
         usuario: usuarioSlice.reducer,
         uiUsuario: uiUsuarioSlice.reducer,
         ui: uiMapaSlice.reducer,

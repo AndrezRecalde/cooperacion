@@ -1,5 +1,5 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { FormEliminar, TitleCard } from "../../../components";
+import { FormEliminar, TitleSections } from "../../../components";
 import { useProyectoStore, useUiProyecto } from "../../../hooks";
 import { isNotEmpty, useForm } from "@mantine/form";
 
@@ -23,13 +23,14 @@ export const ModalEliminarProyecto = () => {
     const handleCloseModal = () => {
         modalActionDelete(0);
         setClearActivateProyecto();
+        form.reset();
     }
 
     return (
         <Modal
             opened={isOpenModalDeleteProyecto}
             onClose={handleCloseModal}
-            title={<TitleCard title="Eliminar Proyecto" />}
+            title={<TitleSections title="Eliminar Proyecto" fw={700} />}
             centered
             overlayProps={{
                 color:

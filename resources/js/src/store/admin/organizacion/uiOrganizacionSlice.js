@@ -6,6 +6,7 @@ export const uiOrganizacionSlice = createSlice({
         isOpenModalAddOrg: false,
         isOpenModalShowOrg: false,
         isOpenModalOrgActivo: false,
+        isOpenModalEliminarOrg: false,
     },
     reducers: {
         onOpenModalOrg: (state) => {
@@ -26,6 +27,12 @@ export const uiOrganizacionSlice = createSlice({
         onCloseModalOrgActivo: (state) => {
             state.isOpenModalOrgActivo = false;
         },
+        onOpenModalEliminarOrg: (state) => {
+            state.isOpenModalEliminarOrg = true;
+        },
+        onCloseModalEliminarOrg: (state) => {
+            state.isOpenModalEliminarOrg = false;
+        }
     },
 });
 
@@ -36,4 +43,6 @@ export const {
     onCloseModalShowOrg,
     onOpenModalOrgActivo,
     onCloseModalOrgActivo,
+    onOpenModalEliminarOrg,
+    onCloseModalEliminarOrg
 } = uiOrganizacionSlice.actions;

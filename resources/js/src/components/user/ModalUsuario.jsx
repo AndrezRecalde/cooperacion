@@ -1,6 +1,6 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { hasLength, isEmail, isNotEmpty, useForm } from "@mantine/form";
-import { TitleCard, FormUsuario } from "../../components";
+import { TitleSections, FormUsuario } from "../../components";
 import { useUiUsuario } from "../../hooks";
 
 
@@ -37,7 +37,7 @@ export const ModalUsuario = () => {
         <Modal
             opened={isOpenModalUser}
             onClose={handleCloseModal}
-            title={<TitleCard title="Usuario" />}
+            title={<TitleSections title="Usuario" />}
             overlayProps={{
                 color:
                     theme.colorScheme === "dark"

@@ -1,6 +1,6 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { useUiMapa } from "../../../hooks";
-import { DivTitle, ViewGraphics } from "../../../components";
+import { TitleSections, ViewGraphics } from "../../../components";
 
 export const ModalCharts = () => {
     const theme = useMantineTheme();
@@ -10,7 +10,7 @@ export const ModalCharts = () => {
         <Modal
             opened={isOpenModalChart}
             onClose={() => modalActionChart(0)}
-            title={<DivTitle title="Gráfico de Distribución de Proyectos" fw={700} fz="sm" />}
+            title={<TitleSections title="Gráfico de Distribución de Proyectos" fw={700} fz="sm" />}
             overlayProps={{
                 color:
                     theme.colorScheme === "dark"

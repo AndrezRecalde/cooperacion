@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
     createStyles,
     Avatar,
@@ -11,11 +11,10 @@ import {
 import {
     IconLogout,
     IconSettings,
-    IconSwitchHorizontal,
     IconChevronDown,
 } from "@tabler/icons-react";
 
-import { useAuthStore } from "../../../../hooks/auth/useAuthStore";
+import { useAuthStore } from "../../../../hooks";
 import { useNavigate } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
@@ -51,14 +50,18 @@ const useStyles = createStyles((theme) => ({
 export function User() {
     const { classes, theme, cx } = useStyles();
     const [userMenuOpened, setUserMenuOpened] = useState(false);
+    const { startProfile, startLogout } = useAuthStore();
+    let usuario = JSON.parse(localStorage.getItem("profile"));
 
-    const { user, startLogout } = useAuthStore();
+    useEffect(() => {
+        startProfile();
+    }, []);
 
     const navigate = useNavigate();
 
     const iniciales = () => {
-        let n = user.nombres.slice(0,1);
-        let a = user.apellidos.slice(0,1);
+        let n = usuario?.nombres?.slice(0,1);
+        let a = usuario?.apellidos?.slice(0,1);
         return n + a;
     }
 
@@ -83,7 +86,7 @@ export function User() {
                     })}
                 >
                     <Group spacing={7}>
-                        <Avatar radius="xl" color="teal" alt={user.apellidos} >{iniciales()}</Avatar>
+                        <Avatar radius="xl" color="teal" alt={usuario?.apellidos} >{iniciales()}</Avatar>
                         <div style={{ flex: 1 }}>
                             <Text
                                 weight={500}
@@ -91,10 +94,10 @@ export function User() {
                                 sx={{ lineHeight: 1 }}
                                 mr={3}
                             >
-                                {user.nombres + " " + user.apellidos}
+                                {usuario?.nombres + " " + usuario?.apellidos}
                             </Text>
                             <Text fz="xs" c="dimmed" mr={3}>
-                                {user.email}
+                                {usuario?.email}
                             </Text>
                         </div>
                         <IconChevronDown size={rem(14)} stroke={1.8} />
@@ -104,7 +107,6 @@ export function User() {
             <Menu.Dropdown>
                 <Menu.Label>Configuración</Menu.Label>
                 <Menu.Item onClick={changePassword} icon={<IconSettings size="1rem" stroke={1.8} />}>
-
                     Cambiar contraseña
                 </Menu.Item>
 
@@ -121,7 +123,7 @@ export function User() {
                         />
                     }
                 >
-                    Salir
+                    Cerrar Sesión
                 </Menu.Item>
             </Menu.Dropdown>
         </Menu>

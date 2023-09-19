@@ -11,7 +11,7 @@ import {
     Tooltip,
 } from "@mantine/core";
 import { useUiMapa, useMarkerStore } from "../../../hooks";
-import { DivTitle } from "../../../components";
+import { TitleSections } from "../../../components";
 import { IconChecks, IconChevronsLeft, IconLoader3 } from "@tabler/icons-react";
 import Flag from "react-flagkit";
 
@@ -45,7 +45,7 @@ export const DrawerProyecto = () => {
             onClose={handleCloseDrawer}
             withOverlay={false}
             padding="md"
-            title={<DivTitle title="Resultado de Proyectos" fw={700} />}
+            title={<TitleSections title="Resultado de Proyectos" fw={700} />}
             size="md"
         >
             <Button onClick={handleBack} fullWidth  variant="light" color="teal.7" mb={2} leftIcon={<IconChevronsLeft size="1rem" />}>

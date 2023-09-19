@@ -35,7 +35,7 @@ class OrganizacionUpdateRequest extends FormRequest
             'tipo_id'               =>  'required',
             'country_id'            =>  'required',
             'state_id'              =>  'required',
-            'imagen_url'            =>  'required'
+            'imagen_url'            =>  ''
         ];
     }
     protected function failedValidation(Validator $validator): HttpResponseException

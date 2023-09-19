@@ -24,6 +24,7 @@ class Proyecto extends Model
         'cooperacion_id',
         'modalidad_id',
         'monto',
+        'contrapartida',
         'estado_id',
         'periodo_id',
         'activo'

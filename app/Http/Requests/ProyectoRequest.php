@@ -35,6 +35,7 @@ class ProyectoRequest extends FormRequest
             'cooperacion_id'            =>  'required',
             'modalidad_id'              =>  'required',
             'monto'                     =>  '',
+            'contrapartida'             =>  '',
             'estado_id'                 =>  'required',
             'periodo_id'                =>  '',
             'activo'                    =>  ''

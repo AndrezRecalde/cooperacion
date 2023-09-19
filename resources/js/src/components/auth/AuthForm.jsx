@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
     Box,
     Button,
@@ -13,10 +14,11 @@ import {
 import { isEmail, isNotEmpty, useForm } from "@mantine/form";
 import { IconKey } from "@tabler/icons-react";
 
-import logo from "../../assets/images/logo/logo.png";
-import { useAuthStore } from "../../hooks/auth/useAuthStore";
+import { useAuthStore } from "../../hooks";
+
 import Swal from "sweetalert2";
-import { useEffect } from "react";
+import logo from "../../assets/images/logo/logo.png";
+
 
 export const AuthForm = () => {
     const { errores, startLogin } = useAuthStore();

@@ -1,25 +1,29 @@
 import { Card, Grid, Text } from "@mantine/core";
-import { DivTitle } from "../../components";
-import { useProyectoStore } from "../../hooks";
-import { Pie } from 'react-chartjs-2';
+import { TitleSections } from "../..";
+import { useDashboardStore, useProyectoStore } from "../../../hooks";
+import { Doughnut, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { useEffect } from "react";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const ChartObjetivos = () => {
 
-    const { errores, graficoProyectosOds } = useProyectoStore()
+    const { errores, totalProyectosOds } = useDashboardStore();
+
 
     const proyectosOds = {
-        labels: graficoProyectosOds?.map((grafico) => grafico.objetivo_ods),
+        labels: totalProyectosOds?.map((grafico) => grafico.objetivo_ods),
         datasets: [
             {
                 label: "Total",
-                data: graficoProyectosOds?.map((grafico) => grafico.total),
-                backgroundColor: graficoProyectosOds?.map(
+                data: totalProyectosOds?.map((grafico) => grafico.total),
+                backgroundColor: totalProyectosOds?.map(
                     (grafico) => grafico.color
                 ),
-                borderColor: [],
+                borderColor: totalProyectosOds?.map(
+                    (grafico) => grafico.border
+                ),
                 borderWidth: 1.5,
             },
         ]
@@ -28,13 +32,13 @@ export const ChartObjetivos = () => {
 
 
     return (
-        <Card mt={10} shadow="sm" p="lg">
+        <Card mt={5} shadow="sm" p="lg">
             <Card.Section withBorder inheritPadding py="xs">
-                <DivTitle title="Distribución de Proyectos por Objetivos" fw={700} />
+                <TitleSections title="Distribución de Proyectos por Objetivos" fw={700} />
             </Card.Section>
             <Card.Section withBorder inheritPadding py="xs">
-                {graficoProyectosOds.length > 0 ? (
-                    <Pie
+                {totalProyectosOds.length > 0 ? (
+                    <Doughnut
                         height={350}
                         data={proyectosOds}
                         options={{ maintainAspectRatio: false }}

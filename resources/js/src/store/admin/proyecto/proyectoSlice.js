@@ -6,10 +6,6 @@ export const proyectoSlice = createSlice({
         isLoading: false,
         proyectos: [],
         activateProyecto: null,
-        totalProyectos: [],
-        montoEjecutado: null,
-        graficoProyectosOds: [],
-        graficoProyectosTipos: [],
         errores: undefined,
     },
     reducers: {
@@ -44,19 +40,6 @@ export const proyectoSlice = createSlice({
                 state.errores = undefined;
             }
         },
-        onSetTotalProyectos: (state, { payload }) => {
-            state.totalProyectos = payload;
-        },
-
-        onSetMontoEjecutado: (state, { payload }) => {
-            state.montoEjecutado = payload;
-        },
-        onSetGraficoProyectosOds: (state, { payload }) => {
-            state.graficoProyectosOds = payload;
-        },
-        onSetGraficoProyectosTipos: (state, { payload }) => {
-            state.graficoProyectosTipos = payload;
-        },
         onSetActivateProyecto: (state, { payload }) => {
             state.activateProyecto = payload;
             state.errores = undefined;
@@ -64,16 +47,6 @@ export const proyectoSlice = createSlice({
         onClearProyectos: (state) => {
             state.proyectos = [];
             state.errores = undefined;
-        },
-        onClearTotales: (state) => {
-            state.totalProyectos = [];
-        },
-        onClearMontos: (state) => {
-            state.montoEjecutado = null;
-        },
-        onClearGraficos: (state) => {
-            state.graficoProyectosOds = [];
-            state.graficoProyectosTipos = [];
         },
         onErrores: (state, { payload }) => {
             state.errores = payload;
@@ -87,14 +60,7 @@ export const {
     onAddProyectos,
     onUpdateProyecto,
     onDeleteProyecto,
-    onSetTotalProyectos,
-    onSetMontoEjecutado,
-    onSetGraficoProyectosOds,
-    onSetGraficoProyectosTipos,
     onSetActivateProyecto,
     onClearProyectos,
-    onClearTotales,
-    onClearMontos,
-    onClearGraficos,
     onErrores,
 } = proyectoSlice.actions;

@@ -94,11 +94,13 @@ export function CardOrganizacion() {
                                     /> */}
                                     <Image
                                         mt={10}
-                                        width={100}
+                                        width={90}
                                         height={90}
                                         src={
                                             "/storage" + organizacion.imagen_url
                                         }
+                                        withPlaceholder
+                                        fit="contain"
                                     />
                                     <Text fs="italic" fz="sm" weight={700}>
                                         {organizacion.pais}

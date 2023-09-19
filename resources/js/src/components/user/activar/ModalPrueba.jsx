@@ -1,6 +1,6 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { useUiUsuario } from "../../../hooks";
-import { TitleCard } from "../../../components";
+import { TitleSections } from "../../../components";
 
 
 export const ModalPrueba = () => {
@@ -12,7 +12,7 @@ export const ModalPrueba = () => {
         <Modal
             opened={isOpenModalActivateUser}
             onClose={() => modalActivateUsuario(0)}
-            title={<TitleCard title="Activar Usuario" />}
+            title={<TitleSections title="Activar Usuario" />}
             centered
             overlayProps={{
                 color:

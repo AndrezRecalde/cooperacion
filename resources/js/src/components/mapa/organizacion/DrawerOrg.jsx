@@ -1,5 +1,5 @@
 import { Drawer, rem, useMantineTheme } from '@mantine/core';
-import { DivTitle, CardOrganizacion } from '../../../components';
+import { TitleSections, CardOrganizacion } from '../../../components';
 import { useUiMapa } from '../../../hooks';
 
 export const DrawerOrg = () => {
@@ -18,7 +18,7 @@ export const DrawerOrg = () => {
                 blur: 3,
               }}
             padding="md"
-            title={<DivTitle title="Nuestros Cooperantes" fw={700} />}
+            title={<TitleSections title="Nuestros Cooperantes" fw={700} />}
             size={rem(550)}
             position="right"
         >

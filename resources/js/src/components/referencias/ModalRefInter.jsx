@@ -1,6 +1,6 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
-import { TitleCard, FormRefInter } from "../../components";
+import { TitleSections, FormRefInter } from "../../components";
 import { useUiInternacional } from "../../hooks";
 
 export const ModalRefInter = () => {
@@ -32,7 +32,7 @@ export const ModalRefInter = () => {
         <Modal
             opened={isOpenModalInternacional}
             onClose={handleCloseModal}
-            title={<TitleCard title="Referencias Internacionales" />}
+            title={<TitleSections title="Referencias Internacionales" />}
             overlayProps={{
                 color:
                     theme.colorScheme === "dark"

@@ -1,6 +1,6 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { hasLength, isEmail, isNotEmpty, useForm } from "@mantine/form";
-import { FormOrganizacion, TitleCard } from "../../components";
+import { FormOrganizacion, TitleSections } from "../../components";
 import { useUiOrganizacion } from "../../hooks";
 
 export const ModalOrganizacion = () => {
@@ -22,7 +22,7 @@ export const ModalOrganizacion = () => {
             state_id: "",
         },
         validate: {
-            imagen_url: isNotEmpty("Por favor ingrese el logo de la organización"),
+            /* imagen_url: isNotEmpty("Por favor ingrese el logo de la organización"), */
             nombre_organizacion: isNotEmpty("El nombre es obligatorio"),
             abreviatura: hasLength(
                 { min: 1, max: 10 },
@@ -50,7 +50,7 @@ export const ModalOrganizacion = () => {
         <Modal
             opened={isOpenModalAddOrg}
             onClose={handleCloseModalOrg}
-            title={<TitleCard title="Organizacion" />}
+            title={<TitleSections title="Organizacion" />}
             overlayProps={{
                 color:
                     theme.colorScheme === "dark"

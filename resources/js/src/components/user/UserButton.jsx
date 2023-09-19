@@ -26,8 +26,8 @@ export function UserButton({ icon, ...others }) {
                         Cooperación Internacional
                     </Text>
 
-                    <Badge radius="sm" color="teal">
-                        <Text fs="italic" tt="uppercase" fw={700}>Plataforma OCIE</Text>
+                    <Badge radius="sm" color="teal.7">
+                        <Text fs="italic" tt="uppercase" fz={15} fw={700}>Plataforma OCIE</Text>
                     </Badge>
                 </div>
 

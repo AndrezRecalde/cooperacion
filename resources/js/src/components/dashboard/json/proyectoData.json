@@ -1,0 +1,20 @@
+{
+    "proyectoData": [
+        {
+            "title": "Total Proyectos",
+            "icon": "proyectos",
+            "value": "total_proyectos"
+        },
+        {
+            "title": "Proyectos En Proceso",
+            "icon": "p_proceso",
+            "value": "proyectos_proceso"
+        },
+
+        {
+            "title": "Proyectos Finalizados",
+            "icon": "p_finalizados",
+            "value": "proyectos_finalizados"
+        }
+    ]
+}

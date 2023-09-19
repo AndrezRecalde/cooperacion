@@ -1,15 +1,16 @@
 import { useEffect } from "react";
-import { Button, Card, Container, Group, Text } from "@mantine/core";
+import { Button, Card, Group, Text } from "@mantine/core";
 import { IconDownload } from "@tabler/icons-react";
 import {
     InfoHeader,
     ModalActivateOrg,
+    ModalEliminarOrg,
     ModalOrganizacion,
     ModalShowOrganizacion,
     TableOrganizaciones,
-    TitleCard,
+    TitleSections,
 } from "../../components";
-import { useOrganizacionStore } from "../../hooks/organizacion/useOrganizacionStore";
+import { useOrganizacionStore } from "../../hooks";
 
 export const OrganizacionesPage = () => {
     const {
@@ -33,18 +34,12 @@ export const OrganizacionesPage = () => {
     };
 
     return (
-        <Container size="xl">
+        <>
             <Text mt={15} tt="capitalize" fw={700} fz="xl">
                 Organizaciones
             </Text>
-            <Text mb="xl" fz={16} fw={500} c="teal">
-                Existen {organizaciones.length} organizaciones registradas
-            </Text>
             <InfoHeader
-                texto="En esta seccion podras encontrar una lista de las organizaciones
-                nacionales e internacionales con las que el Gobierno Autonomo
-                Descentralizado de la Provincia de Esmeraldas guarda convenios
-                de cooperacion."
+                texto={`Existen ${organizaciones.length} organizaciones registradas.`}
             />
             <Card
                 withBorder
@@ -56,7 +51,7 @@ export const OrganizacionesPage = () => {
             >
                 <Card.Section withBorder inheritPadding py="lg">
                     <Group position="apart">
-                        <TitleCard title="Lista de Organizaciones" />
+                        <TitleSections title="Lista de Organizaciones" fw={700} />
                         <Button
                             variant="light"
                             color="teal"
@@ -75,6 +70,7 @@ export const OrganizacionesPage = () => {
             <ModalOrganizacion />
             <ModalActivateOrg />
             <ModalShowOrganizacion />
-        </Container>
+            <ModalEliminarOrg />
+        </>
     );
 };

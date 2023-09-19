@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedInteger('cooperacion_id');
             $table->unsignedInteger('modalidad_id');
             $table->decimal('monto', 15, 2)->default(0);
+            $table->decimal('contrapartida', 15, 2)->default(0);
             $table->unsignedInteger('periodo_id');
             $table->unsignedInteger('estado_id');
             $table->boolean('activo')->default(0);

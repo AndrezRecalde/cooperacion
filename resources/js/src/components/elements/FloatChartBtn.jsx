@@ -9,7 +9,7 @@ export const FloatChartBtn = () => {
     return (
         <Tooltip
             label="Proyectos por Objetivos"
-            color="teal"
+            color="teal.7"
             position="left-start"
             transitionProps={{ transition: "pop-bottom-left", duration: 300 }}
             withArrow

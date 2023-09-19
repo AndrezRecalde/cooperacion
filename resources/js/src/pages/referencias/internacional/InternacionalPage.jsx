@@ -1,43 +1,42 @@
-import { Card, Container, Text } from "@mantine/core";
-import { InfoHeader, ModalRefInter, TableRefInter, TitleCard } from "../../../components";
-import { useInternacionalStore } from "../../../hooks/referencia/internacional/useInternacionalStore";
+import { Card, Text } from "@mantine/core";
+import {
+    InfoHeader,
+    ModalRefInter,
+    TableRefInter,
+    TitleSections,
+} from "../../../components";
+import { useInternacionalStore } from "../../../hooks";
 import { useEffect } from "react";
 
 export const InternacionalPage = () => {
+    const { startLoadRefInter, referencias } = useInternacionalStore();
 
-   const { startLoadRefInter, referencias } = useInternacionalStore();
-
-   useEffect(() => {
+    useEffect(() => {
         startLoadRefInter();
 
-     /* return () => {
+        /* return () => {
        second
      } */
-   }, []);
-
+    }, []);
 
     return (
-        <Container size="xl">
+        <>
             <Text mt={15} tt="capitalize" fw={700} fz="xl">
                 Referencias Internacionales
             </Text>
-            <Text mb="xl" fz={15} fw={500} c="teal">
-                Existen {referencias.length} referencias internacionales registrados
-            </Text>
             <InfoHeader
-                texto="En esta seccion podras encontrar una lista de las Referencias
-                Internacionales para la visualizacion correcta de las
-                organizaciones."
+                texto={`Existen ${referencias.length} referencias internacionales
+                registrados`}
             />
             <Card withBorder radius="md" mt="lg" mb="lg" shadow="sm">
                 <Card.Section withBorder inheritPadding py="lg">
-                    <TitleCard title="Lista de Refeencias Internacionales" />
+                    <TitleSections title="Lista de Refeencias Internacionales" />
                 </Card.Section>
                 <Card.Section>
                     <TableRefInter />
                 </Card.Section>
             </Card>
             <ModalRefInter />
-        </Container>
+        </>
     );
 };

@@ -1,6 +1,6 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
-import { TitleCard, FormTipo } from "../../components";
+import { TitleSections, FormTipo } from "../../components";
 import { useUiTipo } from "../../hooks";
 
 export const ModalTipo = () => {
@@ -26,7 +26,7 @@ export const ModalTipo = () => {
         <Modal
             opened={isOpenModalTipo}
             onClose={handleCloseModalTipo}
-            title={<TitleCard title="Tipos de Organizacion" />}
+            title={<TitleSections title="Tipos de Organizacion" />}
             overlayProps={{
                 color:
                     theme.colorScheme === "dark"

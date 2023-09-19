@@ -18,7 +18,7 @@ import {
     rem,
 } from "@mantine/core";
 import { hasLength, isEmail, isNotEmpty, useForm } from "@mantine/form";
-import { TitleCard } from "../../../components";
+import { TitleSections } from "../../../components";
 import {
     IconBrandTelegram,
     IconChecks,
@@ -229,7 +229,7 @@ export const FormAfiliacion = () => {
                             shadow="sm"
                         >
                             <Card.Section inheritPadding py="xs">
-                                <TitleCard title="Datos del contacto" />
+                                <TitleSections title="Datos del contacto" />
                             </Card.Section>
                             <Card.Section inheritPadding py="xs">
                                 <Grid>
@@ -281,7 +281,7 @@ export const FormAfiliacion = () => {
                                 </Grid>
                             </Card.Section>
                             <Card.Section inheritPadding py="xs">
-                                <TitleCard title="Información general de la entidad" />
+                                <TitleSections title="Información general de la entidad" />
                             </Card.Section>
                             <Card.Section inheritPadding py="xs">
                                 <Grid>

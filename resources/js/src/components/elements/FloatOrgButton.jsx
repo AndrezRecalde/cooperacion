@@ -14,7 +14,7 @@ export const FloatOrgButton = () => {
             arrowPosition="center"
         >
             <Button
-                color="teal"
+                color="teal.7"
                 variant="light"
                 className="btnOrg"
                 onClick={() => drawerOrg(1)}

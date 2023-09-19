@@ -1,11 +1,17 @@
-import { Card, Container, Text } from "@mantine/core";
+import { Card, Text } from "@mantine/core";
 import { useEffect } from "react";
-import { InfoHeader, ModalActivateUser, ModalUsuario, TableUsuarios, TitleCard } from "../../components";
-import { useUsuarioStore } from "../../hooks/usuario/useUsuarioStore";
+import {
+    InfoHeader,
+    ModalActivateUser,
+    ModalUsuario,
+    TableUsuarios,
+    TitleSections,
+} from "../../components";
+import { useUsuarioStore } from "../../hooks";
 
 export const UsuariosPage = () => {
-
-    const { usuarios, startLoadUsuarios, startClearUsuarios } = useUsuarioStore();
+    const { usuarios, startLoadUsuarios, startClearUsuarios } =
+        useUsuarioStore();
 
     useEffect(() => {
         startLoadUsuarios();
@@ -16,26 +22,16 @@ export const UsuariosPage = () => {
     }, []);
 
     return (
-        <Container size="xl">
+        <>
             <Text mt={15} tt="capitalize" fw={700} fz="xl">
                 Usuarios
             </Text>
-            <Text mb="xl" fz={16} fw={500} c="teal">
-                Existen {usuarios.length} usuarios registradas
-            </Text>
             <InfoHeader
-                texto=" En esta seccion podras encontrar una lista de los usuarios
-                registrados en el sistema."
+                texto={`Existen ${usuarios.length} usuarios registradas.`}
             />
-            <Card
-                withBorder
-                radius="md"
-                mt="lg"
-                mb="lg"
-                shadow="sm"
-            >
+            <Card withBorder radius="md" mt="lg" mb="lg" shadow="sm">
                 <Card.Section withBorder inheritPadding py="lg">
-                    <TitleCard title="Lista de Usuarios" />
+                    <TitleSections title="Lista de Usuarios" fw={700} />
                 </Card.Section>
                 <Card.Section>
                     <TableUsuarios />
@@ -43,6 +39,6 @@ export const UsuariosPage = () => {
             </Card>
             <ModalUsuario />
             <ModalActivateUser />
-        </Container>
+        </>
     );
 };

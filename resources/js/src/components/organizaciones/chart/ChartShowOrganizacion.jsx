@@ -1,5 +1,5 @@
 import { Card, Grid, Text } from "@mantine/core";
-import { DivTitle } from "../../../components";
+import { TitleSections } from "../../../components";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
@@ -32,7 +32,7 @@ export const ChartShowOrganizacion = ({ activateOrganizacion }) => {
         mb="lg"
         shadow="sm">
             <Card.Section withBorder inheritPadding py="xs">
-                <DivTitle title="Distribución de Proyectos" fw={700} />
+                <TitleSections title="Distribución de Proyectos" fw={700} />
             </Card.Section>
             <Card.Section withBorder inheritPadding py="xs">
                 {activateOrganizacion?.proyectos_activos === null &&

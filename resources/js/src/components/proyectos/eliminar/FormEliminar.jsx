@@ -23,7 +23,7 @@ import { useUiProyecto, useProyectoStore } from "../../../hooks";
 export const FormEliminar = ({ form }) => {
     const { confirm_proyecto } = form.values;
     const { modalActionDelete } = useUiProyecto();
-    const { activateProyecto, startDelete } = useProyectoStore();
+    const { activateProyecto, startDeleteProyecto } = useProyectoStore();
     const [btnDisabled, setBtnDisabled] = useState(true);
 
 
@@ -44,7 +44,7 @@ export const FormEliminar = ({ form }) => {
 
     const handleEliminar = (e) => {
         e.preventDefault();
-        startDelete(activateProyecto);
+        startDeleteProyecto(activateProyecto);
         form.reset();
         modalActionDelete(0);
     }
@@ -69,7 +69,7 @@ export const FormEliminar = ({ form }) => {
                                     position="right"
                                 >
                                     <ActionIcon
-                                        color={copied ? "teal" : "gray"}
+                                        color={copied ? "teal.5" : "gray"}
                                         onClick={copy}
                                     >
                                         {copied ? (
@@ -89,7 +89,7 @@ export const FormEliminar = ({ form }) => {
                     <Alert
                         icon={<IconAlertCircle size="1rem" />}
                         title="Informacion!"
-                        color="yellow"
+                        color="yellow.7"
                     >
                         Para confirmar la eliminación, escriba el nombre del
                         proyecto en el cuadro de a continuación.

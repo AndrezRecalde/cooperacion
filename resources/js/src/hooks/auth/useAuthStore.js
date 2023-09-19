@@ -16,6 +16,7 @@ export const useAuthStore = () => {
             const { data } = await gricApi.post("/auth/login", { email, password });
             const { user } = data;
             localStorage.setItem("atf_token", data.access_token);
+            localStorage.setItem("profile", JSON.stringify({ nombres: user.nombres, apellidos: user.apellidos, email: user.email }));
             localStorage.setItem("token_init_date", new Date().getTime());
             dispatch(onAuthenticate(user));
         } catch (error) {
@@ -36,7 +37,13 @@ export const useAuthStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
@@ -53,7 +60,6 @@ export const useAuthStore = () => {
             localStorage.setItem("atf_token", data.access_token);
             localStorage.setItem("token_init_date", new Date().getTime());
             dispatch(onAuthenticate(user));
-            startProfile();
         } catch (error) {
             localStorage.clear();
             dispatch(onLogout());

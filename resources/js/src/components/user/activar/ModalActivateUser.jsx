@@ -1,5 +1,5 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { TitleCard, FormActivarUsuario } from "../../../components";
+import { TitleSections, FormActivarUsuario } from "../../../components";
 import { useUsuarioStore, useUiUsuario } from "../../../hooks";
 
 export const ModalActivateUser = () => {
@@ -18,7 +18,7 @@ export const ModalActivateUser = () => {
         <Modal
             opened={isOpenModalActivateUser}
             onClose={(e) => handleCloseModal(e)}
-            title={<TitleCard title="Activar Usuario" />}
+            title={<TitleSections title="Activar Usuario" />}
             centered
             overlayProps={{
                 color:

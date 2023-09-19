@@ -1,5 +1,5 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { TitleCard, FormContactar } from "../../../components";
+import { FormContactar, TitleSections } from "../../../components";
 import { useUiAfiliacion } from "../../../hooks";
 
 
@@ -12,7 +12,7 @@ export const ModalContactado = () => {
         <Modal
             opened={isOpenModalAfiActivo}
             onClose={() => modalActivateAfiliacion(0)}
-            title={<TitleCard title="¿Se ha llegado a contactar?" />}
+            title={<TitleSections title="¿Se ha llegado a contactar?" />}
             centered
             overlayProps={{
                 color:

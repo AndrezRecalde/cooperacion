@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
     Navbar,
     SegmentedControl,
-    Text,
     createStyles,
     getStylesRef,
     rem,
@@ -21,9 +20,9 @@ import {
     IconNotebook,
 } from "@tabler/icons-react";
 import { UserButton } from "../../components";
-import { Link, useLocation } from "react-router-dom";
-import { useAuthStore } from "../../hooks/auth/useAuthStore";
+import { useAuthStore } from "../../hooks";
 import { IconMapPinShare } from "@tabler/icons-react";
+import { LinksGroup } from "./LinksGroup";
 
 const useStyles = createStyles((theme) => ({
     navbar: {
@@ -105,62 +104,82 @@ const useStyles = createStyles((theme) => ({
 
 const tabs = {
     system: [
-        { link: "/", label: "Dashboard", icon: IconChartPie },
-        { link: "/admin/afiliados", label: "Afiliaciones", icon: IconNotebook },
         {
-            link: "/admin/organizaciones",
+            label: "Dashboard",
+            icon: IconChartPie,
+            links: [{ label: "Dashboard", link: "/" }],
+        },
+
+        {
+            label: "Afiliaciones",
+            icon: IconNotebook,
+            links: [{ label: "Ver afiliaciones", link: "/admin/afiliados" }],
+        },
+
+        {
             label: "Organizaciones",
             icon: IconWorldCheck,
+            initiallyOpened: true,
+            links: [
+                { label: "Ver organizaciones", link: "/admin/organizaciones" },
+            ],
         },
-        { link: "/admin/proyectos", label: "Proyectos", icon: IconFolderCheck },
+
+        {
+            label: "Proyectos",
+            icon: IconFolderCheck,
+            initiallyOpened: true,
+            links: [{ label: "Ver proyectos", link: "/admin/proyectos" }],
+        },
     ],
     settings: [
-        { link: "/admin/usuarios", label: "Usuarios", icon: IconUsers },
-        { link: "/admin/tipos/cooperaciones", label: "Tipos Cooperacion", icon: IconBinaryTree2 },
-        { link: "/admin/tipos/modalidades", label: "Modalidades", icon: IconListCheck },
-        { link: "/admin/tipos/organizaciones", label: "Tipos de Organización", icon: IconListDetails },
-        { link: "/admin/referencias/internacionales", label: "Referencias Internacionales", icon: IconMapPinShare },
-
+        {
+            label: "Usuarios",
+            icon: IconUsers,
+            links: [{ label: "Ver usuarios", link: "/admin/usuarios" }],
+        },
+        {
+            label: "Tipos Cooperacion",
+            icon: IconBinaryTree2,
+            links: [
+                { label: "Ver Tipos Coop", link: "/admin/tipos/cooperaciones" },
+            ],
+        },
+        {
+            label: "Modalidades",
+            icon: IconListCheck,
+            links: [
+                { label: "Ver Modalidades", link: "/admin/tipos/modalidades" },
+            ],
+        },
+        {
+            label: "Tipos de Organización",
+            icon: IconListDetails,
+            links: [
+                { label: "Ver Tipos Org", link: "/admin/tipos/organizaciones" },
+            ],
+        },
+        {
+            label: "Geolocalización",
+            icon: IconMapPinShare,
+            links: [
+                {
+                    label: "Ver Referencias",
+                    link: "/admin/referencias/internacionales",
+                },
+            ],
+        },
     ],
 };
 
 export function NavbarSegmented({ opened }) {
-    const { classes, cx } = useStyles();
-    const currentLocation = useLocation();
+    const { classes } = useStyles();
     const [section, setSection] = useState(Object.keys(tabs)[0]);
-    const [active, setActive] = useState(tabs.system[0].label);
 
     const { startLogout } = useAuthStore();
 
-    const capitalize = (word) => {
-       if(word === ""){
-            let path = word + "dashboard";
-            return path[0].toUpperCase() + path.slice(1);
-       }
-        return word[0].toUpperCase() + word.slice(1);
-    };
-
-    useEffect(() => {
-        let param = currentLocation.pathname.substring(1);
-        setActive(capitalize(param));
-    }, []);
-
     const links = tabs[section].map((item) => (
-        <Text
-            component={Link}
-            variant="link"
-            className={cx(classes.link, {
-                [classes.linkActive]: item.label === active,
-            })}
-            to={item.link}
-            key={item.label}
-            onClick={() => {
-                setActive(item.label);
-            }}
-        >
-            <item.icon className={classes.linkIcon} stroke={1.5} />
-            <span>{item.label}</span>
-        </Text>
+        <LinksGroup {...item} key={item.label} />
     ));
 
     return (
@@ -194,11 +213,7 @@ export function NavbarSegmented({ opened }) {
             </Navbar.Section>
 
             <Navbar.Section className={classes.footer}>
-                <a
-                    href="#"
-                    className={classes.link}
-                    onClick={startLogout}
-                >
+                <a href="#" className={classes.link} onClick={startLogout}>
                     <IconLogout
                         className={classes.linkIcon}
                         stroke={1.8}

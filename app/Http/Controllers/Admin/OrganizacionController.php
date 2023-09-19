@@ -215,32 +215,9 @@ class OrganizacionController extends Controller
         }
     }
 
-    public function totalOrganizaciones(): JsonResponse
-    {
-        $totalOrganizaciones = Organizacion::from('organizaciones as org')
-            ->join('convenios as c', 'c.id', 'org.convenio_id')
-            ->selectRaw('COUNT(org.convenio_id) as total, c.convenio')
-            ->groupBy('c.convenio')
-            ->get();
-
-        if (sizeof($totalOrganizaciones) > 0) {
-            return response()->json([
-                'status' => MsgStatusEnum::Success,
-                'totalOrganizaciones' => $totalOrganizaciones
-            ], 200);
-        } else {
-            return response()->json(['status' => MsgStatusEnum::Error, 'msg' => "Aún no existen datos"], 200);
-        }
-    }
-
     public function exportOrganizaciones()
     {
         return Excel::download(new OrganizacionExport, 'organizaciones.xlsx');
     }
 
-    /* public function getLogo(Request $request)
-    {
-        $logo = Organizacion::find($request->id);
-
-    } */
 }

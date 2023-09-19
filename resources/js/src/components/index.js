@@ -3,24 +3,23 @@ import { AuthForm } from "./auth/AuthForm";
 
 /* Elements */
 import { DivHeader } from "./elements/DivHeader";
-import { DivTitle } from "./elements/DivTitle";
 import { FloatAddButton } from "./elements/FloatAddButton";
 import { FloatButton } from "./elements/FloatButton";
 import { FloatOrgButton } from "./elements/FloatOrgButton";
-import { TitleCard } from "./elements/TitleCard";
 import { InfoHeader } from "./elements/InfoHeader";
 import { FloatChartBtn } from "./elements/FloatChartBtn";
 import { BtnAdd } from "./elements/BtnAdd";
 import { MenuActionsAdmin } from "./elements/action/MenuActionsAdmin";
+import { TitleSections } from "./elements/TitleSections";
 
 /* Dashboard */
-import { Charts } from "./dashboard/Charts";
-import { Stats } from "./dashboard/Stats";
-import { ChartReporteProyectos } from "./dashboard/ChartReporteProyectos";
-import { ChartObjetivos } from "./dashboard/ChartObjetivos";
-import { ChartOrganizaciones } from "./dashboard/ChartOrganizaciones";
-import { ChartTipos } from "./dashboard/ChartTipos";
-
+import { ChartObjetivos } from "./dashboard/charts/ChartObjetivos";
+import { ChartTipos } from "./dashboard/charts/ChartTipos";
+import { ChartModalidad } from "./dashboard/charts/ChartModalidad";
+import { StatMontoEjecutado } from "./dashboard/stats/StatMontoEjecutado";
+import { StatMontoPartida } from "./dashboard/stats/StatMontoPartida";
+import { StatProyecto } from "./dashboard/stats/StatProyecto";
+import { StatOrganizacion } from "./dashboard/stats/StatOrganizacion";
 
 /* Mapa */
 import { DrawerMenu } from "./mapa/menu/DrawerMenu";
@@ -45,6 +44,8 @@ import { FormOrganizacion } from "./organizaciones/FormOrganizacion";
 import { ModalOrganizacion } from "./organizaciones/ModalOrganizacion";
 import { ModalShowOrganizacion } from "./organizaciones/ModalShowOrganizacion";
 
+import { ModalEliminarOrg } from "./organizaciones/eliminar/ModalEliminarOrg";
+import { FormEliminarOrg } from "./organizaciones/eliminar/FormEliminarOrg";
 
 /* Proyectos */
 import { TableProyectos } from "./proyectos/table/TableProyectos";
@@ -99,25 +100,27 @@ import { ActivateAfilButton } from "./afiliacion/contactar/ActivateAfilButton";
 import { FormContactar } from "./afiliacion/form/FormContactar";
 import { FormAfiliacion } from "./afiliacion/form/FormAfiliacion";
 import { DetailPanelAfiliacion } from "./afiliacion/table/panel/DetailPanelAfiliacion";
+import { ModalContactado } from "./afiliacion/contactar/ModalContactado";
+import { TableAfiliaciones } from "./afiliacion/table/TableAfiliaciones";
 
 export {
     DivHeader,
-    DivTitle,
     FloatAddButton,
     FloatButton,
     FloatOrgButton,
-    TitleCard,
     InfoHeader,
     FloatChartBtn,
     BtnAdd,
     MenuActionsAdmin,
+    TitleSections,
 
-    Charts,
-    Stats,
-    ChartReporteProyectos,
     ChartObjetivos,
-    ChartOrganizaciones,
     ChartTipos,
+    ChartModalidad,
+    StatMontoEjecutado,
+    StatMontoPartida,
+    StatProyecto,
+    StatOrganizacion,
 
     DrawerMenu,
     CardOrganizacion,
@@ -137,6 +140,8 @@ export {
     FormOrganizacion,
     ModalOrganizacion,
     ModalShowOrganizacion,
+    ModalEliminarOrg,
+    FormEliminarOrg,
 
     TableProyectos,
     ActionsProyecto,
@@ -182,5 +187,7 @@ export {
     ActivateAfilButton,
     FormContactar,
     FormAfiliacion,
-    DetailPanelAfiliacion
+    DetailPanelAfiliacion,
+    ModalContactado,
+    TableAfiliaciones
 };

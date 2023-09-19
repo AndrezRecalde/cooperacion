@@ -1,0 +1,19 @@
+{
+    "organizacionData": [
+        {
+            "title": "Total Organizaciones",
+            "icon": "organizaciones",
+            "value": "total_organizaciones"
+        },
+        {
+            "title": "Organizaciones Activas",
+            "icon": "o_activos",
+            "value": "organizaciones_activas"
+        },
+        {
+            "title": "Organizaciones Finalizadas",
+            "icon": "o_finalizada",
+            "value": "organizaciones_finalizadas"
+        }
+    ]
+}

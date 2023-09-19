@@ -1,43 +1,41 @@
 import { Card, Grid, Text } from "@mantine/core";
-import { DivTitle } from "../../components";
-import { useProyectoStore } from "../../hooks";
-import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { useDashboardStore } from "../../../hooks";
+import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, RadialLinearScale, ArcElement, Tooltip, Legend } from 'chart.js';
+import { TitleSections } from "../../../components";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
+
+export const ChartTipos = () => {
+
+    const { errores,  totalProyectosTipos } = useDashboardStore();
 
 
-export const ChartReporteProyectos = () => {
-    const { errores, totalProyectos } = useProyectoStore();
-
-    const proyectos = {
-        labels: totalProyectos?.map((proyecto) =>
-            proyecto.activo === 0 ? "Proyectos NO activos" : "Proyectos Activos"
+    const proyectosTipos = {
+        labels: totalProyectosTipos?.map(
+            (grafico) => grafico.tipo_cooperacion
         ),
         datasets: [
             {
                 label: "Total",
-                data: totalProyectos?.map((proyecto) => proyecto.total),
-                backgroundColor: [
-                    "rgba(39, 255, 96, 0.61)",
-                    "rgba(255, 39, 39, 0.61)"
-                ],
-                borderColor: [ "rgba(0,100,0)", "rgba(128,0,0)"],
+                data: totalProyectosTipos?.map((grafico) => grafico.monto),
+                backgroundColor: totalProyectosTipos?.map(grafico => grafico.color),
+                borderColor: totalProyectosTipos?.map(grafico => grafico.border),
                 borderWidth: 1.5,
             },
         ],
     };
 
     return (
-        <Card mt={10} shadow="sm" p="lg">
+        <Card mt={5} shadow="sm" p="lg">
             <Card.Section withBorder inheritPadding py="xs">
-                <DivTitle title="Reporte Proyectos" fw={700} />
+                <TitleSections title="Distribución de Montos por Tipos de Coop" fw={700} />
             </Card.Section>
             <Card.Section withBorder inheritPadding py="xs">
-                {totalProyectos.length > 0 ? (
-                    <Pie
+                {totalProyectosTipos.length > 0 ? (
+                    <Doughnut
                         height={350}
-                        data={proyectos}
+                        data={proyectosTipos}
                         options={{ maintainAspectRatio: false }}
                     />
                 ) : (

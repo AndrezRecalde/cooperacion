@@ -1,11 +1,11 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export const PrivateRoute = ({
-    user,
+    token,
     redirectPath = "/auth/login",
     children,
 }) => {
-    return Object.entries(user).length === 0 ? (
+    return !token ? (
         <Navigate to={redirectPath} replace />
     ) : (
         children

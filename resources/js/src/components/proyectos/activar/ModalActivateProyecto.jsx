@@ -1,7 +1,7 @@
 import { Modal, useMantineTheme } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { useUiProyecto, useProyectoStore } from "../../../hooks";
-import { FormActivar, TitleCard } from "../../../components";
+import { FormActivar, TitleSections } from "../../../components";
 
 export const ModalActivateProyecto = () => {
     const theme = useMantineTheme();
@@ -25,7 +25,7 @@ export const ModalActivateProyecto = () => {
         <Modal
             opened={isOpenModalProyectoActivo}
             onClose={handleCloseModal}
-            title={<TitleCard title="Activar Proyecto" />}
+            title={<TitleSections title="Activar Proyecto" />}
             centered
             overlayProps={{
                 color:

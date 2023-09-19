@@ -2,13 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     onAddOrganizacion,
     onClearOrganizaciones,
-    onClearTotalesOrg,
     onDeleteOrganizacion,
-    onErrores,
     onLoading,
     onOrganizaciones,
     onSetActivateOrganizacion,
-    onSetTotalOrganizaciones,
     onUpdateOrganizacion,
 } from "../../store/admin/organizacion/organizacionSlice";
 import gricApi from "../../api/gricApi";
@@ -19,7 +16,6 @@ export const useOrganizacionStore = () => {
         errores,
         isLoading,
         organizaciones,
-        totalOrganizaciones,
         activateOrganizacion,
     } = useSelector((state) => state.organizacion);
     const dispatch = useDispatch();
@@ -34,7 +30,13 @@ export const useOrganizacionStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
@@ -49,7 +51,13 @@ export const useOrganizacionStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
@@ -66,7 +74,13 @@ export const useOrganizacionStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
@@ -116,7 +130,13 @@ export const useOrganizacionStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
@@ -134,7 +154,13 @@ export const useOrganizacionStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
@@ -143,7 +169,7 @@ export const useOrganizacionStore = () => {
     const startDeleteOrganizacion = async (organizacion) => {
         Swal.fire({
             icon: "warning",
-            title: `Estas seguro de eliminar ${organizacion.nombre_organizacion}?`,
+            text: `Estas seguro de eliminar ${organizacion.nombre_organizacion}?`,
             showDenyButton: true,
             confirmButtonColor: "#3085d6",
             confirmButtonText: "Si",
@@ -161,7 +187,13 @@ export const useOrganizacionStore = () => {
                     Swal.fire({
                         icon: "error",
                         title: "Oops...",
-                        text: error.response ? error.response.data.msg : error,
+                        text: error.response.data.msg
+                            ? error.response.data.msg
+                            : error.response.data.errores
+                            ? Object.values(error.response.data.errores)
+                            : error.message
+                            ? error.message
+                            : error,
                         confirmButtonColor: "#c81d11",
                     });
                 }
@@ -175,30 +207,6 @@ export const useOrganizacionStore = () => {
                 ...organizacion,
             })
         );
-    };
-
-    const startTotalOrganizaciones = async () => {
-        try {
-            const { data } = await gricApi.get("/total/organizaciones");
-
-            if (data.msg) {
-                dispatch(onErrores(data.msg));
-            } else {
-                const { totalOrganizaciones } = data;
-                dispatch(onSetTotalOrganizaciones(totalOrganizaciones));
-            }
-        } catch (error) {
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
-                confirmButtonColor: "#c81d11",
-            });
-        }
-    };
-
-    const setClearTotalesOrg = () => {
-        dispatch(onClearTotalesOrg());
     };
 
     const setClearActivateOrganizacion = () => {
@@ -227,7 +235,13 @@ export const useOrganizacionStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
@@ -249,7 +263,13 @@ export const useOrganizacionStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }
@@ -259,7 +279,6 @@ export const useOrganizacionStore = () => {
         errores,
         isLoading,
         organizaciones,
-        totalOrganizaciones,
         activateOrganizacion,
 
         starLoadOrganizaciones,
@@ -271,8 +290,6 @@ export const useOrganizacionStore = () => {
         setActivateOrganizacion,
         setClearActivateOrganizacion,
         startClearOrganizaciones,
-        startTotalOrganizaciones,
-        setClearTotalesOrg,
         startUpdateConvenioOrg,
         exportExcelOrganizaciones
     };

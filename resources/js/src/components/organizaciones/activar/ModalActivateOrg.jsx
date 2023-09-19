@@ -1,5 +1,5 @@
 import { Modal, useMantineTheme } from "@mantine/core";
-import { TitleCard, FormActivarOrg } from "../../../components";
+import { FormActivarOrg, TitleSections } from "../../../components";
 import { useOrganizacionStore, useUiOrganizacion } from "../../../hooks";
 import { isNotEmpty, useForm } from "@mantine/form";
 
@@ -27,7 +27,7 @@ export const ModalActivateOrg = () => {
         <Modal
             opened={isOpenModalOrgActivo}
             onClose={(e) => handleCloseModal(e)}
-            title={<TitleCard title="Activar Organización" />}
+            title={<TitleSections title="Activar Organización" />}
             centered
             overlayProps={{
                 color:

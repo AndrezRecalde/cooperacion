@@ -18,7 +18,7 @@ class ProyectoController extends Controller
             ->selectRaw('p.id, org.nombre_organizacion, p.nombre_proyecto, p.objetivo_general,
                         p.beneficiados_directos, p.beneficiados_indirectos,
                         coop.tipo_cooperacion, m.tipo_modalidad as modalidad,
-                        p.monto, e.estado, per.fechas_periodo as periodo, p.activo')
+                        p.monto, p.contrapartida, e.estado, per.fechas_periodo as periodo, p.activo')
             ->with(
                 [
                     'odsostenibles'  => function ($query) {
@@ -48,7 +48,7 @@ class ProyectoController extends Controller
             ->selectRaw('p.id, org.nombre_organizacion, p.nombre_proyecto, p.objetivo_general,
                                 p.beneficiados_directos, p.beneficiados_indirectos,
                                 coop.tipo_cooperacion, m.tipo_modalidad as modalidad,
-                                p.monto, e.estado, per.fechas_periodo as periodo, p.activo')
+                                p.monto, p.contrapartida, e.estado, per.fechas_periodo as periodo, p.activo')
             ->with(
                 [
                     'odsostenibles'  => function ($query) {
@@ -165,29 +165,6 @@ class ProyectoController extends Controller
         }
     }
 
-    public function totalProyectos(): JsonResponse
-    {
-        $totalProyectos = Proyecto::from('proyectos as p')
-            ->selectRaw('COUNT(p.activo) as total, p.activo')
-            ->groupBy('p.activo')
-            ->get();
-
-        if (sizeof($totalProyectos) > 0) {
-            return response()->json([
-                'status' => MsgStatusEnum::Success,
-                'totalProyectos' => $totalProyectos,
-            ], 200);
-        } else {
-            return response()->json(['status' => MsgStatusEnum::Error, 'msg' => "Aún no existen datos"], 200);
-        }
-    }
-
-    public function montoEjecutado(): JsonResponse
-    {
-        $montoEjecutado = Proyecto::where('estado_id', 2)->sum('monto');
-        return response()->json(['status' => MsgStatusEnum::Success, 'montoEjecutado' => $montoEjecutado], 200);
-    }
-
     public function searchProyecto(Request $request): JsonResponse
     {
         $proyectos = Proyecto::from('proyectos as p')
@@ -228,37 +205,6 @@ class ProyectoController extends Controller
             return response()->json(['status' => MsgStatusEnum::Success, 'proyectos' => $proyectos], 201);
         } else {
             return response()->json(['status' => MsgStatusEnum::Error, 'msg' => "No existen proyectos en esa zona"], 201);
-        }
-    }
-
-    public function graficoProyectosOds()
-    {
-        $proyectosOds = Proyecto::from('proyectos as p')
-            ->selectRaw('ods.objetivo_ods, COUNT(p.id) as total, ods.color')
-            ->join('odsostenible_proyecto as op', 'op.proyecto_id', 'p.id')
-            ->join('odsostenibles as ods', 'ods.id', 'op.odsostenible_id')
-            ->groupBy('ods.objetivo_ods', 'ods.color')
-            ->get();
-
-        if (sizeof($proyectosOds) >= 1) {
-            return response()->json(['status' => MsgStatusEnum::Success, 'proyectosOds' => $proyectosOds], 200);
-        } else {
-            return response()->json(['status' => MsgStatusEnum::Error, 'msg' => "Aún no existen datos"], 200);
-        }
-    }
-
-    public function graficoProyectosTipos()
-    {
-        $proyectosTipos = Proyecto::from('proyectos as p')
-            ->selectRaw('coop.tipo_cooperacion, SUM(p.monto) as monto')
-            ->join('cooperaciones as coop', 'coop.id', 'p.cooperacion_id')
-            ->groupBy('coop.tipo_cooperacion')
-            ->get();
-
-        if (sizeof($proyectosTipos) >= 1) {
-            return response()->json(['status' => MsgStatusEnum::Success, 'proyectosTipos' => $proyectosTipos], 200);
-        } else {
-            return response()->json(['status' => MsgStatusEnum::Error, 'msg' => "Aún no existen datos"], 200);
         }
     }
 }

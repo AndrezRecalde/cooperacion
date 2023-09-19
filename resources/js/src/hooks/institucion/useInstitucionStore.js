@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import gricApi from "../../api/gricApi";
 import { onClearInstituciones, onLoadInstituciones } from "../../store/admin/institucion/institucionSlice";
+import gricApi from "../../api/gricApi";
 import Swal from "sweetalert2";
 
 export const useInstitucionStore = () => {
@@ -16,7 +16,13 @@ export const useInstitucionStore = () => {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: error.response ? error.response.data.msg : error,
+                text: error.response.data.msg
+                    ? error.response.data.msg
+                    : error.response.data.errores
+                    ? Object.values(error.response.data.errores)
+                    : error.message
+                    ? error.message
+                    : error,
                 confirmButtonColor: "#c81d11",
             });
         }

@@ -6,13 +6,13 @@ import {
     Grid,
     Group,
     PasswordInput,
+    rem,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
-import { TitleCard } from "../../components";
 import { IconArrowsExchange } from "@tabler/icons-react";
-import { useUsuarioStore } from "../../hooks/usuario/useUsuarioStore";
-import { useAuthStore } from "../../hooks/auth/useAuthStore";
+import { TitleSections } from "../../components";
+import { useUsuarioStore, useAuthStore } from "../../hooks";
 
 export const PasswordPage = () => {
     const [visible, { toggle }] = useDisclosure(false);
@@ -41,55 +41,57 @@ export const PasswordPage = () => {
     };
 
     return (
-        <Container size="md">
-            <Box
-                component="form"
-                mx="auto"
-                sx={(theme) => ({
-                    padding: theme.spacing.md,
-                })}
-                onSubmit={form.onSubmit((_, e) => handleSubmit(e))}
+        <Box
+            component="form"
+            mx="auto"
+            sx={(theme) => ({
+                padding: theme.spacing.sm,
+                width: rem(700)
+            })}
+            onSubmit={form.onSubmit((_, e) => handleSubmit(e))}
+        >
+            <Card
+                withBorder
+                radius="md"
+                mt="md"
+                mb="md"
+                shadow="sm"
+                sx={{ position: "static" }}
             >
-                <Card
-                    withBorder
-                    radius="md"
-                    mt="lg"
-                    mb="lg"
-                    shadow="sm"
-                    sx={{ position: "static" }}
-                >
-                    <Card.Section withBorder inheritPadding py="lg">
-                        <TitleCard title="Cambio de contraseña" />
-                    </Card.Section>
-                    <Card.Section inheritPadding py="lg">
-                        <Grid justify="center">
-                            <Grid.Col sm={12} md={7} lg={7} xl={7}>
-                                <PasswordInput
-                                    label="Password"
-                                    visible={visible}
-                                    size="md"
-                                    onVisibilityChange={toggle}
-                                    {...form.getInputProps("password")}
-                                />
-                            </Grid.Col>
-                            <Grid.Col sm={12} md={7} lg={7} xl={7}>
-                                <PasswordInput
-                                    label="Confirm password"
-                                    visible={visible}
-                                    size="md"
-                                    onVisibilityChange={toggle}
-                                    {...form.getInputProps("confirmPassword")}
-                                />
-                            </Grid.Col>
-                        </Grid>
-                    </Card.Section>
-                    <Group position="right" mt="xl" mb="xl">
-                        <Box w={230}>
-                            <Button variant="outline" color="teal" type="submit" leftIcon={<IconArrowsExchange />}>Cambiar Contraseña</Button>
-                        </Box>
-                    </Group>
-                </Card>
-            </Box>
-        </Container>
+                <Card.Section withBorder inheritPadding py="lg">
+                    <TitleSections title="Cambio de contraseña" fw={700} />
+                </Card.Section>
+                <Card.Section inheritPadding py="lg">
+                    <Grid justify="center">
+                        <Grid.Col sm={12} md={12} lg={12} xl={12}>
+                            <PasswordInput
+                                label="Contraseña"
+                                visible={visible}
+                                onVisibilityChange={toggle}
+                                {...form.getInputProps("password")}
+                            />
+                        </Grid.Col>
+                        <Grid.Col sm={12} md={12} lg={12} xl={12}>
+                            <PasswordInput
+                                label="Confirmar contraseña"
+                                visible={visible}
+                                onVisibilityChange={toggle}
+                                {...form.getInputProps("confirmPassword")}
+                            />
+                        </Grid.Col>
+                    </Grid>
+                </Card.Section>
+                <Group position="center" mt="xl" mb="xl">
+                    <Button
+                        variant="light"
+                        color="teal.7"
+                        type="submit"
+                        leftIcon={<IconArrowsExchange />}
+                    >
+                        Cambiar Contraseña
+                    </Button>
+                </Group>
+            </Card>
+        </Box>
     );
 };

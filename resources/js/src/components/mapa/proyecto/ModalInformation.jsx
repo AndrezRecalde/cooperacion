@@ -13,7 +13,7 @@ import {
 } from "@mantine/core";
 import { IconCircleCheckFilled, IconFlag2Filled } from "@tabler/icons-react";
 import { useUiMapa, useMarkerStore } from "../../../hooks";
-import { DivTitle } from "../../../components";
+import { TitleSections } from "../../../components";
 import Flag from "react-flagkit";
 
 const useStyles = createStyles((theme) => ({
@@ -60,7 +60,7 @@ export const ModalInformation = () => {
             opened={isOpenModalInformation}
             onClose={handleCloseModalInf}
             title={
-                <DivTitle
+                <TitleSections
                     title="Información Técnica del proyecto"
                     fw={700}
                     fz="sm"
