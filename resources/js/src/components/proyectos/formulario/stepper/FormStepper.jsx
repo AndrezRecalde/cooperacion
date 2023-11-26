@@ -19,7 +19,10 @@ export const FormStepper = ({ form }) => {
             form.setValues({
                 ...activateProyecto,
                 monto: parseFloat(activateProyecto.monto),
+                contrapartida: parseFloat(activateProyecto.contrapartida),
                 canton_id: activateProyecto.cantones.map((canton) => canton.id),
+                beneficiados_directos:  activateProyecto.beneficiados_directos !== null ? activateProyecto.beneficiados_directos : "",
+                beneficiados_indirectos:  activateProyecto.beneficiados_indirectos !== null ? activateProyecto.beneficiados_indirectos : "",
                 grupo_atencion_id: activateProyecto.grupos.map(
                     (grupo) => grupo.id
                 ),
