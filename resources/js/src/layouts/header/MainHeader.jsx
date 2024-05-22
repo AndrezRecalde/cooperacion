@@ -8,12 +8,10 @@ import {
     useMantineTheme,
     ActionIcon,
     useMantineColorScheme,
-    Image,
 } from "@mantine/core";
 import { IconMoon, IconSunHigh } from "@tabler/icons-react";
 import { User } from "../../layouts";
-
-import logo from "../../assets/images/logo/LogoGadpe.png";
+import { Logo } from "../../components";
 
 const useStyles = createStyles((theme) => ({
     header: {
@@ -81,15 +79,7 @@ export const MainHeader = ({ opened, setOpened }) => {
                             mr="xl"
                         />
                     </MediaQuery>
-
-                    {/* <Logo colorScheme={colorScheme}  size={28} /> */}
-                    <Image
-                        maw={170}
-                        mx="auto"
-                        radius="md"
-                        src={logo}
-                        alt="logo_image"
-                    />
+                    <Logo maw={170} />
                 </Group>
                 <Group>
                     <ActionIcon

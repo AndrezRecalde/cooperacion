@@ -2,31 +2,25 @@ import { useEffect } from "react";
 import {
     Box,
     Button,
-    Card,
     Checkbox,
-    Grid,
-    Group,
-    Image,
+    LoadingOverlay,
     PasswordInput,
-    Text,
+    Stack,
     TextInput,
 } from "@mantine/core";
 import { isEmail, isNotEmpty, useForm } from "@mantine/form";
-import { IconKey } from "@tabler/icons-react";
-
 import { useAuthStore } from "../../hooks";
-
-import Swal from "sweetalert2";
-import logo from "../../assets/images/logo/logo.png";
-
+import { AlertSection, BtnSubmit, LoaderCustom } from "../../components";
+import { IconInfoCircle, IconKey } from "@tabler/icons-react";
 
 export const AuthForm = () => {
-    const { errores, startLogin } = useAuthStore();
+    const { isLoading, validate, errores, startLogin } = useAuthStore();
 
     const form = useForm({
         initialValues: {
             email: "",
             password: "",
+            remember: false,
         },
         validate: {
             email: isEmail("Por favor introduce tu email correctamente"),
@@ -36,16 +30,22 @@ export const AuthForm = () => {
 
     const { email, password } = form.values;
 
+    useEffect(() => {
+        if (validate !== undefined) {
+            form.setErrors(validate);
+            return;
+        }
+
+        return () => {
+            form.clearErrors();
+        };
+    }, [validate]);
+
     const handleLogin = (e) => {
         e.preventDefault();
         startLogin({ email, password });
+        //console.log(form.values);
     };
-
-    useEffect(() => {
-        if (errores !== undefined) {
-            Swal.fire("Error", errores, "error");
-        }
-    }, [errores]);
 
     return (
         <Box
@@ -53,72 +53,50 @@ export const AuthForm = () => {
             mx="auto"
             onSubmit={form.onSubmit((_, e) => handleLogin(e))}
         >
-            <Grid justify="center">
-                <Grid.Col sm={7} md={7} lg={7} xl={7}>
-                    <Card
-                        withBorder
-                        shadow="lg"
-                        p="lg"
-                        radius="md"
-                        sx={{ position: "static" }}
-                        mt={100}
+            <LoadingOverlay loader={LoaderCustom} visible={isLoading} overlayBlur={2} />
+            <Stack>
+                <TextInput
+                    label="Correo Electronico"
+                    placeholder="hello@gadpe.gob.ec"
+                    withAsterisk
+                    {...form.getInputProps("email")}
+                />
+                <PasswordInput
+                    label="Contraseña"
+                    placeholder="Tu contraseña"
+                    mt="md"
+                    withAsterisk
+                    {...form.getInputProps("password")}
+                />
+                <Checkbox
+                    {...form.getInputProps("remember", {
+                        type: "checkbox",
+                    })}
+                    label="Recuerdame"
+                    mt="xl"
+                    color="teal"
+                />
+                {errores ? (
+                    <AlertSection
+                        variant="light"
+                        color="red.8"
+                        icon={IconInfoCircle}
+                        title="Error"
                     >
-                        <Card.Section withBorder inheritPadding py="xs">
-                            <Group position="apart">
-                                <Text
-                                    c="dimmed"
-                                    fz={15}
-                                    tt="uppercase"
-                                    fw={700}
-                                >
-                                    Cooperación Internacional
-                                </Text>
-                            </Group>
-                        </Card.Section>
-                        <Card.Section inheritPadding mt="xl" pb="lg">
-                            <Image
-                                maw={220}
-                                mx="auto"
-                                mt="md"
-                                mb="md"
-                                radius="xs"
-                                src={logo}
-                                alt="logo"
-                            />
-                            <TextInput
-                                label="Correo Electronico"
-                                placeholder="hello@gadpe.gob.ec"
-                                withAsterisk
-                                {...form.getInputProps("email")}
-                            />
-                            <PasswordInput
-                                label="Contraseña"
-                                placeholder="Tu contraseña"
-                                mt="md"
-                                withAsterisk
-                                {...form.getInputProps("password")}
-                            />
-                            <Checkbox
-                                label="Mantenme conectado"
-                                mt="xl"
-                                color="teal"
-                            />
-                        </Card.Section>
-                        <Card.Section inheritPadding mt="md" pb="md">
-                            <Group position="center">
-                                <Button
-                                    leftIcon={<IconKey size="1.1rem" />}
-                                    variant="outline"
-                                    color="teal"
-                                    type="submit"
-                                >
-                                    Autenticarse
-                                </Button>
-                            </Group>
-                        </Card.Section>
-                    </Card>
-                </Grid.Col>
-            </Grid>
+                        {errores}
+                    </AlertSection>
+                ) : null}
+                <BtnSubmit IconSection={IconKey}>Autenticarse</BtnSubmit>
+                {/* <Button
+                    fullWidth
+                    leftIcon={<IconKey size="1.1rem" />}
+                    variant="outline"
+                    color="teal"
+                    type="submit"
+                >
+                    Autenticarse
+                </Button> */}
+            </Stack>
         </Box>
     );
 };

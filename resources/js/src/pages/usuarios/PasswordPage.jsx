@@ -1,17 +1,14 @@
 import {
     Box,
-    Button,
     Card,
-    Container,
     Grid,
-    Group,
     PasswordInput,
     rem,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { IconArrowsExchange } from "@tabler/icons-react";
-import { TitleSections } from "../../components";
+import { BtnSubmit, TitleSections } from "../../components";
 import { useUsuarioStore, useAuthStore } from "../../hooks";
 
 export const PasswordPage = () => {
@@ -81,7 +78,8 @@ export const PasswordPage = () => {
                         </Grid.Col>
                     </Grid>
                 </Card.Section>
-                <Group position="center" mt="xl" mb="xl">
+                <BtnSubmit IconSection={IconArrowsExchange} fontSize={14}>Cambiar Contraseña</BtnSubmit>
+                {/* <Group position="center" mt="xl" mb="xl">
                     <Button
                         variant="light"
                         color="teal.7"
@@ -90,7 +88,7 @@ export const PasswordPage = () => {
                     >
                         Cambiar Contraseña
                     </Button>
-                </Group>
+                </Group> */}
             </Card>
         </Box>
     );

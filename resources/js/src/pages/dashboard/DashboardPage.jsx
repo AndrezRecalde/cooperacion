@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import { Flex, Grid, Loader, Skeleton } from "@mantine/core";
+import { Flex, Grid, Loader, LoadingOverlay, Skeleton } from "@mantine/core";
 import {
     ChartModalidad,
     ChartObjetivos,
     ChartTipos,
     DivHeader,
+    LoaderCustom,
     StatMontoEjecutado,
     StatMontoPartida,
     StatOrganizacion,
@@ -81,16 +82,7 @@ export const DashboardPage = () => {
                         </Grid.Col>
                     </>
                 ) : (
-                    <Flex
-                        mih={150}
-                        gap="md"
-                        justify="center"
-                        align="center"
-                        direction="row"
-                        wrap="wrap"
-                    >
-                        <Loader variant="bars" color="teal.5" size="xl" />
-                    </Flex>
+                    <Loader color="teal.5" size="xl" mt={20} />
                 )}
             </Grid>
         </>

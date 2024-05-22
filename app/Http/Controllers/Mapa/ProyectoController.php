@@ -74,6 +74,21 @@ class ProyectoController extends Controller
         return response()->json(['status' => MsgStatusEnum::Success, 'proyectos' => $proyectos], 200);
     }
 
+    function getCountProyectosWithCanton(Request $request): JsonResponse
+    {
+        $proyecto = Proyecto::where('organizacion_id', $request->organizacion_id);
+        if ($proyecto) {
+            $proyectosCount = $proyecto->with([
+                'cantones' => function ($query) {
+                    $query->select('cantones.id')->count();
+                }
+            ])->get();
+            return response()->json(['status' => MsgStatusEnum::Success, 'proyectosCount' => $proyectosCount], 200);
+        } else {
+            return response()->json(['status' => MsgStatusEnum::Error, 'msg' => MsgStatusEnum::NotFound], 404);
+        }
+    }
+
     public function store(ProyectoRequest $request): JsonResponse
     {
         $proyecto = Proyecto::create($request->validated());

@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { Box, Button, Grid, Group, Select, TextInput } from "@mantine/core";
+import { Box, Grid, Select, TextInput } from "@mantine/core";
 import { IconChecks } from "@tabler/icons-react";
 import { useModalidadStore, useUiModalidad } from "../../../hooks";
+import { BtnSubmit } from "../../../components";
 
 export const FormModalidad = ({ form }) => {
     const { modalActionModalidad } = useUiModalidad();
@@ -62,7 +63,10 @@ export const FormModalidad = ({ form }) => {
                     />
                 </Grid.Col>
             </Grid>
-            <Group position="center" mt="xl" mb="xl">
+            <BtnSubmit IconSection={IconChecks} fontSize={14}>
+                Agregar Modalidad
+            </BtnSubmit>
+            {/* <Group position="center" mt="xl" mb="xl">
                 <Box w={230}>
                     <Button
                         fullWidth
@@ -73,7 +77,7 @@ export const FormModalidad = ({ form }) => {
                         Agregar Modalidad
                     </Button>
                 </Box>
-            </Group>
+            </Group> */}
         </Box>
     );
 };

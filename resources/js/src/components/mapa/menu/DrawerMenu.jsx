@@ -5,10 +5,10 @@ import {
     Card,
     Divider,
     Drawer,
-    Grid,
     Group,
     Image,
     Select,
+    Stack,
     Text,
     createStyles,
     rem,
@@ -122,49 +122,43 @@ export const DrawerMenu = () => {
                     </Badge>
                 </Group>
                 <Divider my="sm" />
-                <Grid>
-                    <Grid.Col sm={12} md={12} lg={12} xl={12}>
-                        <Select
-                            placeholder="Selecciona Cantón"
-                            label="Cantón"
-                            data={cantones.map((canton) => {
-                                return {
-                                    label: canton.nombre_canton,
-                                    value: canton.id,
-                                };
-                            })}
-                            {...form.getInputProps("canton_id")}
-                        />
-                    </Grid.Col>
-                    <Grid.Col sm={12} md={12} lg={12} xl={12}>
-                        <Select
-                            placeholder="Selecciona ODS"
-                            label="Objetivo de Desarrollo Sostenible"
-                            data={objetivos.map((objetivo) => {
-                                return {
-                                    label: objetivo.objetivo_ods,
-                                    value: objetivo.id,
-                                };
-                            })}
-                            {...form.getInputProps("ods_id")}
-                            mt={5}
-                        />
-                    </Grid.Col>
-                    <Grid.Col sm={12} md={12} lg={12} xl={12}>
-                        <Select
-                            placeholder="Selecciona la Organización"
-                            label="Organización"
-                            data={organizaciones.map((organizacion) => {
-                                return {
-                                    label: organizacion.nombre_organizacion,
-                                    value: organizacion.id,
-                                };
-                            })}
-                            {...form.getInputProps("organizacion_id")}
-                            mt={5}
-                        />
-                    </Grid.Col>
-                </Grid>
+                <Stack>
+                    <Select
+                        placeholder="Selecciona Cantón"
+                        label="Cantón"
+                        data={cantones.map((canton) => {
+                            return {
+                                label: canton.nombre_canton,
+                                value: canton.id,
+                            };
+                        })}
+                        {...form.getInputProps("canton_id")}
+                    />
+                    <Select
+                        placeholder="Selecciona ODS"
+                        label="Objetivo de Desarrollo Sostenible"
+                        data={objetivos.map((objetivo) => {
+                            return {
+                                label: objetivo.objetivo_ods,
+                                value: objetivo.id,
+                            };
+                        })}
+                        {...form.getInputProps("ods_id")}
+                        mt={5}
+                    />
+                    <Select
+                        placeholder="Selecciona la Organización"
+                        label="Organización"
+                        data={organizaciones.map((organizacion) => {
+                            return {
+                                label: organizacion.nombre_organizacion,
+                                value: organizacion.id,
+                            };
+                        })}
+                        {...form.getInputProps("organizacion_id")}
+                        mt={5}
+                    />
+                </Stack>
 
                 <Group position="center">
                     <Button

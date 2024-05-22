@@ -70,6 +70,10 @@ import { useRoleStore } from "./role/useRoleStore";
 import { useAfiliacionStore } from "./afiliacion/useAfiliacionStore";
 import { useUiAfiliacion } from "./afiliacion/useUiAfiliacion";
 
+
+/* ERROR */
+import { useErrorException } from "./error/useErrorException";
+
 export {
     useAuthStore,
 
@@ -116,5 +120,7 @@ export {
     useRoleStore,
 
     useAfiliacionStore,
-    useUiAfiliacion
+    useUiAfiliacion,
+
+    useErrorException
 }

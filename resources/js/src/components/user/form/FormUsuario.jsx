@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { Box, Button, Grid, Group, Select, Skeleton, TextInput } from "@mantine/core";
+import { Box, Grid, Select, Skeleton, TextInput } from "@mantine/core";
 import { IconUserPlus } from "@tabler/icons-react";
 import { useUsuarioStore, useUiUsuario, useRoleStore, useInstitucionStore } from "../../../hooks";
+import { BtnSubmit } from "../../../components";
 
 export const FormUsuario = ({ form }) => {
 
@@ -122,7 +123,8 @@ export const FormUsuario = ({ form }) => {
 
                 </Grid>
             </Skeleton>
-            <Group position="center" mt="xl" mb="xl">
+            <BtnSubmit IconSection={IconUserPlus} fontSize={14}>Agregar Usuario</BtnSubmit>
+            {/* <Group position="center" mt="xl" mb="xl">
                 <Box w={230}>
                     <Button
                         fullWidth
@@ -133,7 +135,7 @@ export const FormUsuario = ({ form }) => {
                         Agregar Usuario
                     </Button>
                 </Box>
-            </Group>
+            </Group> */}
         </Box>
     );
 };

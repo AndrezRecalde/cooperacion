@@ -1,9 +1,12 @@
 import {
+    Card,
     Flex,
     Grid,
     Group,
     List,
     Modal,
+    Stack,
+    Table,
     Text,
     ThemeIcon,
     Tooltip,
@@ -78,33 +81,38 @@ export const ModalInformation = () => {
         >
             <Grid>
                 <Grid.Col sm={12} md={12} lg={12} xl={12}>
-                    <Group position="apart">
-                        <Tooltip.Floating
-                            label="Tipo de Cooperación"
-                            color="teal"
-                        >
-                            <Text fz={12} fw={700} c="dimmed" tt="uppercase">
-                                {activateMarker?.tipo_cooperacion}
+                    <Stack>
+                        <div>
+                            <Text fz="sm" fw={700}>
+                                {activateMarker?.nombre_organizacion}
                             </Text>
-                        </Tooltip.Floating>
-                        <Tooltip.Floating label="Modalidad" color="teal">
-                            <Text fz={12} fw={700} c="dimmed" tt="uppercase">
-                                {activateMarker?.tipo_modalidad}
+                            <Text fz="sm" c="dimmed">
+                                Organización
                             </Text>
-                        </Tooltip.Floating>
-                    </Group>
-                </Grid.Col>
-                <Grid.Col sm={12} md={12} lg={12} xl={12}>
-                    <Group position="center" mb={10}>
-                        <Text fz={14} fw={700} c="dimmed" tt="uppercase">
-                            {activateMarker?.nombre_proyecto}
-                        </Text>
-                    </Group>
-                    <Group position="center">
-                        <Text fz={14} fw={700} c="dimmed" tt="uppercase">
-                            {activateMarker?.nombre_organizacion}
-                        </Text>
-                    </Group>
+                        </div>
+                        <div mt="lg">
+                            <Text fz="sm" fw={700}>
+                                {activateMarker?.nombre_proyecto}
+                            </Text>
+                            <Text fz="sm" c="dimmed">
+                                Proyecto
+                            </Text>
+                        </div>
+                        <Table striped withBorder withColumnBorders>
+                            <thead>
+                                <tr>
+                                    <th>Tipo Cooperación</th>
+                                    <th>Tipo Modalidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{activateMarker?.tipo_cooperacion}</td>
+                                    <td>{activateMarker?.tipo_modalidad}</td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </Stack>
                 </Grid.Col>
                 <Grid.Col sm={12} md={12} lg={12} xl={12}>
                     <div className={classes.section}>
@@ -113,27 +121,27 @@ export const ModalInformation = () => {
                         </Text>
                         <div className={classes.section_a}>
                             <Group spacing={8} mb={-8}>
-                                    {activateMarker?.cantones.map((canton) => (
-                                        <List
-                                            key={canton.id}
-                                            spacing="xs"
-                                            size="sm"
-                                            center
-                                            icon={
-                                                <ThemeIcon
-                                                    color="cyan.7"
-                                                    size={24}
-                                                    radius="xl"
-                                                >
-                                                    <IconFlag2Filled size="1rem" />
-                                                </ThemeIcon>
-                                            }
-                                        >
-                                            <List.Item>
-                                                {canton.nombre_canton}
-                                            </List.Item>
-                                        </List>
-                                    ))}
+                                {activateMarker?.cantones.map((canton) => (
+                                    <List
+                                        key={canton.id}
+                                        spacing="xs"
+                                        size="sm"
+                                        center
+                                        icon={
+                                            <ThemeIcon
+                                                color="cyan.7"
+                                                size={24}
+                                                radius="xl"
+                                            >
+                                                <IconFlag2Filled size="1rem" />
+                                            </ThemeIcon>
+                                        }
+                                    >
+                                        <List.Item>
+                                            {canton.nombre_canton}
+                                        </List.Item>
+                                    </List>
+                                ))}
                             </Group>
                         </div>
                     </div>

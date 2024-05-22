@@ -11,6 +11,11 @@ import { FloatChartBtn } from "./elements/FloatChartBtn";
 import { BtnAdd } from "./elements/BtnAdd";
 import { MenuActionsAdmin } from "./elements/action/MenuActionsAdmin";
 import { TitleSections } from "./elements/TitleSections";
+import { AlertSection } from "./elements/AlertSection";
+import { TitlePage } from "./elements/TitlePage";
+import { Logo } from "./elements/Logo";
+import { BtnSubmit } from "./elements/BtnServices";
+import { LoaderCustom } from "./elements/LoaderCustom";
 
 /* Dashboard */
 import { ChartObjetivos } from "./dashboard/charts/ChartObjetivos";
@@ -39,6 +44,7 @@ import { ChartShowOrganizacion } from "./organizaciones/chart/ChartShowOrganizac
 import { DotButton } from "./organizaciones/table/DotButton";
 import { TableOrganizaciones } from "./organizaciones/table/TableOrganizaciones";
 import { ActionsOrganizacion } from "./organizaciones/table/action/ActionsOrganizacion";
+import { DetailPanelOrganizacion } from "./organizaciones/table/panel/DetailPanelOrganizacion";
 
 import { FormOrganizacion } from "./organizaciones/FormOrganizacion";
 import { ModalOrganizacion } from "./organizaciones/ModalOrganizacion";
@@ -113,6 +119,11 @@ export {
     BtnAdd,
     MenuActionsAdmin,
     TitleSections,
+    AlertSection,
+    TitlePage,
+    Logo,
+    BtnSubmit,
+    LoaderCustom,
 
     ChartObjetivos,
     ChartTipos,
@@ -137,6 +148,7 @@ export {
     DotButton,
     TableOrganizaciones,
     ActionsOrganizacion,
+    DetailPanelOrganizacion,
     FormOrganizacion,
     ModalOrganizacion,
     ModalShowOrganizacion,

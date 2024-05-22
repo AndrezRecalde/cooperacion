@@ -91,8 +91,8 @@ export const DrawerProyecto = () => {
                                 <Group position="apart">
                                     <Badge
                                         size="md"
-                                        color="cyan"
-                                        variant="outline"
+                                        color="teal"
+                                        variant="light"
                                         radius="sm"
                                     >
                                         {proyecto.tipo_cooperacion}

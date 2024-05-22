@@ -7,6 +7,7 @@ import {
     Grid,
     Group,
     Image,
+    Table,
     Text,
     createStyles,
     rem,
@@ -115,55 +116,67 @@ export const CardShowOrganizacion = ({ handleCloseShowModal }) => {
                             />
                         </Group>
                     </Grid.Col>
-                    <Grid.Col sm={6} md={6} lg={6} xl={6}>
-                        <Card
+                    <Grid.Col sm={12} md={12} lg={12} xl={12}>
+                        <Table
+                            horizontalSpacing="sm"
+                            verticalSpacing="sm"
+                            striped
+                            highlightOnHover
                             withBorder
-                            radius="sm"
-                            mt="lg"
-                            mb="lg"
-                            shadow="sm"
+                            withColumnBorders
                         >
-                            <Card.Section inheritPadding py="xs" withBorder>
-                                <TitleSections title="Tipo de Convenio" />
-                            </Card.Section>
-                            <Card.Section inheritPadding py="xs">
-                                <Badge size="lg" color="indigo.7" radius="sm">
-                                    {activateOrganizacion?.convenio}
-                                </Badge>
-                            </Card.Section>
-                            <Card.Section inheritPadding py="xs" withBorder>
-                                <TitleSections title="Tipo de Organización" />
-                            </Card.Section>
-                            <Card.Section inheritPadding py="xs">
-                                <Text
-                                    tt="uppercase"
-                                    className={classes.description}
-                                >
-                                    {activateOrganizacion?.tipo}
-                                </Text>
-                            </Card.Section>
-                            <Card.Section inheritPadding py="xs" withBorder>
-                                <TitleSections title="Sitio Web" />
-                            </Card.Section>
-                            <Card.Section inheritPadding py="xs">
-                                {activateOrganizacion?.sitio_web ? (
-                                    <Anchor
-                                        href={`https://${activateOrganizacion.sitio_web}`}
-                                        target="_blank"
-                                        underline={false}
-                                        color="dark"
-                                    >
-                                        {activateOrganizacion.sitio_web}
-                                    </Anchor>
-                                ) : (
-                                    <Text fs="italic">
-                                        Sitio web no registrado
-                                    </Text>
-                                )}
-                            </Card.Section>
-                        </Card>
+                            <thead>
+                                <tr>
+                                    <th>Tipo de convenio</th>
+                                    <th>Tipo de Organización</th>
+                                    <th>Número de proyectos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{activateOrganizacion?.convenio}</td>
+                                    <td>{activateOrganizacion?.tipo}</td>
+                                    <td>{activateOrganizacion?.proyectos.length}</td>
+                                    {/* {activateOrganizacion?.sitio_web ? (
+                                        <td>
+                                            <Anchor
+                                                href={`https://${activateOrganizacion.sitio_web}`}
+                                                target="_blank"
+                                                underline={false}
+                                                color="dark"
+                                            >
+                                                {activateOrganizacion.sitio_web}
+                                            </Anchor>
+                                        </td>
+                                    ) : (
+                                        <td>
+                                            <Text fs="italic">
+                                                Sitio web no registrado
+                                            </Text>
+                                        </td>
+                                    )} */}
+                                </tr>
+                            </tbody>
+                        </Table>
                     </Grid.Col>
-                    <Grid.Col sm={6} md={6} lg={6} xl={6}>
+                   {/*  <Grid.Col sm={12} md={12} lg={12} xl={12}>
+                        <Table
+                            horizontalSpacing="sm"
+                            verticalSpacing="sm"
+                            striped
+                            highlightOnHover
+                            withBorder
+                            withColumnBorders
+                        >
+                            <thead>
+                                <tr>
+                                    <th>Lugar del proyecto</th>
+                                    <th>Número de proyectos</th>
+                                </tr>
+                            </thead>
+                        </Table>
+                    </Grid.Col> */}
+                    <Grid.Col sm={12} md={12} lg={12} xl={12}>
                         <ChartShowOrganizacion
                             activateOrganizacion={activateOrganizacion}
                         />

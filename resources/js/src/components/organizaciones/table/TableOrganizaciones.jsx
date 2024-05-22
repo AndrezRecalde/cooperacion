@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import { Badge } from "@mantine/core";
 import { MantineReactTable, useMantineReactTable } from "mantine-react-table";
 import { useUiOrganizacion, useOrganizacionStore } from "../../../hooks";
-import { ActionsOrganizacion, BtnAdd, DotButton } from "../../../components";
+import { ActionsOrganizacion, BtnAdd, DetailPanelOrganizacion, DotButton } from "../../../components";
 import Flag from "react-flagkit";
 
 export const TableOrganizaciones = () => {
@@ -127,6 +127,9 @@ export const TableOrganizaciones = () => {
             />
         ),
         renderTopToolbarCustomActions: () => <BtnAdd title="Agregar Organización" handleAdd={handleOpen} />,
+        renderDetailPanel: ({ row }) => (
+            <DetailPanelOrganizacion row={row} />
+        ),
     });
 
     return (

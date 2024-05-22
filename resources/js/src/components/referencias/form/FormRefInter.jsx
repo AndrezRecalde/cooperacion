@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { Box, Button, Grid, Group, Select, TextInput } from "@mantine/core";
+import { Box, Grid, Select, TextInput } from "@mantine/core";
 import { IconChecks } from "@tabler/icons-react";
 import {
     useUiInternacional,
     useInternacionalStore,
     useStateStore,
 } from "../../../hooks";
+import { BtnSubmit } from "../../../components";
 
 export const FormRefInter = ({ form }) => {
     const { modalActionRefInter } = useUiInternacional();
@@ -108,18 +109,15 @@ export const FormRefInter = ({ form }) => {
                     />
                 </Grid.Col>
             </Grid>
-            <Group position="center" mt="xl" mb="xl">
-                <Box w={230}>
-                    <Button
+            <BtnSubmit IconSection={IconChecks} fontSize={14}>Agregar Referencia</BtnSubmit>
+            {/*  <Button
                         fullWidth
                         variant="outline"
                         leftIcon={<IconChecks />}
                         type="submit"
                     >
                         Agregar Referencia
-                    </Button>
-                </Box>
-            </Group>
+                    </Button> */}
         </Box>
     );
 };

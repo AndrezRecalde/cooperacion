@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
     Box,
-    Button,
     Center,
     FileInput,
     Grid,
@@ -19,6 +18,7 @@ import {
     useUiOrganizacion,
     useOrganizacionStore,
 } from "../../hooks";
+import { BtnSubmit } from "../../components";
 import { IconPhoto, IconWorldPlus } from "@tabler/icons-react";
 
 export const FormOrganizacion = ({ form }) => {
@@ -274,18 +274,17 @@ export const FormOrganizacion = ({ form }) => {
                     </Grid.Col>
                 </Grid>
             </Skeleton>
-            <Group position="center" mt="xl" mb="xl">
-                <Box w={230}>
-                    <Button
+            <BtnSubmit IconSection={IconWorldPlus} fontSize={14}>
+                Agregar Organización
+            </BtnSubmit>
+            {/* <Button
                         fullWidth
                         variant="outline"
                         leftIcon={<IconWorldPlus />}
                         type="submit"
                     >
                         Agregar Organización
-                    </Button>
-                </Box>
-            </Group>
+                    </Button> */}
         </Box>
     );
 };

@@ -6,6 +6,7 @@ export const authSlice = createSlice({
         isLoading: false,
         user: {},
         profile: {},
+        validate: undefined,
         errores: undefined,
     },
     reducers: {
@@ -26,10 +27,30 @@ export const authSlice = createSlice({
             state.profile = {};
             state.errores = payload;
         },
-        clearErrores: (state) => {
+        onValidate: (state, { payload }) => {
+            state.isLoading = false;
+            state.validate = payload;
+        },
+        onClearValidates: (state) => {
+            state.isLoading = false;
+            state.validate = undefined;
+        },
+        onLoadErrores: (state, { payload }) => {
+            state.errores = payload;
+        },
+        onClearErrores: (state) => {
             state.errores = undefined;
-        }
+        },
     },
 });
 
-export const { onLoading, onAuthenticate, onProfile, onLogout, clearErrores } = authSlice.actions;
+export const {
+    onLoading,
+    onAuthenticate,
+    onProfile,
+    onLogout,
+    onValidate,
+    onClearValidates,
+    onLoadErrores,
+    onClearErrores,
+} = authSlice.actions;

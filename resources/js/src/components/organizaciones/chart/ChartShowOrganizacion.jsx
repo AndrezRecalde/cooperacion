@@ -7,36 +7,43 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const ChartShowOrganizacion = ({ activateOrganizacion }) => {
     const proyectosOrganizacion = {
-        labels: ["Proyectos Ejecutados", "Proyectos en Revisión"],
+        labels: [
+            "Proyectos Finalizados",
+            "Proyectos en Proceso",
+            "Proyectos Iniciados",
+        ],
         datasets: [
             {
                 label: "Total",
                 data: [
-                    activateOrganizacion?.proyectos_activos,
-                    activateOrganizacion?.proyectos_inactivos,
+                    activateOrganizacion?.proyectos_finalizados.length,
+                    activateOrganizacion?.proyectos_proceso.length,
+                    activateOrganizacion?.proyectos_iniciados.length,
                 ],
                 backgroundColor: [
-                    "rgba(39, 255, 96, 0.61)",
-                    "rgba(255, 39, 39, 0.61)",
+                    "rgba(39, 255, 96, 0.8)",
+                    "rgba(58, 76, 249, 0.8)",
+                    "rgba(246, 223, 74, 0.8)",
                 ],
-                borderColor: ["rgba(0,100,0)", "rgba(128,0,0)"],
+                borderColor: [
+                    "rgba(0, 211, 56, 0.8)",
+                    "rgba(9, 33, 247, 0.8)",
+                    "rgba(243, 211, 7, 0.8)",
+                ],
                 borderWidth: 1.5,
             },
         ],
     };
 
     return (
-        <Card  withBorder
-        radius="sm"
-        mt="lg"
-        mb="lg"
-        shadow="sm">
+        <Card withBorder radius="sm" mt="md" mb="lg" shadow="sm">
             <Card.Section withBorder inheritPadding py="xs">
                 <TitleSections title="Distribución de Proyectos" fw={700} />
             </Card.Section>
             <Card.Section withBorder inheritPadding py="xs">
-                {activateOrganizacion?.proyectos_activos === null &&
-                activateOrganizacion?.proyectos_inactivos === null ? (
+                {activateOrganizacion?.proyectos_finalizados.length === 0 &&
+                activateOrganizacion?.proyectos_proceso.length === 0 &&
+                activateOrganizacion.proyectos_iniciados.length === 0 ? (
                     <Card
                         shadow="sm"
                         padding="lg"

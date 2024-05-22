@@ -6,7 +6,7 @@ export const ActionsProyecto = ({ row, handleCertificate, handleEdit, handleDele
         <>
             <Menu.Item onClick={() => handleCertificate(row.original.id)} icon={<IconFileCertificate />}>Ver Documento</Menu.Item>
             <Menu.Item onClick={() => handleEdit(row.original)} icon={<IconPencil />}>Editar</Menu.Item>
-            <Menu.Item onClick={() => handleDelete(row.original)} icon={<IconTrash />}>Elimnar</Menu.Item>
+            <Menu.Item onClick={() => handleDelete(row.original)} icon={<IconTrash />}>Eliminar</Menu.Item>
         </>
     );
 };

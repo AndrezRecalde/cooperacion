@@ -1,18 +1,18 @@
 import { useEffect } from "react";
 import { IconChecks } from "@tabler/icons-react";
-import { Box, Button, Grid, Group, TextInput } from "@mantine/core";
+import { Box, Grid, TextInput } from "@mantine/core";
 import { useTipoStore, useUiTipo } from "../../../hooks";
+import { BtnSubmit } from "../../../components";
 
 export const FormTipo = ({ form }) => {
     const { modalActionTipo } = useUiTipo();
     const { activateTipo, startAddTipo, setClearActivateTipo } = useTipoStore();
 
     useEffect(() => {
-      return () => {
-        setClearActivateTipo();
-      }
+        return () => {
+            setClearActivateTipo();
+        };
     }, []);
-
 
     useEffect(() => {
         if (activateTipo !== null) {
@@ -48,7 +48,10 @@ export const FormTipo = ({ form }) => {
                     />
                 </Grid.Col>
             </Grid>
-            <Group position="center" mt="xl" mb="xl">
+            <BtnSubmit IconSection={IconChecks} fontSize={14}>
+                Agregar Tipo de Organización
+            </BtnSubmit>
+            {/* <Group position="center" mt="xl" mb="xl">
                 <Box w={230}>
                     <Button
                         fullWidth
@@ -59,7 +62,7 @@ export const FormTipo = ({ form }) => {
                         Agregar Tipo de Organización
                     </Button>
                 </Box>
-            </Group>
+            </Group> */}
         </Box>
     );
 };

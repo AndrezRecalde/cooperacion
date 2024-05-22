@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Proyecto extends Model
@@ -47,6 +48,11 @@ class Proyecto extends Model
         return $this->belongsToMany(Canton::class);
     }
 
+    function organizacion(): BelongsTo
+    {
+        return $this->belongsTo(Organizacion::class,'organizacion_id','id');
+    }
+
     public function scopeCanton($query, $canton)
     {
         if ($canton) {
@@ -76,7 +82,7 @@ class Proyecto extends Model
 
     public function scopeOrganizacion($query, $organizacion)
     {
-        if($organizacion){
+        if ($organizacion) {
             return $query->where('p.organizacion_id', $organizacion);
         }
     }
@@ -84,7 +90,7 @@ class Proyecto extends Model
     protected static function boot()
     {
         parent::boot();
-        static::deleting(function($proyecto){
+        static::deleting(function ($proyecto) {
             $proyecto->cantones()->detach();
             $proyecto->odsostenibles()->detach();
             $proyecto->grupos()->detach();

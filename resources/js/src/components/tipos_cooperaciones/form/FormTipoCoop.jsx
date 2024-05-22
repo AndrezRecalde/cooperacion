@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { Box, Button, Grid, Group, Select, TextInput } from "@mantine/core";
+import { Box, Grid, Select, TextInput } from "@mantine/core";
 import { IconChecks } from "@tabler/icons-react";
 import { useUiTipoCoop, useTipoCoopStore } from "../../../hooks";
+import { BtnSubmit } from "../../../components";
 
 export const FormTipoCoop = ({ form }) => {
     const { modalActionTipoCoop } = useUiTipoCoop();
@@ -48,21 +49,22 @@ export const FormTipoCoop = ({ form }) => {
                     />
                 </Grid.Col>
                 <Grid.Col sm={12} md={12} lg={12} xl={12}>
-                        <Select
-                            label="Activo"
-                            placeholder="¿Esta activo este tipo de cooperación?"
-                            searchable
-                            defaultValue={1}
-                            nothingFound="No options"
-                            {...form.getInputProps("activo")}
-                            data={[
-                                { label: "Si", value: 1 },
-                                { label: "No", value: 0 },
-                            ]}
-                        />
-                    </Grid.Col>
+                    <Select
+                        label="Activo"
+                        placeholder="¿Esta activo este tipo de cooperación?"
+                        searchable
+                        defaultValue={1}
+                        nothingFound="No options"
+                        {...form.getInputProps("activo")}
+                        data={[
+                            { label: "Si", value: 1 },
+                            { label: "No", value: 0 },
+                        ]}
+                    />
+                </Grid.Col>
             </Grid>
-            <Group position="center" mt="xl" mb="xl">
+            <BtnSubmit IconSection={IconChecks} fontSize={14}>Agregar Tipo</BtnSubmit>
+            {/* <Group position="center" mt="xl" mb="xl">
                 <Box w={230}>
                     <Button
                         fullWidth
@@ -73,7 +75,7 @@ export const FormTipoCoop = ({ form }) => {
                         Agregar Tipo
                     </Button>
                 </Box>
-            </Group>
+            </Group> */}
         </Box>
     );
 };
