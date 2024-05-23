@@ -80,7 +80,6 @@ Route::group(
         Route::delete('/admin/delete/organizacion/{id}', [OrganizacionController::class, 'destroy']);
 
         /* Proyectos */
-        Route::get('/admin/proyectos', [ProyectoController::class, 'getProyectosAdmin']);
         Route::get('/admin/show/edit/proyecto/{id}', [ProyectoController::class, 'showForEdit']);
         Route::put('/admin/update/proyecto/{id}', [ProyectoController::class, 'update']);
         Route::put('/admin/update/proyecto/activo/{id}', [ProyectoController::class, 'updateActivo']);
@@ -165,6 +164,7 @@ Route::group(
         Route::get('/show/organizacion/{id}', [OrganizacionController::class, 'show']);
 
         /* Proyectos */
+        Route::get('/admin/proyectos', [ProyectoController::class, 'getProyectosAdmin']); //ARREGLAR
         Route::get('/proyectos/activos', [ProyectoController::class, 'getProyectosActivos']);
         Route::post('/create/proyecto', [ProyectoController::class, 'store']);
         Route::post('/proyecto/search', [ProyectoController::class, 'searchProyecto']);

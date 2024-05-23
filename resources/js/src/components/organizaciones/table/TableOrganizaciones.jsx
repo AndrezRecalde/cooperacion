@@ -38,8 +38,8 @@ export const TableOrganizaciones = () => {
                 wrap: true,
             },
             {
-                accessorKey: "pais",
-                header: "Pais",
+                accessorFn: (row) => row.pais + ' - ' + row.estado,
+                header: "Origen",
                 size: 120,
             },
             {

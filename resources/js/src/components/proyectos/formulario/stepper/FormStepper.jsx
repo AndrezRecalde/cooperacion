@@ -39,7 +39,7 @@ export const FormStepper = ({ form }) => {
         switch (active) {
             case 0:
                 if (
-                    errors.hasOwnProperty("periodo_id") ||
+                    //errors.hasOwnProperty("periodo_id") ||
                     errors.hasOwnProperty("organizacion_id") ||
                     errors.hasOwnProperty("nombre_proyecto") ||
                     errors.hasOwnProperty("cooperacion_id") ||
