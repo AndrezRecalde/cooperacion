@@ -13,6 +13,7 @@ class AfiliacionRepository implements AfiliacionInterface
         $director = User::from('users as u')
             ->join('model_has_roles as mhr', 'mhr.model_id', 'u.id')
             ->where('mhr.role_id', 2)
+            ->where('activo', 1)
             ->first(['u.email']);
 
         return $director;
@@ -23,6 +24,7 @@ class AfiliacionRepository implements AfiliacionInterface
         $asistente = User::from('users as u')
             ->join('model_has_roles as mhr', 'mhr.model_id', 'u.id')
             ->where('mhr.role_id', 3)
+            ->where('activo', 1)
             ->first(['u.email']);
 
         return $asistente;
