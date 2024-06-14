@@ -6,12 +6,21 @@ use App\Enums\MsgStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProyectoRequest;
 use App\Http\Requests\ProyectoUpdateActivo;
+use App\Interfaces\AfiliacionInterface;
+use App\Mail\ProyectoMail;
 use App\Models\Proyecto;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ProyectoController extends Controller
 {
+
+    public function __construct(AfiliacionInterface $afiliacionRepository)
+    {
+        $this->afiliacionRepository = $afiliacionRepository;
+    }
+    private AfiliacionInterface $afiliacionRepository;
     public function getProyectosAdmin(): JsonResponse
     {
         $proyectos = Proyecto::from('proyectos as p')
@@ -98,6 +107,14 @@ class ProyectoController extends Controller
         $proyecto->grupos()->attach($request->grupo_atencion_id);
 
         $proyecto->odsostenibles()->attach($request->odsostenible_id);
+
+        /* Aquí realizo el envío del correo a los responsables de la gestión */
+        $director = $this->afiliacionRepository->getDirector();
+        $asistente = $this->afiliacionRepository->getAsistente();
+
+        Mail::to($director->email)
+            ->cc($asistente->email)
+            ->queue(new ProyectoMail($proyecto));
 
         return response()->json(['status' => MsgStatusEnum::Success, 'msg' => MsgStatusEnum::CreacionProyecto], 201);
     }
