@@ -4,7 +4,8 @@
 
 Buen día.
 
-Nos complace informarle que el proyecto {{ $proyecto->nombre_proyecto }},
+Nos complace informarle que el proyecto: <br>
+{{ $proyecto->nombre_proyecto }},
 se registro en la plataforma. <br>
 
 
