@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Grid, Group, Table } from "@mantine/core";
+import { Grid, Table } from "@mantine/core";
 import { ChartObjetivos } from "../../../components";
 import { useDashboardStore } from "../../../hooks";
 

@@ -18,8 +18,8 @@ class Afiliacion extends Model
         'cargo',
         'telefono',
         'email',
-        'razon_social',
-        'sitio_web',
+        'razon_social', //Nullable
+        'sitio_web',    // Nullable
         'telefono_org',
         'direccion_org',
         'descripcion_org',

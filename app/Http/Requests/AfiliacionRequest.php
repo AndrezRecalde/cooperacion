@@ -29,7 +29,7 @@ class AfiliacionRequest extends FormRequest
             'cargo'         =>  'required',
             'telefono'      =>  'required',
             'email'         =>  'required',
-            'razon_social'  =>  'required',
+            'razon_social'  =>  '',
             'sitio_web'     =>  '',
             'telefono_org'  =>  'required',
             'direccion_org' =>  'required',

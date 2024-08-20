@@ -2,9 +2,9 @@ import { DEFAULT_THEME } from '@mantine/core';
 
 export const LoaderCustom = (
     <svg
-      width="54"
-      height="54"
-      viewBox="0 0 38 38"
+      width="74"
+      height="64"
+      viewBox="0 0 38 48"
       xmlns="http://www.w3.org/2000/svg"
       stroke={DEFAULT_THEME.colors.teal[6]}
     >

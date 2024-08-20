@@ -55,6 +55,7 @@ export const afiliacionSlice = createSlice({
         },
         onRestartSend: (state) => {
             state.isSend = false;
+            state.isLoading = false;
         },
         onErrores: (state, { payload }) => {
             state.errores = payload;

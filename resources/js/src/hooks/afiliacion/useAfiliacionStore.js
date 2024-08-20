@@ -56,12 +56,14 @@ export const useAfiliacionStore = () => {
             });
             dispatch(onSending());
         } catch (error) {
+            //console.log(error)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: error.response ? error.response.data.msg : error,
                 confirmButtonColor: "#c81d11",
             });
+            startRestartSend();
         }
     };
 

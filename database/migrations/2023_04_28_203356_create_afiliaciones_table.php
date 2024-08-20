@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('cargo');
             $table->string('telefono');
             $table->string('email');
-            $table->string('razon_social');
-            $table->string('sitio_web');
+            $table->string('razon_social')->nullable();
+            $table->string('sitio_web')->nullable();
             $table->string('telefono_org');
             $table->string('direccion_org');
             $table->string('descripcion_org');
