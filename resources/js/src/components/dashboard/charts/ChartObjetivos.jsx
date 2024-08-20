@@ -1,15 +1,12 @@
-import { Card, Grid, Group, Table, Text } from "@mantine/core";
+import { Card, Grid, Text } from "@mantine/core";
 import { useDashboardStore } from "../../../hooks";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { useState } from "react";
-
+import { TitleSections } from "../../../components";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const ChartObjetivos = () => {
-    const [centerText, setCenterText] = useState('');
-
     const { errores, totalProyectosOds } = useDashboardStore();
 
     const proyectosOds = {
@@ -31,38 +28,24 @@ export const ChartObjetivos = () => {
 
     const options = {
         maintainAspectRatio: false, // Desactiva la relación de aspecto
-
-      };
-
-    const rows = totalProyectosOds.map((proyecto) => (
-        <tr key={proyecto.objetivo_ods}>
-            <td>{proyecto.objetivo_ods}</td>
-            <td>{proyecto.total}</td>
-        </tr>
-    ));
+    };
 
     return (
         <>
             {totalProyectosOds.length > 0 ? (
-                <>
-                    <div style={{ width: '100%', height: '60%' }}>
-                        <Doughnut
-                            data={proyectosOds}
-                            options={options}
+                <Card mt={5} shadow="sm" p="lg">
+                    <Card.Section withBorder inheritPadding py="xs">
+                        <TitleSections
+                            title="Distribución de Proyectos por Objetivos"
+                            fw={700}
                         />
-                    </div>
-                    <Group>
-                        <Table striped highlightOnHover withBorder withColumnBorders mt={20}>
-                            <thead>
-                                <tr>
-                                    <th>Objetivo de Desarrollo Sostenible</th>
-                                    <th>Cantidad de Proyectos ejecutados</th>
-                                </tr>
-                            </thead>
-                            <tbody>{rows}</tbody>
-                        </Table>
-                    </Group>
-                </>
+                    </Card.Section>
+                    <Card.Section withBorder inheritPadding py="xs">
+                        <div style={{ width: "100%", height: "60%" }}>
+                            <Doughnut height={350} data={proyectosOds} options={options} />
+                        </div>
+                    </Card.Section>
+                </Card>
             ) : (
                 <Card
                     shadow="sm"
