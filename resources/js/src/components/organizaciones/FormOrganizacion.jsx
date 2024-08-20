@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
     Box,
     Center,
     FileInput,
-    Grid,
     Group,
     Image,
     Select,
+    SimpleGrid,
     Skeleton,
+    Stack,
     TextInput,
     Textarea,
     rem,
@@ -22,9 +23,9 @@ import { BtnSubmit } from "../../components";
 import { IconPhoto, IconWorldPlus } from "@tabler/icons-react";
 
 export const FormOrganizacion = ({ form }) => {
-    const [img, setImg] = useState("");
-    const [change, setChange] = useState(null);
-    const { modalActionOrganizacion } = useUiOrganizacion();
+    const [preview, setPreview] = useState(null);
+    const [file, setFile] = useState(null);
+    const { modalActionOrganizacion, isOpenModalAddOrg } = useUiOrganizacion();
     const { paises, estados, startLoadPaises, startLoadEstados } =
         useStateStore();
     const {
@@ -38,13 +39,14 @@ export const FormOrganizacion = ({ form }) => {
     const { country_id, imagen_url } = form.values;
 
     useEffect(() => {
-        startLoadPaises();
-        startLoadTipos();
-
+        if (isOpenModalAddOrg) {
+            startLoadPaises();
+            startLoadTipos();
+        }
         return () => {
             setClearActivateOrganizacion();
         };
-    }, []);
+    }, [isOpenModalAddOrg]);
 
     useEffect(() => {
         //Usarlo cuando sean mas de 3 selects y ponerlo en el ultimo select
@@ -61,7 +63,20 @@ export const FormOrganizacion = ({ form }) => {
             form.setValues({
                 ...activateOrganizacion,
             });
-            setImg("/storage" + activateOrganizacion?.imagen_url);
+            const imageUrl = "/storage" + activateOrganizacion?.imagen_url;
+            setPreview(imageUrl);
+
+            fetch(imageUrl)
+                .then((response) => response.blob())
+                .then((blob) => {
+                    const file = new File(
+                        [blob],
+                        activateOrganizacion.imagen_url,
+                        { type: blob.type }
+                    );
+                    setFile(file);
+                    form.setFieldValue("imagen_url", file);
+                });
             return;
         }
     }, [activateOrganizacion]);
@@ -116,122 +131,114 @@ export const FormOrganizacion = ({ form }) => {
         return <Value file={value} />;
     };
 
-    const setImagePrev = (e) => {
-        form.setFieldValue("imagen_url", e);
-        setChange((change) => change + 1);
-    };
-
-    useEffect(() => {
-        if (!imagen_url) {
-            setImg(undefined);
-            return;
+    const handleImageChange = useCallback((file) => {
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => setPreview(reader.result);
+            reader.readAsDataURL(file);
+            setFile(file);
+        } else {
+            setPreview(null);
+            setFile(null);
         }
-        const objectUrl = URL.createObjectURL(imagen_url);
-        setImg(objectUrl);
-
-        // free memory when ever this component is unmounted
-        return () => {
-            URL.revokeObjectURL(objectUrl);
-            setChange(null);
-        };
-    }, [change]);
+    }, []);
 
     return (
         <Box
             component="form"
             mx="auto"
             sx={(theme) => ({
-                padding: theme.spacing.md,
+                padding: theme.spacing.sm,
             })}
             onSubmit={form.onSubmit((_, e) => handleSubmit(e))}
         >
             <Skeleton visible={isLoading}>
-                <Grid>
-                    <Grid.Col sm={12} md={12} lg={12} xl={12}>
-                        <FileInput
-                            mt="md"
-                            label="Logo"
-                            placeholder="Logo de la organización"
-                            radius="md"
-                            accept="image/png,image/jpeg,image/jpeg"
-                            valueComponent={ValueComponent}
-                            onChange={(e) => setImagePrev(e)}
-                            error={
-                                imagen_url === null || imagen_url === ""
-                                    ? "Por favor carga el logo de la organización"
-                                    : null
-                            }
-                            withAsterisk
-                        />
+                <Stack align="stretch" justify="center">
+                    <FileInput
+                        withAsterisk
+                        label="Logo"
+                        placeholder="Logo de la organización"
+                        accept="image/png,image/jpeg,image/jpeg"
+                        valueComponent={ValueComponent}
+                        {...form.getInputProps("imagen_url")}
+                        onChange={(file) => {
+                            form.setFieldValue("imagen_url", file);
+                            handleImageChange(file);
+                        }}
+                    />
+                    {preview && (
                         <Group position="center">
-                            <Image mt={10} width={100} height={90} src={img} />
+                            <Image
+                                src={preview}
+                                alt="Vista previa"
+                                fit="contain"
+                                maw={100}
+                            />
                         </Group>
-                    </Grid.Col>
-                    <Grid.Col sm={12} md={8} lg={8} xl={8}>
+                    )}
+
+                    <SimpleGrid cols={2}>
                         <TextInput
                             placeholder="Nombre de la organización"
                             label="Organizacion"
                             withAsterisk
                             {...form.getInputProps("nombre_organizacion")}
                         />
-                    </Grid.Col>
-                    <Grid.Col sm={12} md={4} lg={4} xl={4}>
-                        <TextInput
-                            placeholder="Teléfono"
-                            label="Teléfono"
-                            withAsterisk
-                            {...form.getInputProps("telefono")}
-                        />
-                    </Grid.Col>
-                    <Grid.Col sm={12} md={6} lg={6} xl={6}>
                         <TextInput
                             placeholder="Razón Social"
                             label="Razón social"
                             withAsterisk
                             {...form.getInputProps("razon_social")}
                         />
-                    </Grid.Col>
-                    <Grid.Col sm={12} md={6} lg={6} xl={6}>
+                    </SimpleGrid>
+
+                    <SimpleGrid cols={2}>
+                        <TextInput
+                            placeholder="Teléfono"
+                            label="Teléfono"
+                            withAsterisk
+                            {...form.getInputProps("telefono")}
+                        />
                         <TextInput
                             placeholder="xyz@abc.org"
                             label="Correo"
                             withAsterisk
                             {...form.getInputProps("email")}
                         />
-                    </Grid.Col>
-                    <Grid.Col sm={12} md={6} lg={6} xl={6}>
+                    </SimpleGrid>
+
+                    <SimpleGrid cols={2}>
                         <TextInput
                             placeholder="Abreviatura de la Organización"
                             label="Abreviatura"
                             withAsterisk
                             {...form.getInputProps("abreviatura")}
                         />
-                    </Grid.Col>
-                    <Grid.Col sm={12} md={6} lg={6} xl={6}>
                         <TextInput
                             placeholder="Sitio Web"
                             label="Sitio web"
                             {...form.getInputProps("sitio_web")}
                         />
-                    </Grid.Col>
-                    <Grid.Col sm={12} md={12} lg={12} xl={12}>
-                        <Select
-                            label="Tipo de Organizacion"
-                            placeholder="Seleccione el tipo de organizacion"
-                            searchable
-                            nothingFound="No options"
-                            {...form.getInputProps("tipo_id")}
-                            data={tipos.map((tipo) => {
-                                return {
-                                    label: tipo.tipo,
-                                    value: tipo.id,
-                                };
-                            })}
-                        />
-                    </Grid.Col>
+                    </SimpleGrid>
 
-                    <Grid.Col sm={12} md={6} lg={6} xl={6}>
+                    <Select
+                        withAsterisk
+                        label="Tipo de Organizacion"
+                        placeholder="Seleccione el tipo de organizacion"
+                        searchable
+                        nothingFound="No options"
+                        {...form.getInputProps("tipo_id")}
+                        data={tipos.map((tipo) => {
+                            return {
+                                label: tipo.tipo,
+                                value: tipo.id,
+                            };
+                        })}
+                    />
+
+                    <SimpleGrid cols={2}>
                         <Select
+                            withAsterisk
                             label="Pais"
                             placeholder="Seleccione el país de la organización"
                             searchable
@@ -244,9 +251,8 @@ export const FormOrganizacion = ({ form }) => {
                                 };
                             })}
                         />
-                    </Grid.Col>
-                    <Grid.Col sm={12} md={6} lg={6} xl={6}>
                         <Select
+                            withAsterisk
                             label="Estado/Provincia"
                             placeholder="Seleccione el estado de la organización"
                             searchable
@@ -259,21 +265,19 @@ export const FormOrganizacion = ({ form }) => {
                                 };
                             })}
                         />
-                    </Grid.Col>
-                    <Grid.Col sm={12} md={12} lg={12} xl={12}>
-                        <Textarea
-                            placeholder="Ingresa la descripción"
-                            label="Descripción"
-                            description="Agregar una breve descripción de la organización."
-                            radius="md"
-                            withAsterisk
-                            minRows={2}
-                            maxRows={4}
-                            {...form.getInputProps("descripcion")}
-                        />
-                    </Grid.Col>
-                </Grid>
+                    </SimpleGrid>
+                    <Textarea
+                        placeholder="Ingresa la descripción"
+                        label="Descripción"
+                        description="Agregar una breve descripción de la organización."
+                        withAsterisk
+                        minRows={2}
+                        maxRows={4}
+                        {...form.getInputProps("descripcion")}
+                    />
+                </Stack>
             </Skeleton>
+
             <BtnSubmit IconSection={IconWorldPlus} fontSize={14}>
                 Agregar Organización
             </BtnSubmit>

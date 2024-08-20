@@ -10,7 +10,7 @@ export const ModalCharts = () => {
         <Modal
             opened={isOpenModalChart}
             onClose={() => modalActionChart(0)}
-            title={<TitleSections title="Gráfico de Distribución de Proyectos" fw={700} fz="sm" />}
+            title={<TitleSections title="Gráfico de Distribución de Proyectos por Objetivos" fw={700} fz="sm" />}
             overlayProps={{
                 color:
                     theme.colorScheme === "dark"

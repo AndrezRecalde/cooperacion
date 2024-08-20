@@ -9,26 +9,29 @@ import {
     Text,
 } from "@mantine/core";
 import { IconChecks, IconWorldCheck } from "@tabler/icons-react";
-import { useUiOrganizacion, useOrganizacionStore, useConvenioStore } from "../../../../hooks";
+import {
+    useUiOrganizacion,
+    useOrganizacionStore,
+    useConvenioStore,
+} from "../../../../hooks";
 
 export const FormActivarOrg = ({ form }) => {
-
-    const { modalActivateOrg } = useUiOrganizacion();
-    const { activateOrganizacion, startUpdateConvenioOrg } = useOrganizacionStore();
+    const { modalActivateOrg, isOpenModalOrgActivo } = useUiOrganizacion();
+    const { activateOrganizacion, startUpdateConvenioOrg } =
+        useOrganizacionStore();
     const { convenios, startLoadConvenios } = useConvenioStore();
 
-
+    useEffect(() => {
+        if (isOpenModalOrgActivo) {
+            startLoadConvenios();
+        }
+    }, [isOpenModalOrgActivo]);
 
     useEffect(() => {
-        startLoadConvenios();
-    }, []);
-
-    useEffect(() => {
-      if(activateOrganizacion !== null){
-        form.setValues({ ...activateOrganizacion });
-        return;
-      }
-
+        if (activateOrganizacion !== null) {
+            form.setValues({ ...activateOrganizacion });
+            return;
+        }
     }, [activateOrganizacion]);
 
     const handleSubmit = (e) => {
@@ -36,9 +39,7 @@ export const FormActivarOrg = ({ form }) => {
         startUpdateConvenioOrg(form.values);
         form.reset();
         modalActivateOrg(0);
-
-    }
-
+    };
 
     return (
         <>
@@ -58,11 +59,11 @@ export const FormActivarOrg = ({ form }) => {
                 </Grid.Col>
                 <Grid.Col sm={12} md={12} lg={12} xl={12}>
                     <Select
-                        data={convenios.map(convenio => {
+                        data={convenios.map((convenio) => {
                             return {
                                 label: convenio.convenio,
-                                value: convenio.id
-                            }
+                                value: convenio.id,
+                            };
                         })}
                         placeholder="Tipo de convenio"
                         label="Convenio"

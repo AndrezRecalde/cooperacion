@@ -1,5 +1,4 @@
 import {
-    Card,
     Flex,
     Grid,
     Group,
@@ -9,7 +8,6 @@ import {
     Table,
     Text,
     ThemeIcon,
-    Tooltip,
     createStyles,
     rem,
     useMantineTheme,
@@ -83,7 +81,7 @@ export const ModalInformation = () => {
                 <Grid.Col sm={12} md={12} lg={12} xl={12}>
                     <Stack>
                         <div>
-                            <Text fz="sm" fw={700}>
+                            <Text fz="sm" fw={600}>
                                 {activateMarker?.nombre_organizacion}
                             </Text>
                             <Text fz="sm" c="dimmed">
@@ -91,7 +89,7 @@ export const ModalInformation = () => {
                             </Text>
                         </div>
                         <div mt="lg">
-                            <Text fz="sm" fw={700}>
+                            <Text fz="sm" fw={600}>
                                 {activateMarker?.nombre_proyecto}
                             </Text>
                             <Text fz="sm" c="dimmed">
@@ -149,7 +147,7 @@ export const ModalInformation = () => {
                 <Grid.Col sm={6} md={6} lg={6} xl={6}>
                     <div className={classes.section}>
                         <Text className={classes.title}>
-                            Objetivos de Desarrollo
+                            Objetivos de Desarrollo Sostenible
                         </Text>
                         <div className={classes.section_a}>
                             <Group spacing={8} mb={-8}>

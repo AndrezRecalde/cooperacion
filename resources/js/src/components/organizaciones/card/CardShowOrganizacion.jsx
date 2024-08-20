@@ -1,6 +1,4 @@
 import {
-    Anchor,
-    Badge,
     Box,
     Button,
     Card,
@@ -12,9 +10,9 @@ import {
     createStyles,
     rem,
 } from "@mantine/core";
-import { IconThumbUp } from "@tabler/icons-react";
+import { IconChecks } from "@tabler/icons-react";
 import { useOrganizacionStore } from "../../../hooks";
-import { ChartShowOrganizacion, TitleSections } from "../../../components";
+import { ChartShowOrganizacion } from "../../../components";
 import Flag from "react-flagkit";
 
 const useStyles = createStyles((theme) => ({
@@ -49,7 +47,7 @@ const useStyles = createStyles((theme) => ({
         fontSize: rem(40),
         lineHeight: 1,
         fontWeight: 700,
-        fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+        fontFamily: `${theme.fontFamily}`,
     },
     label: {
         marginBottom: theme.spacing.xs,
@@ -189,7 +187,7 @@ export const CardShowOrganizacion = ({ handleCloseShowModal }) => {
                         fullWidth
                         variant="light"
                         color="teal.7"
-                        leftIcon={<IconThumbUp />}
+                        leftIcon={<IconChecks />}
                         onClick={handleCloseShowModal}
                     >
                         Entendido

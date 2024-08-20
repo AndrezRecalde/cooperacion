@@ -33,7 +33,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'email.required'    =>  'El email es requerido',
-            'email.email'       =>  'Formato incorrecto de email'
+            //'email.email'       =>  'Formato incorrecto de email'
         ];
     }
     protected function failedValidation(Validator $validator): HttpResponseException

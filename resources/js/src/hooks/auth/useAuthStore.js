@@ -48,7 +48,7 @@ export const useAuthStore = () => {
             setTimeout(() => {
                 //dispatch(onClearValidates());
                 dispatch(onClearErrores());
-            }, 2000);
+            }, 3000);
         }
     };
 

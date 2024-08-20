@@ -162,7 +162,7 @@ export const DrawerMenu = () => {
 
                 <Group position="center">
                     <Button
-                        variant="outline"
+                        fullWidth
                         color="teal"
                         leftIcon={<IconSearch size={15} />}
                         mt={20}

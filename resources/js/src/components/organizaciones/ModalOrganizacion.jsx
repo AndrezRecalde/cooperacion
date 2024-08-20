@@ -50,7 +50,7 @@ export const ModalOrganizacion = () => {
         <Modal
             opened={isOpenModalAddOrg}
             onClose={handleCloseModalOrg}
-            title={<TitleSections title="Organizacion" />}
+            title={<TitleSections fw={700} title="Organizacion" />}
             overlayProps={{
                 color:
                     theme.colorScheme === "dark"

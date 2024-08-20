@@ -48,7 +48,7 @@ const useStyles = createStyles((theme) => ({
 
     title: {
         color: theme.white,
-        fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+        fontFamily: `${theme.fontFamily}`,
         fontWeight: 900,
         lineHeight: 1.05,
         maxWidth: rem(500),
@@ -74,7 +74,7 @@ const useStyles = createStyles((theme) => ({
     control: {
         paddingLeft: rem(50),
         paddingRight: rem(50),
-        fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+        fontFamily: `${theme.fontFamily}`,
         fontSize: rem(22),
 
         [theme.fn.smallerThan("md")]: {

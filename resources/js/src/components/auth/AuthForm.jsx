@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 import {
     Box,
-    Button,
     Checkbox,
     LoadingOverlay,
     PasswordInput,
     Stack,
     TextInput,
 } from "@mantine/core";
-import { isEmail, isNotEmpty, useForm } from "@mantine/form";
+import { useForm } from "@mantine/form";
 import { useAuthStore } from "../../hooks";
 import { AlertSection, BtnSubmit, LoaderCustom } from "../../components";
 import { IconInfoCircle, IconKey } from "@tabler/icons-react";
@@ -22,10 +21,10 @@ export const AuthForm = () => {
             password: "",
             remember: false,
         },
-        validate: {
+        /*  validate: {
             email: isEmail("Por favor introduce tu email correctamente"),
             password: isNotEmpty("Por favor introduce tu contraseña"),
-        },
+        }, */
     });
 
     const { email, password } = form.values;
@@ -49,11 +48,15 @@ export const AuthForm = () => {
 
     return (
         <Box
+            pos="relative"
             component="form"
-            mx="auto"
             onSubmit={form.onSubmit((_, e) => handleLogin(e))}
         >
-            <LoadingOverlay loader={LoaderCustom} visible={isLoading} overlayBlur={2} />
+            <LoadingOverlay
+                loader={LoaderCustom}
+                zIndex={1000}
+                visible={isLoading}
+            />
             <Stack>
                 <TextInput
                     label="Correo Electronico"

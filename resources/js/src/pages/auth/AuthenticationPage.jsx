@@ -20,7 +20,7 @@ const useStyles = createStyles(() => ({
 
     title: {
         marginTop: 'auto',
-        fontWeight: '700'
+        fontWeight: '900'
     }
 }));
 

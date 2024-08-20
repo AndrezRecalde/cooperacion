@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Button, Card, Group, Text } from "@mantine/core";
-import { IconDownload } from "@tabler/icons-react";
+import { IconDownload, IconFileTypeXls } from "@tabler/icons-react";
 import {
     InfoHeader,
     ModalActivateOrg,
@@ -41,32 +41,18 @@ export const OrganizacionesPage = () => {
             <InfoHeader
                 texto={`Existen ${organizaciones.length} organizaciones registradas.`}
             />
-            <Card
-                withBorder
-                radius="md"
-                mt="lg"
-                mb="lg"
-                shadow="sm"
-                sx={{ position: "static" }}
-            >
-                <Card.Section withBorder inheritPadding py="lg">
-                    <Group position="apart">
-                        <TitleSections title="Lista de Organizaciones" fw={700} />
-                        <Button
-                            variant="light"
-                            color="teal"
-                            uppercase
-                            leftIcon={<IconDownload size="1.2rem" />}
-                            onClick={(e) => handleExportOrg(e)}
-                        >
-                            Excel
-                        </Button>
-                    </Group>
-                </Card.Section>
-                <Card.Section>
-                    <TableOrganizaciones />
-                </Card.Section>
-            </Card>
+
+            <Group position="right" mb={10}>
+                <Button
+                    color="teal"
+                    leftIcon={<IconFileTypeXls size="1.4rem" />}
+                    onClick={(e) => handleExportOrg(e)}
+                >
+                    Exportar
+                </Button>
+            </Group>
+
+            <TableOrganizaciones />
             <ModalOrganizacion />
             <ModalActivateOrg />
             <ModalShowOrganizacion />
